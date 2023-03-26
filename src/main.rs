@@ -23,4 +23,9 @@ async fn main() {
         Ok(channels) => println!("{:?}", channels),
         Err(error) => println!("{:?}", error),
     };
+
+    match client.emojis.gets("1089521338286342195").await {
+        Ok(emojis) => println!("{:?}", emojis),
+        Err(error) => println!("{:?}", error),
+    }
 }
