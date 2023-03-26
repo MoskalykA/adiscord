@@ -1,9 +1,12 @@
 [package]
 name = "adiscord"
-version = "0.1.0"
+version = "0.0.1"
+authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "A Discord API wrapper for Rust"
+documentation = "https://docs.rs/adiscord"
+repository = "https://github.com/MoskalykA/adiscord"
+license = "MIT"
 
 [dependencies]
 dotenv_codegen = "0.15.0"
