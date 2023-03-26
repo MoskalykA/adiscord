@@ -3,12 +3,14 @@ pub mod emoji;
 pub mod guild;
 pub mod sticker;
 pub mod types;
+pub mod webhook;
 
 use channel::Channel;
 use emoji::Emoji;
 use guild::Guild;
 use serde_derive::Deserialize;
 use sticker::Sticker;
+use webhook::Webhook;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
@@ -17,6 +19,7 @@ pub struct Client {
     pub guild: Guild,
     pub sticker: Sticker,
     pub channel: Channel,
+    pub webhook: Webhook,
 }
 
 #[derive(Deserialize, Debug)]
@@ -59,6 +62,7 @@ impl Client {
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
             guild: Guild::new(url.clone(), client.clone(), token.clone()),
             sticker: Sticker::new(url.clone(), client.clone(), token.clone()),
+            webhook: Webhook::new(url.clone(), client.clone(), token.clone()),
             channel: Channel::new(url, client, token),
         }
     }

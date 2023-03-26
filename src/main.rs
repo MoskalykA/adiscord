@@ -32,5 +32,10 @@ async fn main() {
     match client.sticker.gets("1089521338286342195").await {
         Ok(stickers) => println!("{:?}", stickers),
         Err(error) => println!("{:?}", error),
+    };
+
+    match client.webhook.gets("1089521338286342195").await {
+        Ok(webhooks) => println!("{:?}", webhooks),
+        Err(error) => println!("{:?}", error),
     }
 }

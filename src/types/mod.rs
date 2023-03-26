@@ -5,3 +5,4 @@ pub mod guild;
 pub mod role;
 pub mod sticker;
 pub mod user;
+pub mod webhook;
