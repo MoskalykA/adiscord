@@ -1,18 +1,21 @@
 pub mod channel;
 pub mod emoji;
 pub mod guild;
+pub mod sticker;
 pub mod types;
 
 use channel::Channel;
 use emoji::Emoji;
 use guild::Guild;
 use serde_derive::Deserialize;
+use sticker::Sticker;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
 pub struct Client {
     pub emoji: Emoji,
     pub guild: Guild,
+    pub sticker: Sticker,
     pub channel: Channel,
 }
 
@@ -34,7 +37,7 @@ impl Client {
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
@@ -55,6 +58,7 @@ impl Client {
         Self {
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
             guild: Guild::new(url.clone(), client.clone(), token.clone()),
+            sticker: Sticker::new(url.clone(), client.clone(), token.clone()),
             channel: Channel::new(url, client, token),
         }
     }

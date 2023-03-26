@@ -27,5 +27,10 @@ async fn main() {
     match client.emoji.gets("1089521338286342195").await {
         Ok(emojis) => println!("{:?}", emojis),
         Err(error) => println!("{:?}", error),
+    };
+
+    match client.sticker.gets("1089521338286342195").await {
+        Ok(stickers) => println!("{:?}", stickers),
+        Err(error) => println!("{:?}", error),
     }
 }
