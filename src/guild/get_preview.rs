@@ -2,6 +2,14 @@ use crate::{types::guild::preview::Preview, Error};
 use reqwest::StatusCode;
 
 impl super::Guild {
+    /// # Examples
+    ///
+    /// ```
+    /// match client.guild.get_preview("1089521338286342195").await {
+    ///     Ok(preview) => println!("{:?}", preview.name),
+    ///     Err(error) => println!("{:?}", error),
+    /// };
+    /// ```
     pub async fn get_preview(&self, index: &str) -> Result<Preview, Error> {
         let client = reqwest::Client::new();
         let response = client

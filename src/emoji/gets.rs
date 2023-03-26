@@ -2,6 +2,14 @@ use crate::{types::emoji::Emoji, Error};
 use reqwest::StatusCode;
 
 impl super::Emoji {
+    /// # Examples
+    ///
+    /// ```
+    /// match client.emoji.gets("1089521338286342195").await {
+    ///     Ok(emojis) => println!("{:?}", emojis),
+    ///     Err(error) => println!("{:?}", error),
+    /// };
+    /// ```
     pub async fn gets(&self, index: &str) -> Result<Vec<Emoji>, Error> {
         let client = reqwest::Client::new();
         let response = client

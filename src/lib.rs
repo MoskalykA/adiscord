@@ -29,6 +29,17 @@ pub enum TokenType {
 }
 
 impl Client {
+    /// # Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    /// }    
+    /// ```
     pub fn new(version: &str, token: &str, token_type: TokenType) -> Self {
         let url = format!("{BASE_URL}{version}");
         let client = reqwest::Client::new();

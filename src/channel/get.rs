@@ -2,6 +2,14 @@ use crate::{types::channel::Channel, Error};
 use reqwest::StatusCode;
 
 impl super::Channel {
+    /// # Examples
+    ///
+    /// ```
+    /// match client.channel.get("1089521338827427852").await {
+    ///     Ok(channel) => println!("{:?}", channel.name),
+    ///     Err(error) => println!("{:?}", error),
+    /// };
+    /// ```
     pub async fn get(&self, index: &str) -> Result<Channel, Error> {
         let client = reqwest::Client::new();
         let response = client

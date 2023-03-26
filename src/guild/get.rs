@@ -2,6 +2,14 @@ use crate::{types::guild::Guild, Error};
 use reqwest::StatusCode;
 
 impl super::Guild {
+    /// # Examples
+    ///
+    /// ```
+    /// match client.guild.get("1089521338286342195").await {
+    ///     Ok(guild) => println!("{:?}", guild.name),
+    ///     Err(error) => println!("{:?}", error),
+    /// };
+    /// ```
     pub async fn get(&self, index: &str) -> Result<Guild, Error> {
         let client = reqwest::Client::new();
         let response = client
