@@ -1,8 +1,7 @@
-use super::Guilds;
 use crate::{types::channel::Channel, Error};
 use reqwest::StatusCode;
 
-impl Guilds {
+impl super::Guild {
     pub async fn get_channels(&self, index: &str) -> Result<Vec<Channel>, Error> {
         let client = reqwest::Client::new();
         let response = client

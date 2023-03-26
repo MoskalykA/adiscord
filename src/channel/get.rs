@@ -1,12 +1,11 @@
-use super::Guilds;
-use crate::{types::guild::Guild, Error};
+use crate::{types::channel::Channel, Error};
 use reqwest::StatusCode;
 
-impl Guilds {
-    pub async fn get(&self, index: &str) -> Result<Guild, Error> {
+impl super::Channel {
+    pub async fn get(&self, index: &str) -> Result<Channel, Error> {
         let client = reqwest::Client::new();
         let response = client
-            .get(format!("{}/guilds/{index}", self.url))
+            .get(format!("{}/channels/{index}", self.url))
             .header("Authorization", self.token.clone())
             .send()
             .await
@@ -15,7 +14,7 @@ impl Guilds {
         let status = response.status();
         match status {
             StatusCode::OK => {
-                let body: Guild = response.json().await.unwrap();
+                let body: Channel = response.json().await.unwrap();
                 Ok(body)
             }
             _ => {

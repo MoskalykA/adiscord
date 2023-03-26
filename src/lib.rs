@@ -1,19 +1,19 @@
-pub mod channels;
-pub mod emojis;
-pub mod guilds;
+pub mod channel;
+pub mod emoji;
+pub mod guild;
 pub mod types;
 
-use channels::Channels;
-use emojis::Emojis;
-use guilds::Guilds;
+use channel::Channel;
+use emoji::Emoji;
+use guild::Guild;
 use serde_derive::Deserialize;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
 pub struct Client {
-    pub emojis: Emojis,
-    pub guilds: Guilds,
-    pub channels: Channels,
+    pub emoji: Emoji,
+    pub guild: Guild,
+    pub channel: Channel,
 }
 
 #[derive(Deserialize, Debug)]
@@ -42,9 +42,9 @@ impl Client {
         );
 
         Self {
-            emojis: Emojis::new(url.clone(), client.clone(), token.clone()),
-            guilds: Guilds::new(url.clone(), client.clone(), token.clone()),
-            channels: Channels::new(url, client, token),
+            emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
+            guild: Guild::new(url.clone(), client.clone(), token.clone()),
+            channel: Channel::new(url, client, token),
         }
     }
 }

@@ -1,8 +1,7 @@
-use super::Guilds;
 use crate::{types::guild::preview::Preview, Error};
 use reqwest::StatusCode;
 
-impl Guilds {
+impl super::Guild {
     pub async fn get_preview(&self, index: &str) -> Result<Preview, Error> {
         let client = reqwest::Client::new();
         let response = client

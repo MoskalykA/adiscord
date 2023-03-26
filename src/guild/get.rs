@@ -1,12 +1,11 @@
-use super::Emojis;
-use crate::{types::emoji::Emoji, Error};
+use crate::{types::guild::Guild, Error};
 use reqwest::StatusCode;
 
-impl Emojis {
-    pub async fn gets(&self, index: &str) -> Result<Vec<Emoji>, Error> {
+impl super::Guild {
+    pub async fn get(&self, index: &str) -> Result<Guild, Error> {
         let client = reqwest::Client::new();
         let response = client
-            .get(format!("{}/guilds/{index}/emojis", self.url))
+            .get(format!("{}/guilds/{index}", self.url))
             .header("Authorization", self.token.clone())
             .send()
             .await
@@ -15,7 +14,7 @@ impl Emojis {
         let status = response.status();
         match status {
             StatusCode::OK => {
-                let body: Vec<Emoji> = response.json().await.unwrap();
+                let body: Guild = response.json().await.unwrap();
                 Ok(body)
             }
             _ => {
