@@ -1,3 +1,4 @@
+pub mod channel;
 pub mod emoji;
 pub mod feature;
 pub mod guilds;

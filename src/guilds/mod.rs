@@ -1,6 +1,7 @@
 use reqwest::Client;
 
 pub mod get;
+pub mod get_channel;
 pub mod get_preview;
 
 pub struct Guilds {

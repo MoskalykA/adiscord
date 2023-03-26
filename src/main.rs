@@ -13,4 +13,9 @@ async fn main() {
         Ok(guild) => println!("{:?}", guild),
         Err(error) => println!("{:?}", error),
     };
+
+    match client.guilds.get_channel("1089521338827427852").await {
+        Ok(guild) => println!("{:?}", guild),
+        Err(error) => println!("{:?}", error),
+    };
 }
