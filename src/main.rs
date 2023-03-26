@@ -10,12 +10,12 @@ async fn main() {
     };
 
     match client.guilds.get_preview("1089521338286342195").await {
-        Ok(guild) => println!("{:?}", guild),
+        Ok(preview) => println!("{:?}", preview),
         Err(error) => println!("{:?}", error),
     };
 
     match client.guilds.get_channel("1089521338827427852").await {
-        Ok(guild) => println!("{:?}", guild),
+        Ok(channel) => println!("{:?}", channel),
         Err(error) => println!("{:?}", error),
     };
 }
