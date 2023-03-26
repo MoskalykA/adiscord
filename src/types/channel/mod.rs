@@ -1,3 +1,13 @@
+pub mod flags;
+pub mod forum;
+pub mod forum_layout;
+pub mod overwrite;
+pub mod reaction;
+pub mod sort_order;
+pub mod thread;
+pub mod r#type;
+pub mod video;
+
 use self::{
     flags::Flags,
     forum::tags::ForumTags,
@@ -11,16 +21,6 @@ use self::{
 };
 use super::user::User;
 use serde_derive::Deserialize;
-
-pub mod flags;
-pub mod forum;
-pub mod forum_layout;
-pub mod overwrite;
-pub mod reaction;
-pub mod sort_order;
-pub mod thread;
-pub mod r#type;
-pub mod video;
 
 #[derive(Deserialize, Debug)]
 pub struct Channel {

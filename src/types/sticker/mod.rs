@@ -1,9 +1,9 @@
+pub mod format;
+pub mod r#type;
+
 use self::{format::StickerFormatType, r#type::StickerType};
 use super::user::User;
 use serde_derive::Deserialize;
-
-pub mod format;
-pub mod r#type;
 
 #[derive(Deserialize, Debug)]
 pub struct Sticker {

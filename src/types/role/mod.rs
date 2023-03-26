@@ -1,7 +1,7 @@
+pub mod tags;
+
 use self::tags::RoleTags;
 use serde_derive::Deserialize;
-
-pub mod tags;
 
 #[derive(Deserialize, Debug)]
 pub struct Role {
