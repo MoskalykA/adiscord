@@ -10,12 +10,17 @@ async fn main() {
     };
 
     match client.guilds.get_preview("1089521338286342195").await {
-        Ok(preview) => println!("{:?}", preview),
+        Ok(preview) => println!("{:?}", preview.name),
         Err(error) => println!("{:?}", error),
     };
 
     match client.channels.get("1089521338827427852").await {
-        Ok(channel) => println!("{:?}", channel),
+        Ok(channel) => println!("{:?}", channel.name),
+        Err(error) => println!("{:?}", error),
+    };
+
+    match client.guilds.get_channels("1089521338286342195").await {
+        Ok(channels) => println!("{:?}", channels),
         Err(error) => println!("{:?}", error),
     };
 }

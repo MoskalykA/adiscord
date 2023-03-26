@@ -2,6 +2,7 @@ use reqwest::Client;
 
 pub mod get;
 pub mod get_preview;
+pub mod get_channels;
 
 pub struct Guilds {
     pub url: String,
