@@ -31,7 +31,7 @@ pub struct Channel {
     pub permission_overwrites: Option<Vec<Overwrite>>,
     pub name: Option<String>,
     pub topic: Option<String>,
-    pub nsfw: bool,
+    pub nsfw: Option<bool>,
     pub last_message_id: Option<String>,
     pub bitrate: Option<i32>,
     pub user_limit: Option<u8>,
