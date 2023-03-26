@@ -3,11 +3,11 @@ use crate::{types::channel::Channel, Error};
 use reqwest::StatusCode;
 
 impl Guilds {
-    pub async fn get_channel(self, index: &str) -> Result<Channel, Error> {
+    pub async fn get_channel(&self, index: &str) -> Result<Channel, Error> {
         let client = reqwest::Client::new();
         let response = client
             .get(format!("{}/channels/{index}", self.url))
-            .header("Authorization", self.token)
+            .header("Authorization", self.token.clone())
             .send()
             .await
             .unwrap();
