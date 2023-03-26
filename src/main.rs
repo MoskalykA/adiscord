@@ -37,5 +37,10 @@ async fn main() {
     match client.webhook.gets("1089521338286342195").await {
         Ok(webhooks) => println!("{:?}", webhooks),
         Err(error) => println!("{:?}", error),
+    };
+
+    match client.voice.get_regions().await {
+        Ok(regions) => println!("{:?}", regions),
+        Err(error) => println!("{:?}", error),
     }
 }
