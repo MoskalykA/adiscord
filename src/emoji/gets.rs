@@ -11,8 +11,8 @@ impl super::Emoji {
     /// };
     /// ```
     pub async fn gets(&self, index: &str) -> Result<Vec<Emoji>, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/guilds/{index}/emojis", self.url))
             .header("Authorization", self.token.clone())
             .send()

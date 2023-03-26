@@ -11,8 +11,8 @@ impl super::Sticker {
     /// };
     /// ```
     pub async fn gets(&self, index: &str) -> Result<Vec<Sticker>, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/guilds/{index}/stickers", self.url))
             .header("Authorization", self.token.clone())
             .send()

@@ -11,8 +11,8 @@ impl super::Voice {
     /// };
     /// ```
     pub async fn get_regions(&self) -> Result<Vec<VoiceRegion>, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/voice/regions", self.url))
             .header("Authorization", self.token.clone())
             .send()

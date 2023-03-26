@@ -11,8 +11,8 @@ impl super::Webhook {
     /// };
     /// ```
     pub async fn gets(&self, index: &str) -> Result<Vec<Webhook>, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/guilds/{index}/webhooks", self.url))
             .header("Authorization", self.token.clone())
             .send()

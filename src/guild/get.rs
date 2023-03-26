@@ -11,8 +11,8 @@ impl super::Guild {
     /// };
     /// ```
     pub async fn get(&self, index: &str) -> Result<Guild, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/guilds/{index}", self.url))
             .header("Authorization", self.token.clone())
             .send()

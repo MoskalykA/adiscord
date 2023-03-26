@@ -11,8 +11,8 @@ impl super::Channel {
     /// };
     /// ```
     pub async fn get(&self, index: &str) -> Result<Channel, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/channels/{index}", self.url))
             .header("Authorization", self.token.clone())
             .send()

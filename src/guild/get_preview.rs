@@ -11,8 +11,8 @@ impl super::Guild {
     /// };
     /// ```
     pub async fn get_preview(&self, index: &str) -> Result<Preview, Error> {
-        let client = reqwest::Client::new();
-        let response = client
+        let response = self
+            .client
             .get(format!("{}/guilds/{index}/preview", self.url))
             .header("Authorization", self.token.clone())
             .send()
