@@ -1,13 +1,16 @@
-use guilds::Guilds;
-use serde_derive::Deserialize;
-
+pub mod channels;
 pub mod guilds;
 pub mod types;
+
+use channels::Channels;
+use guilds::Guilds;
+use serde_derive::Deserialize;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
 pub struct Client {
     pub guilds: Guilds,
+    pub channels: Channels,
 }
 
 #[derive(Deserialize, Debug)]
@@ -36,7 +39,8 @@ impl Client {
         );
 
         Self {
-            guilds: Guilds::new(url, client, token),
+            guilds: Guilds::new(url.clone(), client.clone(), token.clone()),
+            channels: Channels::new(url, client, token),
         }
     }
 }

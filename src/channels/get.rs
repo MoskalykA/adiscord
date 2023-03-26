@@ -1,9 +1,9 @@
-use super::Guilds;
+use super::Channels;
 use crate::{types::channel::Channel, Error};
 use reqwest::StatusCode;
 
-impl Guilds {
-    pub async fn get_channel(&self, index: &str) -> Result<Channel, Error> {
+impl Channels {
+    pub async fn get(&self, index: &str) -> Result<Channel, Error> {
         let client = reqwest::Client::new();
         let response = client
             .get(format!("{}/channels/{index}", self.url))
