@@ -1,5 +1,5 @@
 use super::Guilds;
-use crate::{types::test::Guild, Error};
+use crate::{types::guild::Guild, Error};
 use reqwest::StatusCode;
 
 impl Guilds {

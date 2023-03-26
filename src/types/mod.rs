@@ -4,5 +4,4 @@ pub mod feature;
 pub mod guild;
 pub mod role;
 pub mod sticker;
-pub mod test;
 pub mod user;
