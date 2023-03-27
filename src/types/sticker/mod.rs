@@ -1,4 +1,5 @@
 pub mod format;
+pub mod item;
 pub mod r#type;
 
 use self::{format::StickerFormatType, r#type::StickerType};

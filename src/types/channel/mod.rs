@@ -1,6 +1,10 @@
+pub mod attachment;
+pub mod embed;
 pub mod flags;
 pub mod forum;
 pub mod forum_layout;
+pub mod mention;
+pub mod message;
 pub mod overwrite;
 pub mod reaction;
 pub mod sort_order;

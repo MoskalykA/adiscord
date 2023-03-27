@@ -4,7 +4,12 @@ use dotenv_codegen::dotenv;
 #[tokio::main]
 async fn main() {
     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
-    match client.guild.get("1089521338286342195").await {
+    match client.channel.get_messages("1089521338827427852", None).await {
+        Ok(messages) => println!("{:?}", messages),
+        Err(error) => println!("{:?}", error),
+    };
+
+    /*match client.guild.get("1089521338286342195").await {
         Ok(guild) => println!("{:?}", guild.name),
         Err(error) => println!("{:?}", error),
     };
@@ -42,5 +47,5 @@ async fn main() {
     match client.voice.get_regions().await {
         Ok(regions) => println!("{:?}", regions),
         Err(error) => println!("{:?}", error),
-    }
+    }*/
 }
