@@ -1,5 +1,6 @@
 pub mod default_message_notifications;
 pub mod explicit_content_filter;
+pub mod member;
 pub mod mfa_level;
 pub mod nsfw_level;
 pub mod premium_tier;

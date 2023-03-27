@@ -5,11 +5,17 @@ use dotenv_codegen::dotenv;
 async fn main() {
     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
     match client
-        .channel
-        .get_message("1089521338827427852", "1089869456764837888")
+        .guild
+        .get_members(
+            "1089521338286342195",
+            Some(adiscord::guild::get_members::Query {
+                limit: Some(100),
+                after: None,
+            }),
+        )
         .await
     {
-        Ok(message) => println!("{:?}", message),
+        Ok(members) => println!("{:?}", members),
         Err(error) => println!("{:?}", error),
     };
 
