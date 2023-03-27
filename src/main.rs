@@ -6,7 +6,15 @@ async fn main() {
     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
     match client
         .channel
-        .get_messages("1089521338827427852", None)
+        .get_messages(
+            "1089521338827427852",
+            Some(adiscord::channel::get_messages::Query {
+                around: None,
+                before: Some("1089869456764837888".into()),
+                after: Some("1089860259637624933".into()),
+                limit: Some(10),
+            }),
+        )
         .await
     {
         Ok(messages) => println!("{:?}", messages),
