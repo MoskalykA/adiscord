@@ -1,7 +1,7 @@
 use crate::{types::webhook::Webhook, Error};
 use reqwest::StatusCode;
 
-impl super::Webhook {
+impl crate::Webhook {
     /// # Examples
     ///
     /// ```

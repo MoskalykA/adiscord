@@ -1,7 +1,7 @@
 use crate::{types::guild::Guild, Error};
 use reqwest::StatusCode;
 
-impl super::Guild {
+impl crate::Guild {
     /// # Examples
     ///
     /// ```

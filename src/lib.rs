@@ -6,13 +6,30 @@ pub mod types;
 pub mod voice;
 pub mod webhook;
 
-use channel::Channel;
-use emoji::Emoji;
-use guild::Guild;
+macro_rules! generate_struct {
+    ($struct_name:ident) => {
+        pub struct $struct_name {
+            pub url: String,
+            pub client: reqwest::Client,
+            pub token: String,
+        }
+
+        impl $struct_name {
+            pub fn new(url: String, client: reqwest::Client, token: String) -> Self {
+                Self { url, client, token }
+            }
+        }
+    };
+}
+
+generate_struct!(Channel);
+generate_struct!(Emoji);
+generate_struct!(Guild);
+generate_struct!(Sticker);
+generate_struct!(Voice);
+generate_struct!(Webhook);
+
 use serde_derive::Deserialize;
-use sticker::Sticker;
-use voice::Voice;
-use webhook::Webhook;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 

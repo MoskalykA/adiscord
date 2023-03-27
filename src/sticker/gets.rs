@@ -1,7 +1,7 @@
 use crate::{types::sticker::Sticker, Error};
 use reqwest::StatusCode;
 
-impl super::Sticker {
+impl crate::Sticker {
     /// # Examples
     ///
     /// ```

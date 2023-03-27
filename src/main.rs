@@ -4,7 +4,11 @@ use dotenv_codegen::dotenv;
 #[tokio::main]
 async fn main() {
     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
-    match client.channel.get_messages("1089521338827427852", None).await {
+    match client
+        .channel
+        .get_messages("1089521338827427852", None)
+        .await
+    {
         Ok(messages) => println!("{:?}", messages),
         Err(error) => println!("{:?}", error),
     };

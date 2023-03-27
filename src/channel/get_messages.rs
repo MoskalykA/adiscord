@@ -10,8 +10,12 @@ pub struct Query {
     pub limit: Option<u8>,
 }
 
-impl super::Channel {
-    pub async fn get_messages(&self, index: &str, query: Option<Query>) -> Result<Vec<Message>, Error> {
+impl crate::Channel {
+    pub async fn get_messages(
+        &self,
+        index: &str,
+        query: Option<Query>,
+    ) -> Result<Vec<Message>, Error> {
         let response = self
             .client
             .get(format!("{}/channels/{index}/messages", self.url))

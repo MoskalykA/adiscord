@@ -1,7 +1,7 @@
 use crate::{types::voice::region::VoiceRegion, Error};
 use reqwest::StatusCode;
 
-impl super::Voice {
+impl crate::Voice {
     /// # Examples
     ///
     /// ```

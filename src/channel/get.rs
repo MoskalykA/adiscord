@@ -1,7 +1,7 @@
 use crate::{types::channel::Channel, Error};
 use reqwest::StatusCode;
 
-impl super::Channel {
+impl crate::Channel {
     /// # Examples
     ///
     /// ```

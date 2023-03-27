@@ -1,7 +1,7 @@
 use crate::{types::emoji::Emoji, Error};
 use reqwest::StatusCode;
 
-impl super::Emoji {
+impl crate::Emoji {
     /// # Examples
     ///
     /// ```
