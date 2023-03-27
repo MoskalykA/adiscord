@@ -17,7 +17,10 @@ pub struct Application {
     pub terms_of_service_url: Option<String>,
     pub privacy_policy_url: Option<String>,
     pub owner: Option<User>,
-    // summary: String, (deprecated)
+
+    #[deprecated]
+    pub summary: String,
+
     pub verify_key: String,
     pub team: Option<Team>,
     pub guild_id: Option<String>,

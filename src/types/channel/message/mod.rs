@@ -12,7 +12,12 @@ use self::{
     role_subscription_data::RoleSubscriptionData,
 };
 use super::{attachment::Attachment, embed::Embed, mention::Mention, reaction::Reaction, Channel};
-use crate::types::{application::Application, role::Role, sticker::item::StickerItem, user::User};
+use crate::types::{
+    application::Application,
+    role::Role,
+    sticker::{item::StickerItem, Sticker},
+    user::User,
+};
 use serde_derive::Deserialize;
 
 #[derive(Deserialize, Debug)]
@@ -45,7 +50,10 @@ pub struct Message {
     pub thread: Option<Channel>,
     pub components: Option<Vec<MessageComponent>>,
     pub sticker_items: Option<Vec<StickerItem>>,
-    //stickers: Option<Vec<Sticker>>, (deprecated)
+
+    #[deprecated]
+    pub stickers: Option<Vec<Sticker>>,
+
     pub position: Option<u32>,
     pub role_subscription_data: Option<RoleSubscriptionData>,
 }
