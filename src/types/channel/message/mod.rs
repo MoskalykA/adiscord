@@ -21,6 +21,13 @@ use crate::types::{
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
+#[serde(untagged)]
+pub enum Nonce {
+    Integer(u64),
+    String(String),
+}
+
+#[derive(Deserialize, Debug)]
 pub struct Message {
     pub id: String,
     pub channel_id: String,
@@ -36,7 +43,7 @@ pub struct Message {
     pub attachments: Vec<Attachment>,
     pub embeds: Vec<Embed>,
     pub reactions: Option<Vec<Reaction>>,
-    //nonce?	integer or string	used for validating a message was sent
+    pub nonce: Option<Nonce>,
     pub pinned: bool,
     pub webhook_id: Option<String>,
     pub r#type: MessageType,
