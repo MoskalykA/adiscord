@@ -1,6 +1,6 @@
 use crate::{types::channel::message::Message, Error};
 use reqwest::StatusCode;
-use serde_derive::Serialize;
+use serde::Serialize;
 
 #[derive(Serialize)]
 pub struct Query {

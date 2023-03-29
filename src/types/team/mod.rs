@@ -1,7 +1,7 @@
 pub mod member;
 
 use self::member::TeamMember;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Team {

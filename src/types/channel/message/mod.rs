@@ -18,7 +18,7 @@ use crate::types::{
     sticker::{item::StickerItem, Sticker},
     user::User,
 };
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Message {

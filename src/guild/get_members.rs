@@ -1,6 +1,6 @@
 use crate::{types::guild::member::GuildMember, Error};
 use reqwest::StatusCode;
-use serde_derive::Serialize;
+use serde::Serialize;
 
 #[derive(Serialize)]
 pub struct Query {

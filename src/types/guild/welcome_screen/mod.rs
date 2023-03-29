@@ -1,7 +1,7 @@
 pub mod channels;
 
 use self::channels::WelcomeScreenChannels;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct WelcomeScreen {

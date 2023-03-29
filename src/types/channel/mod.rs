@@ -24,7 +24,7 @@ use self::{
     video::VideoQuality,
 };
 use super::user::User;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Channel {

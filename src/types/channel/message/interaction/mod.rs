@@ -2,7 +2,7 @@ pub mod r#type;
 
 use self::r#type::InteractionType;
 use crate::types::user::User;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct MessageInteraction {

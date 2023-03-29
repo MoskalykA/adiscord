@@ -29,7 +29,7 @@ generate_struct!(Sticker);
 generate_struct!(Voice);
 generate_struct!(Webhook);
 
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 

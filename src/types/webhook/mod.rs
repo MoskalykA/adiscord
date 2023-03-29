@@ -2,7 +2,7 @@ pub mod r#type;
 
 use self::r#type::WebhookType;
 use super::{channel::Channel, guild::Guild, user::User};
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Webhook {

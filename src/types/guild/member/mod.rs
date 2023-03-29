@@ -2,7 +2,7 @@ pub mod flags;
 
 use self::flags::MemberFlags;
 use crate::types::user::User;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct GuildMember {

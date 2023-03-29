@@ -2,7 +2,7 @@ pub mod state;
 
 use self::state::MemberState;
 use crate::types::user::User;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct TeamMember {

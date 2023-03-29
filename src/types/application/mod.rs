@@ -3,7 +3,7 @@ pub mod install_params;
 
 use self::{flags::ApplicationFlags, install_params::InstallParams};
 use super::{team::Team, user::User};
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Application {

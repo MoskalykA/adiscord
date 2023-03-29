@@ -16,7 +16,7 @@ use self::{
     verification_level::VerificationLevel, welcome_screen::WelcomeScreen,
 };
 use super::{emoji::Emoji, feature::Feature, role::Role, sticker::Sticker};
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Guild {
