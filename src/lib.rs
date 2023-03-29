@@ -88,3 +88,87 @@ impl Client {
         }
     }
 }
+
+#[cfg(feature = "gateway")]
+use tungstenite::connect;
+
+#[cfg(feature = "gateway")]
+use url::Url;
+
+#[cfg(feature = "gateway")]
+pub async fn test() {
+    use std::time::Duration;
+
+    use crate::types::gateway::Gateway;
+    use tokio::time::interval;
+    use tungstenite::Message;
+
+    let (mut socket, response) =
+        connect(Url::parse("wss://gateway.discord.gg/?v=10&encoding=json").unwrap())
+            .expect("Can't connect");
+
+    println!("Connected to the server");
+    println!("Response HTTP code: {}", response.status());
+    println!("Response contains the following headers:");
+
+    loop {
+        let msg = socket.read_message().expect("Error reading message");
+        let gateway = serde_json::from_str::<Gateway>(&msg.to_string()).unwrap();
+        match gateway.op {
+            types::gateway::opcode::GatewayOpcode::Dispatch => {
+                println!("Dispatch")
+            }
+            types::gateway::opcode::GatewayOpcode::Heartbeat => {
+                println!("Heartbeat");
+            }
+            types::gateway::opcode::GatewayOpcode::Identify => {
+                println!("Identify")
+            }
+            types::gateway::opcode::GatewayOpcode::PresenceUpdate => {
+                println!("Presence Update")
+            }
+            types::gateway::opcode::GatewayOpcode::VoiceStateUpdate => {
+                println!("Voice State Update")
+            }
+            types::gateway::opcode::GatewayOpcode::Resume => {
+                println!("Resume")
+            }
+            types::gateway::opcode::GatewayOpcode::Reconnect => {
+                println!("Reconnect")
+            }
+            types::gateway::opcode::GatewayOpcode::RequestGuildMembers => {
+                println!("Request Guild Members")
+            }
+            types::gateway::opcode::GatewayOpcode::InvalidSession => {
+                println!("Invalid Session")
+            }
+            types::gateway::opcode::GatewayOpcode::Hello => {
+                println!("Hello");
+
+                tokio::spawn(async move {
+                    let mut interval = interval(Duration::from_secs(10));
+                    loop {
+                        interval.tick().await;
+
+                        socket
+                            .write_message(Message::Text(
+                                r#"{
+                                    "op": 1,
+                                    "d": 251
+                                }"#
+                                .into(),
+                            ))
+                            .unwrap();
+                    }
+                });
+
+                println!("Sent");
+            }
+            types::gateway::opcode::GatewayOpcode::HeartbeatAck => {
+                println!("Heartbeat Ack")
+            }
+        };
+
+        println!("Received");
+    }
+}

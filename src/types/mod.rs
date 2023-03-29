@@ -9,3 +9,6 @@ pub mod team;
 pub mod user;
 pub mod voice;
 pub mod webhook;
+
+#[cfg(feature = "gateway")]
+pub mod gateway;
