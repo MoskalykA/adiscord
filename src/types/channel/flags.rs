@@ -5,6 +5,10 @@ use serde_repr::Deserialize_repr;
 #[repr(u8)]
 pub enum Flags {
     None = 0,
+
+    /// this thread is pinned to the top of its parent GUILD_FORUM channel
     PINNED = 1 << 1,
+
+    /// whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field.
     REQUIRE_TAG = 1 << 4,
 }
