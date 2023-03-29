@@ -4,7 +4,7 @@ use serde_repr::Deserialize_repr;
 #[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
 pub enum Flags {
-    None = 0,
+    None,
 
     /// this thread is pinned to the top of its parent GUILD_FORUM channel
     PINNED = 1 << 1,

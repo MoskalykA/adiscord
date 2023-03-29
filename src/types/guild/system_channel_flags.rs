@@ -3,7 +3,7 @@ use serde_repr::Deserialize_repr;
 #[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
 pub enum SystemChannelFlags {
-    None = 0,
+    None,
 
     /// Suppress member join notifications
     SuppressJoinNotifications = 1 << 0,

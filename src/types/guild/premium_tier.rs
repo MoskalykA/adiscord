@@ -4,14 +4,14 @@ use serde_repr::Deserialize_repr;
 #[repr(u8)]
 pub enum PremiumTier {
     /// guild has not unlocked any Server Boost perks
-    None = 0,
+    None,
 
     /// guild has unlocked Server Boost level 1 perks
-    Tier1 = 1,
+    Tier1,
 
     /// guild has unlocked Server Boost level 2 perks
-    Tier2 = 2,
+    Tier2,
 
     /// guild has unlocked Server Boost level 3 perks
-    Tier3 = 3,
+    Tier3,
 }

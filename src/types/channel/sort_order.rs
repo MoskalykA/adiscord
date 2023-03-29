@@ -5,8 +5,8 @@ use serde_repr::Deserialize_repr;
 #[repr(u8)]
 pub enum SortOrder {
     /// Sort forum posts by activity
-    LATEST_ACTIVITY = 0,
+    LATEST_ACTIVITY,
 
     /// Sort forum posts by creation time (from most recent to oldest)
-    CREATION_DATE = 1,
+    CREATION_DATE,
 }

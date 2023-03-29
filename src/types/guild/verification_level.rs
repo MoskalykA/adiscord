@@ -5,17 +5,17 @@ use serde_repr::Deserialize_repr;
 #[repr(u8)]
 pub enum VerificationLevel {
     /// unrestricted
-    NONE = 0,
+    NONE,
 
     /// must have verified email on account
-    LOW = 1,
+    LOW,
 
     /// must be registered on Discord for longer than 5 minutes
-    MEDIUM = 2,
+    MEDIUM,
 
     /// must be a member of the server for longer than 10 minutes
-    HIGH = 3,
+    HIGH,
 
     /// must have a verified phone number
-    VERY_HIGH = 4,
+    VERY_HIGH,
 }

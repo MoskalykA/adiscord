@@ -5,8 +5,8 @@ use serde_repr::Deserialize_repr;
 #[repr(u8)]
 pub enum DefaultMessageNotifications {
     /// members will receive notifications for all messages by default
-    ALL_MESSAGES = 0,
+    ALL_MESSAGES,
 
     /// members will receive notifications only for messages that @mention them by default
-    ONLY_MENTIONS = 1,
+    ONLY_MENTIONS,
 }

@@ -7,5 +7,5 @@ pub enum VideoQuality {
     AUTO = 1,
 
     /// 720p
-    FULL = 2,
+    FULL,
 }

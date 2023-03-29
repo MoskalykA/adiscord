@@ -7,8 +7,8 @@ pub enum WebhookType {
     Incoming = 1,
 
     /// Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
-    Channel = 2,
+    Channel,
 
     /// Application webhooks are webhooks used with Interactions
-    Application = 3,
+    Application,
 }

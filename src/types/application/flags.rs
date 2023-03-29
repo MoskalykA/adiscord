@@ -4,7 +4,7 @@ use serde_repr::Deserialize_repr;
 #[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u32)]
 pub enum ApplicationFlags {
-    None = 0,
+    None,
 
     /// Intent required for bots in 100 or more servers to receive presence_update events
     GATEWAY_PRESENCE = 1 << 12,

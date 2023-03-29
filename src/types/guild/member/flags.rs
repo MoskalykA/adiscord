@@ -4,7 +4,7 @@ use serde_repr::Deserialize_repr;
 #[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
 pub enum MemberFlags {
-    None = 0,
+    None,
 
     /// Member has left and rejoined the guild
     DID_REJOIN = 1 << 0,

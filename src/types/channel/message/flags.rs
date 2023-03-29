@@ -4,7 +4,7 @@ use serde_repr::Deserialize_repr;
 #[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u16)]
 pub enum MessageFlags {
-    None = 0,
+    None,
 
     /// this message has been published to subscribed channels (via Channel Following)
     CROSSPOSTED = 1 << 0,

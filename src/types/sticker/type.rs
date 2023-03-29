@@ -7,5 +7,5 @@ pub enum StickerType {
     Standard = 1,
 
     /// a sticker uploaded to a guild for the guild's members
-    Guild = 2,
+    Guild,
 }

@@ -5,38 +5,38 @@ use serde_repr::Deserialize_repr;
 #[repr(u8)]
 pub enum ChannelType {
     /// atext channel within a server
-    GUILD_TEXT = 0,
+    GUILD_TEXT,
 
     /// a direct message between users
-    DM = 1,
+    DM,
 
     /// a voice channel within a server
-    GUILD_VOICE = 2,
+    GUILD_VOICE,
 
     /// a direct message between multiple users
-    GROUP_DM = 3,
+    GROUP_DM,
 
     /// an organizational category that contains up to 50 channels
-    GUILD_CATEGORY = 4,
+    GUILD_CATEGORY,
 
     /// a channel that users can follow and crosspost into their own server (formerly news channels)
-    GUILD_ANNOUNCEMENT = 5,
+    GUILD_ANNOUNCEMENT,
 
     /// a temporary sub-channel within a GUILD_ANNOUNCEMENT channel
     ANNOUNCEMENT_THREAD = 10,
 
     /// a temporary sub-channel within a GUILD_TEXT or GUILD_FORUM channel
-    PUBLIC_THREAD = 11,
+    PUBLIC_THREAD,
 
     /// a temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission
-    PRIVATE_THREAD = 12,
+    PRIVATE_THREAD,
 
     /// a voice channel for hosting events with an audience
-    GUILD_STAGE_VOICE = 13,
+    GUILD_STAGE_VOICE,
 
     /// the channel in a hub containing the listed servers
-    GUILD_DIRECTORY = 14,
+    GUILD_DIRECTORY,
 
     /// Channel that can only contain threads
-    GUILD_FORUM = 15,
+    GUILD_FORUM,
 }
