@@ -1,5 +1,6 @@
 use serde::Deserialize;
 
+#[allow(non_camel_case_types)]
 #[derive(Deserialize, Debug)]
 pub enum Feature {
     /// guild has access to set an animated guild banner image
