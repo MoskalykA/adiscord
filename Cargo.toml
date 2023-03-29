@@ -1,16 +1,11 @@
 [package]
-name = "adiscord"
-version = "0.0.3"
+name = "adiscord-test"
+version = "0.0.1"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
-description = "A Discord API wrapper for Rust"
-documentation = "https://docs.rs/adiscord"
-repository = "https://github.com/MoskalykA/adiscord"
 license = "MIT"
 
 [dependencies]
 dotenv_codegen = "0.15.0"
-reqwest = { version = "0.11.14", features = ["json"] }
-serde = { version = "1.0.157", features = ["derive"] }
-serde_repr = "0.1.12"
 tokio = { version = "1", features = ["full"] }
+adiscord = { path = "../adiscord" }
