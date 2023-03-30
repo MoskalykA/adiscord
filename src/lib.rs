@@ -107,6 +107,7 @@ impl Client {
 pub async fn test(client: &Client) {
     use crate::types::gateway::{
         identify::{connection::GatewayIdentifyConnection, GatewayIdentify},
+        opcode::GatewayOpcode,
         Gateway,
     };
     use rand::Rng;
@@ -131,35 +132,35 @@ pub async fn test(client: &Client) {
 
         let gateway = serde_json::from_str::<Gateway>(&msg.to_string()).unwrap();
         match gateway.op {
-            types::gateway::opcode::GatewayOpcode::Dispatch => {
+            GatewayOpcode::Dispatch => {
                 println!("Dispatch");
                 println!("{:?}", gateway.d);
             }
-            types::gateway::opcode::GatewayOpcode::Heartbeat => {
+            GatewayOpcode::Heartbeat => {
                 println!("Heartbeat");
             }
-            types::gateway::opcode::GatewayOpcode::Identify => {
+            GatewayOpcode::Identify => {
                 println!("Identify");
             }
-            types::gateway::opcode::GatewayOpcode::PresenceUpdate => {
+            GatewayOpcode::PresenceUpdate => {
                 println!("Presence Update");
             }
-            types::gateway::opcode::GatewayOpcode::VoiceStateUpdate => {
+            GatewayOpcode::VoiceStateUpdate => {
                 println!("Voice State Update");
             }
-            types::gateway::opcode::GatewayOpcode::Resume => {
+            GatewayOpcode::Resume => {
                 println!("Resume");
             }
-            types::gateway::opcode::GatewayOpcode::Reconnect => {
+            GatewayOpcode::Reconnect => {
                 println!("Reconnect");
             }
-            types::gateway::opcode::GatewayOpcode::RequestGuildMembers => {
+            GatewayOpcode::RequestGuildMembers => {
                 println!("Request Guild Members");
             }
-            types::gateway::opcode::GatewayOpcode::InvalidSession => {
+            GatewayOpcode::InvalidSession => {
                 println!("Invalid Session");
             }
-            types::gateway::opcode::GatewayOpcode::Hello => {
+            GatewayOpcode::Hello => {
                 let heartbeat_interval = gateway
                     .d
                     .expect("Heartbeat interval is required")
@@ -188,7 +189,7 @@ pub async fn test(client: &Client) {
                     }
                 });
             }
-            types::gateway::opcode::GatewayOpcode::HeartbeatAck => {
+            GatewayOpcode::HeartbeatAck => {
                 println!("Heartbeat Ack");
 
                 heartbeat_count += 1;
