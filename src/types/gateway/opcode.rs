@@ -1,6 +1,6 @@
-use serde_repr::Deserialize_repr;
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
-#[derive(Deserialize_repr, PartialEq, Debug)]
+#[derive(Deserialize_repr, PartialEq, Debug, Serialize_repr)]
 #[repr(u8)]
 pub enum GatewayOpcode {
     /// Receive An event was dispatched.
