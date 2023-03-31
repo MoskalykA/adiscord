@@ -110,18 +110,14 @@ pub async fn test(client: &Client) {
         opcode::GatewayOpcode,
         Gateway,
     };
-    use rand::Rng;
-    use std::time::Duration;
-    use tokio::time::interval;
     use tungstenite::connect;
     use url::Url;
 
     let (socket, _) = connect(Url::parse("wss://gateway.discord.gg/?v=10&encoding=json").unwrap())
         .expect("Can't connect");
 
-    let mut heartbeat_count = 0;
-    let gateway_arc = std::sync::Arc::new(client.gateway.clone());
     let socket_arc = std::sync::Arc::new(std::sync::Mutex::new(socket));
+    let mut heartbeat_count = 0;
 
     loop {
         let msg = socket_arc
@@ -169,25 +165,12 @@ pub async fn test(client: &Client) {
                     .as_f64()
                     .expect("Heartbeat interval is required");
 
-                let mut rng = rand::thread_rng();
-                let jitter: f64 = rng.gen();
-                tokio::time::sleep(Duration::from_millis((heartbeat_interval * jitter) as u64))
-                    .await;
-
+                client.gateway.wait_heartbeat(heartbeat_interval).await;
                 client.gateway.send_heartbeat(&socket_arc).await;
-
-                let duration = Duration::from_millis(heartbeat_interval as u64);
-                let gateway_arc_clone = std::sync::Arc::clone(&gateway_arc);
-                let socket_arc_clone = std::sync::Arc::clone(&socket_arc);
-
-                tokio::spawn(async move {
-                    let mut interval = interval(duration);
-                    loop {
-                        interval.tick().await;
-
-                        gateway_arc_clone.send_heartbeat(&socket_arc_clone).await;
-                    }
-                });
+                client
+                    .gateway
+                    .loop_heartbeat(&socket_arc, heartbeat_interval as u64)
+                    .await;
             }
             GatewayOpcode::HeartbeatAck => {
                 println!("Heartbeat Ack");
