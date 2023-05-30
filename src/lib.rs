@@ -6,8 +6,12 @@ pub mod types;
 pub mod voice;
 pub mod webhook;
 
+#[cfg(feature = "gateway")]
+pub mod gateway;
+
 macro_rules! generate_struct {
     ($struct_name:ident) => {
+        #[derive(Clone)]
         pub struct $struct_name {
             pub url: String,
             pub client: reqwest::Client,
@@ -31,9 +35,20 @@ generate_struct!(Webhook);
 
 use serde::Deserialize;
 
+#[cfg(feature = "gateway")]
+use std::collections::HashMap;
+
+#[cfg(feature = "gateway")]
+use crate::gateway::Callback;
+
 const BASE_URL: &str = "https://discord.com/api/v";
 
 pub struct Client {
+    pub token: String,
+
+    #[cfg(feature = "gateway")]
+    pub callbacks: HashMap<String, Callback>,
+
     pub emoji: Emoji,
     pub guild: Guild,
     pub sticker: Sticker,
@@ -64,7 +79,7 @@ impl Client {
     /// #[tokio::main]
     /// async fn main() {
     ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
-    /// }    
+    /// }
     /// ```
     pub fn new(version: &str, token: &str, token_type: TokenType) -> Self {
         let url = format!("{BASE_URL}{version}");
@@ -79,6 +94,11 @@ impl Client {
         );
 
         Self {
+            token: token.clone(),
+
+            #[cfg(feature = "gateway")]
+            callbacks: HashMap::new(),
+
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
             guild: Guild::new(url.clone(), client.clone(), token.clone()),
             sticker: Sticker::new(url.clone(), client.clone(), token.clone()),
