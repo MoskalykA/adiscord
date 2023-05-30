@@ -33,24 +33,28 @@ generate_struct!(Sticker);
 generate_struct!(Voice);
 generate_struct!(Webhook);
 
-#[cfg(feature = "gateway")]
-generate_struct!(Gateway);
-
 use serde::Deserialize;
+
+#[cfg(feature = "gateway")]
+use std::collections::HashMap;
+
+#[cfg(feature = "gateway")]
+use crate::gateway::Callback;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
-#[derive(Clone)]
 pub struct Client {
+    pub token: String,
+
+    #[cfg(feature = "gateway")]
+    pub callbacks: HashMap<String, Callback>,
+
     pub emoji: Emoji,
     pub guild: Guild,
     pub sticker: Sticker,
     pub channel: Channel,
     pub webhook: Webhook,
     pub voice: Voice,
-
-    #[cfg(feature = "gateway")]
-    pub gateway: Gateway,
 }
 
 #[derive(Deserialize, Debug)]
@@ -75,7 +79,7 @@ impl Client {
     /// #[tokio::main]
     /// async fn main() {
     ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
-    /// }    
+    /// }
     /// ```
     pub fn new(version: &str, token: &str, token_type: TokenType) -> Self {
         let url = format!("{BASE_URL}{version}");
@@ -90,115 +94,17 @@ impl Client {
         );
 
         Self {
+            token: token.clone(),
+
+            #[cfg(feature = "gateway")]
+            callbacks: HashMap::new(),
+
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
             guild: Guild::new(url.clone(), client.clone(), token.clone()),
             sticker: Sticker::new(url.clone(), client.clone(), token.clone()),
             webhook: Webhook::new(url.clone(), client.clone(), token.clone()),
             voice: Voice::new(url.clone(), client.clone(), token.clone()),
-            channel: Channel::new(url.clone(), client.clone(), token.clone()),
-
-            #[cfg(feature = "gateway")]
-            gateway: Gateway::new(url, client, token),
+            channel: Channel::new(url, client, token),
         }
-    }
-}
-
-#[cfg(feature = "gateway")]
-pub async fn test(client: &Client) {
-    use crate::types::gateway::{
-        identify::{connection::GatewayIdentifyConnection, GatewayIdentify},
-        opcode::GatewayOpcode,
-        Gateway,
-    };
-    use tungstenite::connect;
-    use url::Url;
-
-    let (socket, _) = connect(Url::parse("wss://gateway.discord.gg/?v=10&encoding=json").unwrap())
-        .expect("Can't connect");
-
-    let socket_arc = std::sync::Arc::new(std::sync::Mutex::new(socket));
-    let mut heartbeat_count = 0;
-
-    loop {
-        let msg = socket_arc
-            .lock()
-            .unwrap()
-            .read_message()
-            .expect("Error reading message");
-
-        let gateway = serde_json::from_str::<Gateway>(&msg.to_string()).unwrap();
-        match gateway.op {
-            GatewayOpcode::Dispatch => {
-                println!("Dispatch");
-                println!("{:?}", gateway.d);
-            }
-            GatewayOpcode::Heartbeat => {
-                println!("Heartbeat");
-            }
-            GatewayOpcode::Identify => {
-                println!("Identify");
-            }
-            GatewayOpcode::PresenceUpdate => {
-                println!("Presence Update");
-            }
-            GatewayOpcode::VoiceStateUpdate => {
-                println!("Voice State Update");
-            }
-            GatewayOpcode::Resume => {
-                println!("Resume");
-            }
-            GatewayOpcode::Reconnect => {
-                println!("Reconnect");
-            }
-            GatewayOpcode::RequestGuildMembers => {
-                println!("Request Guild Members");
-            }
-            GatewayOpcode::InvalidSession => {
-                println!("Invalid Session");
-            }
-            GatewayOpcode::Hello => {
-                let heartbeat_interval = gateway
-                    .d
-                    .expect("Heartbeat interval is required")
-                    .get("heartbeat_interval")
-                    .expect("Heartbeat interval is required")
-                    .as_f64()
-                    .expect("Heartbeat interval is required");
-
-                client.gateway.wait_heartbeat(heartbeat_interval).await;
-                client.gateway.send_heartbeat(&socket_arc).await;
-                client
-                    .gateway
-                    .loop_heartbeat(&socket_arc, heartbeat_interval as u64)
-                    .await;
-            }
-            GatewayOpcode::HeartbeatAck => {
-                println!("Heartbeat Ack");
-
-                heartbeat_count += 1;
-                if heartbeat_count == 2 {
-                    let socket_arc_clone = std::sync::Arc::clone(&socket_arc);
-                    client
-                        .gateway
-                        .identify(
-                            socket_arc_clone,
-                            GatewayIdentify {
-                                token: client.gateway.token.clone(),
-                                properties: GatewayIdentifyConnection {
-                                    os: "windows".to_owned(),
-                                    browser: "adiscord".to_owned(),
-                                    device: "adiscord".to_owned(),
-                                },
-                                compress: None,
-                                large_threshold: None,
-                                shard: None,
-                                presence: None,
-                                intents: 0,
-                            },
-                        )
-                        .await;
-                }
-            }
-        };
     }
 }
