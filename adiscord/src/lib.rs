@@ -79,8 +79,14 @@ pub enum TokenType {
 }
 
 impl Client {
-    /// # Examples
+    /// # Initiating the library
+    /// 
+    /// This function will initiate the library.
+    /// 
+    /// ## Examples
     ///
+    /// With Gateway
+    /// 
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
@@ -88,6 +94,18 @@ impl Client {
     /// #[tokio::main]
     /// async fn main() {
     ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    /// }
+    /// ```
+    /// 
+    /// With API
+    /// 
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bearer);
     /// }
     /// ```
     pub fn new(version: &str, token: &str, token_type: TokenType) -> Self {

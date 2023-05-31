@@ -23,6 +23,7 @@ use url::Url;
 
 const GATEWAY_URL: &str = "wss://gateway.discord.gg/?v=10&encoding=json";
 
+/// This type is used in the gateway system for callbacks.
 pub type Callback = Arc<dyn Fn(Value) + Send + Sync>;
 
 #[derive(Debug)]
@@ -201,10 +202,42 @@ macro_rules! generate_event {
 }
 
 impl Client {
+    /// # Add an intent
+    /// 
+    /// This will add an enum to a list of enums and later transform this set into a number, allowing you to define which events are visible and which are not.
+    /// 
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     client.add_intent(Intent::MessageContent);
+    /// }
+    /// ```
     pub fn add_intent(&mut self, intent: Intent) {
         self.intents.push(intent);
     }
 
+    /// # Add intents
+    /// 
+    /// This does the same thing as the `add_intent` function, but this function takes a list of enums and then adds them.
+    /// 
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     client.add_intents(vec![ Intent::MessageContent ]);
+    /// }
+    /// ```
     pub fn add_intents(&mut self, intents: Vec<Intent>) {
         for intent in intents {
             self.intents.push(intent);
@@ -222,6 +255,22 @@ impl Client {
     generate_event!(on_thread_update, "THREAD_UPDATE", Channel);
     generate_event!(on_thread_delete, "THREAD_DELETE", Channel);
 
+    /// # Create a connection to Discord
+    /// 
+    /// This will simply create the connection to Discord.
+    /// 
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     client.init().await;
+    /// }
+    /// ```
     pub async fn init(self) {
         tracing_subscriber::fmt::init();
 
@@ -255,6 +304,22 @@ impl Client {
         future.await.unwrap();
     }
 
+    /// # "Heartbeat Ack" message or not
+    /// 
+    /// This will allow you to choose whether or not to receive the little "Heartbeat Ack" message when Discord responds to a heartbeat.
+    /// 
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     client.set_heartbeat_ack(true);
+    /// }
+    /// ```
     pub fn set_heartbeat_ack(&mut self, state: bool) {
         self.heartbeat_ack = state;
     }
