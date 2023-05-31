@@ -5,6 +5,8 @@ use crate::types::gateway::identify::GatewayIdentify;
 use crate::types::gateway::opcode::GatewayOpcode;
 use crate::types::gateway::Gateway;
 use crate::Client;
+use adiscord_intents::generate_intent_number;
+use adiscord_intents::Intent;
 use async_trait::async_trait;
 use ezsockets::ClientConfig;
 use serde_json::to_string;
@@ -31,6 +33,7 @@ enum Call {
 struct GatewayClient {
     token: String,
     handle: ezsockets::Client<Self>,
+    intents: u16,
     callbacks: HashMap<String, Callback>,
     identify: bool,
     heartbeat_count: u8,
@@ -40,6 +43,7 @@ impl GatewayClient {
     fn new(
         token: String,
         handle: ezsockets::Client<Self>,
+        intents: u16,
         callbacks: HashMap<String, Callback>,
         identify: bool,
         heartbeat_count: u8,
@@ -47,6 +51,7 @@ impl GatewayClient {
         Self {
             token,
             handle,
+            intents,
             callbacks,
             identify,
             heartbeat_count,
@@ -148,7 +153,7 @@ impl ezsockets::ClientExt for GatewayClient {
                             large_threshold: None,
                             shard: None,
                             presence: None,
-                            intents: 513,
+                            intents: self.intents,
                         };
 
                         let identify = Gateway {
@@ -178,6 +183,10 @@ impl ezsockets::ClientExt for GatewayClient {
 }
 
 impl Client {
+    pub fn add_intent(&mut self, intent: Intent) {
+        self.intents.push(intent);
+    }
+
     pub fn on_message(&mut self, callback: fn(Message)) {
         self.callbacks.insert(
             "MESSAGE_CREATE".to_owned(),
@@ -194,7 +203,16 @@ impl Client {
         let url = Url::parse(GATEWAY_URL).unwrap();
         let config = ClientConfig::new(url);
         let (handle, future) = ezsockets::connect(
-            |handle| GatewayClient::new(self.token, handle, self.callbacks, false, 0),
+            |handle| {
+                GatewayClient::new(
+                    self.token,
+                    handle,
+                    generate_intent_number(self.intents),
+                    self.callbacks,
+                    false,
+                    0,
+                )
+            },
             config,
         )
         .await;

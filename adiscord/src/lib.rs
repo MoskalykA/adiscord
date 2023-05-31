@@ -6,7 +6,7 @@ pub mod types;
 pub mod voice;
 pub mod webhook;
 
-//#[cfg(feature = "gateway")]
+#[cfg(feature = "gateway")]
 pub mod gateway;
 
 macro_rules! generate_struct {
@@ -35,10 +35,13 @@ generate_struct!(Webhook);
 
 use serde::Deserialize;
 
-//#[cfg(feature = "gateway")]
+#[cfg(feature = "gateway")]
+use adiscord_intents::Intent;
+
+#[cfg(feature = "gateway")]
 use std::collections::HashMap;
 
-//#[cfg(feature = "gateway")]
+#[cfg(feature = "gateway")]
 use crate::gateway::Callback;
 
 const BASE_URL: &str = "https://discord.com/api/v";
@@ -46,7 +49,10 @@ const BASE_URL: &str = "https://discord.com/api/v";
 pub struct Client {
     pub token: String,
 
-    //#[cfg(feature = "gateway")]
+    #[cfg(feature = "gateway")]
+    pub intents: Vec<Intent>,
+
+    #[cfg(feature = "gateway")]
     pub callbacks: HashMap<String, Callback>,
 
     pub emoji: Emoji,
@@ -96,7 +102,10 @@ impl Client {
         Self {
             token: token.clone(),
 
-            //#[cfg(feature = "gateway")]
+            #[cfg(feature = "gateway")]
+            intents: Vec::new(),
+
+            #[cfg(feature = "gateway")]
             callbacks: HashMap::new(),
 
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
