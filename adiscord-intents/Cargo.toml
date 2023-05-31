@@ -1,8 +1,9 @@
 [package]
 name = "adiscord-intents"
-version = "0.1.0"
+version = "0.0.1"
+authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
+description = "Calculate the number of intents from a list of enums"
+documentation = "https://docs.rs/adiscord-intents"
+repository = "https://github.com/MoskalykA/adiscord"
+license = "MIT"

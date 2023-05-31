@@ -10,5 +10,5 @@ pub mod user;
 pub mod voice;
 pub mod webhook;
 
-#[cfg(feature = "gateway")]
+//#[cfg(feature = "gateway")]
 pub mod gateway;
