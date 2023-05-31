@@ -1,3 +1,5 @@
+pub mod types;
+
 use crate::gateway::GatewayOpcode::Identify;
 use crate::types::channel::message::Message;
 use crate::types::channel::Channel;
@@ -190,7 +192,7 @@ impl ezsockets::ClientExt for GatewayClient {
 macro_rules! generate_event {
     ($function_name:ident, $event_name:literal, $type:ty) => {
         pub fn $function_name(&mut self, callback: fn($type)) {
-            self.callbacks.insert(
+            self.gateway.callbacks.insert(
                 $event_name.to_owned(),
                 Arc::new(move |value| {
                     let data: $type = serde_json::from_value(value).unwrap();
@@ -203,15 +205,15 @@ macro_rules! generate_event {
 
 impl Client {
     /// # Add an intent
-    /// 
+    ///
     /// This will add an enum to a list of enums and later transform this set into a number, allowing you to define which events are visible and which are not.
-    /// 
+    ///
     /// ## Examples
     ///
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
@@ -219,19 +221,19 @@ impl Client {
     /// }
     /// ```
     pub fn add_intent(&mut self, intent: Intent) {
-        self.intents.push(intent);
+        self.gateway.intents.push(intent);
     }
 
     /// # Add intents
-    /// 
+    ///
     /// This does the same thing as the `add_intent` function, but this function takes a list of enums and then adds them.
-    /// 
+    ///
     /// ## Examples
     ///
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
@@ -240,7 +242,7 @@ impl Client {
     /// ```
     pub fn add_intents(&mut self, intents: Vec<Intent>) {
         for intent in intents {
-            self.intents.push(intent);
+            self.gateway.intents.push(intent);
         }
     }
 
@@ -256,15 +258,15 @@ impl Client {
     generate_event!(on_thread_delete, "THREAD_DELETE", Channel);
 
     /// # Create a connection to Discord
-    /// 
+    ///
     /// This will simply create the connection to Discord.
-    /// 
+    ///
     /// ## Examples
     ///
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
@@ -279,12 +281,12 @@ impl Client {
         let (handle, future) = ezsockets::connect(
             |handle| {
                 GatewayClient::new(
-                    self.token,
+                    self.gateway.token,
                     handle,
-                    generate_intent_number(self.intents),
-                    self.callbacks,
+                    generate_intent_number(self.gateway.intents),
+                    self.gateway.callbacks,
                     false,
-                    self.heartbeat_ack,
+                    self.gateway.heartbeat_ack,
                     0,
                 )
             },
@@ -305,15 +307,15 @@ impl Client {
     }
 
     /// # "Heartbeat Ack" message or not
-    /// 
+    ///
     /// This will allow you to choose whether or not to receive the little "Heartbeat Ack" message when Discord responds to a heartbeat.
-    /// 
+    ///
     /// ## Examples
     ///
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() {
     ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
@@ -321,6 +323,6 @@ impl Client {
     /// }
     /// ```
     pub fn set_heartbeat_ack(&mut self, state: bool) {
-        self.heartbeat_ack = state;
+        self.gateway.heartbeat_ack = state;
     }
 }

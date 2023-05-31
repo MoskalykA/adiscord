@@ -33,30 +33,16 @@ generate_struct!(Sticker);
 generate_struct!(Voice);
 generate_struct!(Webhook);
 
+#[cfg(feature = "gateway")]
+use gateway::types::Gateway;
+
 use serde::Deserialize;
-
-#[cfg(feature = "gateway")]
-use adiscord_intents::Intent;
-
-#[cfg(feature = "gateway")]
-use std::collections::HashMap;
-
-#[cfg(feature = "gateway")]
-use crate::gateway::Callback;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
 pub struct Client {
-    pub token: String,
-
     #[cfg(feature = "gateway")]
-    pub intents: Vec<Intent>,
-
-    #[cfg(feature = "gateway")]
-    pub callbacks: HashMap<String, Callback>,
-
-    #[cfg(feature = "gateway")]
-    pub heartbeat_ack: bool,
+    pub gateway: Gateway,
 
     pub emoji: Emoji,
     pub guild: Guild,
@@ -80,13 +66,13 @@ pub enum TokenType {
 
 impl Client {
     /// # Initiating the library
-    /// 
+    ///
     /// This function will initiate the library.
-    /// 
+    ///
     /// ## Examples
     ///
     /// With Gateway
-    /// 
+    ///
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
@@ -96,9 +82,9 @@ impl Client {
     ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
     /// }
     /// ```
-    /// 
+    ///
     /// With API
-    /// 
+    ///
     /// ```
     /// use adiscord::Client;
     /// use dotenv_codegen::dotenv;
@@ -121,16 +107,8 @@ impl Client {
         );
 
         Self {
-            token: token.clone(),
-
             #[cfg(feature = "gateway")]
-            intents: Vec::new(),
-
-            #[cfg(feature = "gateway")]
-            callbacks: HashMap::new(),
-
-            #[cfg(feature = "gateway")]
-            heartbeat_ack: false,
+            gateway: Gateway::new(token.clone()),
 
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
             guild: Guild::new(url.clone(), client.clone(), token.clone()),
