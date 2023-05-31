@@ -1,4 +1,5 @@
 use crate::gateway::GatewayOpcode::Identify;
+use crate::types::channel::Channel;
 use crate::types::channel::message::Message;
 use crate::types::gateway::identify::connection::GatewayIdentifyConnection;
 use crate::types::gateway::identify::GatewayIdentify;
@@ -202,6 +203,15 @@ impl Client {
     }
 
     generate_event!(on_message, "MESSAGE_CREATE", Message);
+    generate_event!(on_message_update, "MESSAGE_UPDATE", Message);
+    
+    generate_event!(on_channel_create, "CHANNEL_CREATE", Channel);
+    generate_event!(on_channel_update, "CHANNEL_UPDATE", Channel);
+    generate_event!(on_channel_delete, "CHANNEL_DELETE", Channel);
+
+    generate_event!(on_thread_create, "THREAD_CREATE", Channel);
+    generate_event!(on_thread_update, "THREAD_UPDATE", Channel);
+    generate_event!(on_thread_delete, "THREAD_DELETE", Channel);
 
     pub async fn init(self) {
         tracing_subscriber::fmt::init();
