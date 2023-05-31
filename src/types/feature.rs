@@ -1,7 +1,7 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Feature {
     /// guild has access to set an animated guild banner image
     ANIMATED_BANNER,

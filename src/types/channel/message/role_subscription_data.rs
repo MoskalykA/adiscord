@@ -1,6 +1,6 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct RoleSubscriptionData {
     /// the id of the sku and listing that the user is subscribed to
     pub role_subscription_listing_id: String,

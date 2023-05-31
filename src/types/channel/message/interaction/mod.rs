@@ -2,9 +2,9 @@ pub mod r#type;
 
 use self::r#type::InteractionType;
 use crate::types::user::User;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct MessageInteraction {
     /// ID of the interaction
     pub id: String,

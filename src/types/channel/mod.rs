@@ -24,9 +24,9 @@ use self::{
     video::VideoQuality,
 };
 use super::user::User;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Channel {
     /// the id of this channel
     pub id: String,

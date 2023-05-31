@@ -10,9 +10,9 @@ use self::{
     author::EmbedAuthor, field::EmbedField, footer::EmbedFooter, image::EmbedImage,
     provider::EmbedProvider, thumbnail::EmbedThumbnail, video::EmbedVideo,
 };
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Embed {
     /// title of embed
     pub title: Option<String>,

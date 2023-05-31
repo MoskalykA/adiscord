@@ -4,9 +4,9 @@ pub mod r#type;
 
 use self::{format::StickerFormatType, r#type::StickerType};
 use super::user::User;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Sticker {
     /// id of the sticker
     pub id: String,

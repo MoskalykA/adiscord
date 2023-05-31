@@ -3,9 +3,9 @@ pub mod install_params;
 
 use self::{flags::ApplicationFlags, install_params::InstallParams};
 use super::{team::Team, user::User};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Application {
     /// the id of the app
     pub id: String,

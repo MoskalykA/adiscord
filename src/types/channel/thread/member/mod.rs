@@ -2,9 +2,9 @@ pub mod flags;
 
 use self::flags::ThreadMemberFlags;
 use crate::types::user::User;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct ThreadMember {
     /// ID of the thread
     pub id: Option<String>,

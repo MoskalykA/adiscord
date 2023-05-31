@@ -1,9 +1,9 @@
 pub mod member;
 
 use self::member::TeamMember;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Team {
     /// a hash of the image of the team's icon
     pub icon: Option<String>,

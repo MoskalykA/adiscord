@@ -18,16 +18,16 @@ use crate::types::{
     sticker::{item::StickerItem, Sticker},
     user::User,
 };
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 #[serde(untagged)]
 pub enum Nonce {
     Integer(u64),
     String(String),
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Message {
     /// id of the message
     pub id: String,

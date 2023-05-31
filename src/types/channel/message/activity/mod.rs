@@ -1,9 +1,9 @@
 pub mod r#type;
 
 use self::r#type::ActivityType;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct MessageActivity {
     /// type of message activity
     pub r#type: ActivityType,

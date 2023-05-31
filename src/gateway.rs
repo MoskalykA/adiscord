@@ -1,4 +1,5 @@
 use crate::gateway::GatewayOpcode::Identify;
+use crate::types::channel::message::Message;
 use crate::types::gateway::identify::connection::GatewayIdentifyConnection;
 use crate::types::gateway::identify::GatewayIdentify;
 use crate::types::gateway::opcode::GatewayOpcode;
@@ -11,6 +12,7 @@ use serde_json::to_value;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::io::BufRead;
+use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::interval;
 use tokio::time::sleep;
@@ -19,14 +21,13 @@ use url::Url;
 const GATEWAY_URL: &str = "wss://gateway.discord.gg/?v=10&encoding=json";
 const HEARTBEAT_MULTIPLIER: f64 = 0.1;
 
-pub type Callback = fn(Value);
+pub type Callback = Arc<dyn Fn(Value) + Send + Sync>;
 
 #[derive(Debug)]
 enum Call {
     NewLine(String),
 }
 
-#[derive(Debug)]
 struct GatewayClient {
     token: String,
     handle: ezsockets::Client<Self>,
@@ -177,8 +178,14 @@ impl ezsockets::ClientExt for GatewayClient {
 }
 
 impl Client {
-    pub fn add_callback(&mut self, name: String, callback: Callback) {
-        self.callbacks.insert(name, callback);
+    pub fn on_message(&mut self, callback: fn(Message)) {
+        self.callbacks.insert(
+            "MESSAGE_CREATE".to_owned(),
+            Arc::new(move |value| {
+                let message: Message = serde_json::from_value(value).unwrap();
+                callback(message);
+            }),
+        );
     }
 
     pub async fn init(self) {

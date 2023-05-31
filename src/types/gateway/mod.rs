@@ -6,7 +6,7 @@ use self::opcode::GatewayOpcode;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Deserialize, Serialize)]
 pub struct Gateway {
     /// Gateway opcode, which indicates the payload type
     pub op: GatewayOpcode,

@@ -1,7 +1,7 @@
-use serde_repr::Deserialize_repr;
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, PartialEq, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
 pub enum ForumLayout {
     /// No default has been set for forum channel

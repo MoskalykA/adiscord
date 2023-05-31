@@ -1,7 +1,7 @@
 use super::format::StickerFormatType;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct StickerItem {
     /// id of the sticker
     pub id: String,

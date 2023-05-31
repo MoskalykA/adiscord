@@ -1,7 +1,7 @@
 use super::{role::Role, user::User};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Emoji {
     /// emoji id
     pub id: String,

@@ -1,7 +1,7 @@
 use super::r#type::ChannelType;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Mention {
     /// id of the channel
     pub id: String,

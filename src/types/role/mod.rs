@@ -1,9 +1,9 @@
 pub mod tags;
 
 use self::tags::RoleTags;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Role {
     /// role id
     pub id: String,

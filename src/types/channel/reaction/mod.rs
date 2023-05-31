@@ -1,9 +1,9 @@
 pub mod default;
 
 use crate::types::emoji::Emoji;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Reaction {
     /// times this emoji has been used to react
     pub count: u16,
