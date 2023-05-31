@@ -182,20 +182,26 @@ impl ezsockets::ClientExt for GatewayClient {
     }
 }
 
+macro_rules! generate_event {
+    ($function_name:ident, $event_name:literal, $type:ty) => {
+        pub fn $function_name(&mut self, callback: fn($type)) {
+            self.callbacks.insert(
+                $event_name.to_owned(),
+                Arc::new(move |value| {
+                    let data: $type = serde_json::from_value(value).unwrap();
+                    callback(data);
+                }),
+            );
+        }
+    };
+}
+
 impl Client {
     pub fn add_intent(&mut self, intent: Intent) {
         self.intents.push(intent);
     }
 
-    pub fn on_message(&mut self, callback: fn(Message)) {
-        self.callbacks.insert(
-            "MESSAGE_CREATE".to_owned(),
-            Arc::new(move |value| {
-                let message: Message = serde_json::from_value(value).unwrap();
-                callback(message);
-            }),
-        );
-    }
+    generate_event!(on_message, "MESSAGE_CREATE", Message);
 
     pub async fn init(self) {
         tracing_subscriber::fmt::init();
