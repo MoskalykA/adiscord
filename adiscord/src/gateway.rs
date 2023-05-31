@@ -207,6 +207,12 @@ impl Client {
         self.intents.push(intent);
     }
 
+    pub fn add_intents(&mut self, intents: Vec<Intent>) {
+        for intent in intents {
+            self.intents.push(intent);
+        }
+    }
+
     generate_event!(on_message, "MESSAGE_CREATE", Message);
     generate_event!(on_message_update, "MESSAGE_UPDATE", Message);
     
