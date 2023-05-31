@@ -1,6 +1,6 @@
 use crate::gateway::GatewayOpcode::Identify;
-use crate::types::channel::Channel;
 use crate::types::channel::message::Message;
+use crate::types::channel::Channel;
 use crate::types::gateway::identify::connection::GatewayIdentifyConnection;
 use crate::types::gateway::identify::GatewayIdentify;
 use crate::types::gateway::opcode::GatewayOpcode;
@@ -10,6 +10,7 @@ use adiscord_intents::generate_intent_number;
 use adiscord_intents::Intent;
 use async_trait::async_trait;
 use ezsockets::ClientConfig;
+use serde::Deserialize;
 use serde_json::to_string;
 use serde_json::to_value;
 use serde_json::Value;
@@ -17,12 +18,10 @@ use std::collections::HashMap;
 use std::io::BufRead;
 use std::sync::Arc;
 use std::time::Duration;
-use tokio::time::interval;
-use tokio::time::sleep;
+use tokio::time;
 use url::Url;
 
 const GATEWAY_URL: &str = "wss://gateway.discord.gg/?v=10&encoding=json";
-const HEARTBEAT_MULTIPLIER: f64 = 0.1;
 
 pub type Callback = Arc<dyn Fn(Value) + Send + Sync>;
 
@@ -63,6 +62,12 @@ impl GatewayClient {
     }
 }
 
+#[derive(Deserialize, Debug)]
+pub struct Heartbeat {
+    #[serde(rename = "heartbeat_interval")]
+    pub interval: f32,
+}
+
 #[async_trait]
 impl ezsockets::ClientExt for GatewayClient {
     type Call = Call;
@@ -101,21 +106,14 @@ impl ezsockets::ClientExt for GatewayClient {
                 println!("Invalid Session");
             }
             GatewayOpcode::Hello => {
-                let heartbeat_interval = gateway
-                    .d
-                    .expect("Heartbeat interval is required")
-                    .get("heartbeat_interval")
-                    .expect("Heartbeat interval is required")
-                    .as_f64()
-                    .expect("Heartbeat interval is required");
+                let data = gateway.d.expect("Data is required");
+                let heartbeat: Heartbeat = serde_json::from_value(data).unwrap();
+                let interval = heartbeat.interval as u64;
 
                 let handle = std::sync::Arc::new(self.handle.clone());
-                let duration = Duration::from_millis(heartbeat_interval as u64);
+                let duration = Duration::from_millis(interval);
                 tokio::spawn(async move {
-                    sleep(Duration::from_millis(
-                        (heartbeat_interval * HEARTBEAT_MULTIPLIER) as u64,
-                    ))
-                    .await;
+                    time::sleep(Duration::from_millis(interval / 4)).await;
 
                     handle.text(
                         r#"{
@@ -125,7 +123,7 @@ impl ezsockets::ClientExt for GatewayClient {
                         .into(),
                     );
 
-                    let mut interval = interval(duration);
+                    let mut interval = time::interval(duration);
                     loop {
                         interval.tick().await;
 
@@ -215,7 +213,7 @@ impl Client {
 
     generate_event!(on_message, "MESSAGE_CREATE", Message);
     generate_event!(on_message_update, "MESSAGE_UPDATE", Message);
-    
+
     generate_event!(on_channel_create, "CHANNEL_CREATE", Channel);
     generate_event!(on_channel_update, "CHANNEL_UPDATE", Channel);
     generate_event!(on_channel_delete, "CHANNEL_DELETE", Channel);
