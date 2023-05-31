@@ -8,5 +8,5 @@ license = "MIT"
 [dependencies]
 dotenv_codegen = "0.15.0"
 tokio = { version = "1", features = ["full"] }
-adiscord = { path = "../adiscord", features = ["gateway"] }
+adiscord = { version = "0.0.4", features = ["gateway"] }
 adiscord-intents = "0.0.1"
