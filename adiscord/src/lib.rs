@@ -55,6 +55,9 @@ pub struct Client {
     #[cfg(feature = "gateway")]
     pub callbacks: HashMap<String, Callback>,
 
+    #[cfg(feature = "gateway")]
+    pub heartbeat_ack: bool,
+
     pub emoji: Emoji,
     pub guild: Guild,
     pub sticker: Sticker,
@@ -107,6 +110,9 @@ impl Client {
 
             #[cfg(feature = "gateway")]
             callbacks: HashMap::new(),
+
+            #[cfg(feature = "gateway")]
+            heartbeat_ack: false,
 
             emoji: Emoji::new(url.clone(), client.clone(), token.clone()),
             guild: Guild::new(url.clone(), client.clone(), token.clone()),

@@ -37,6 +37,7 @@ struct GatewayClient {
     intents: u16,
     callbacks: HashMap<String, Callback>,
     identify: bool,
+    heartbeat_ack: bool,
     heartbeat_count: u8,
 }
 
@@ -47,6 +48,7 @@ impl GatewayClient {
         intents: u16,
         callbacks: HashMap<String, Callback>,
         identify: bool,
+        heartbeat_ack: bool,
         heartbeat_count: u8,
     ) -> Self {
         Self {
@@ -55,6 +57,7 @@ impl GatewayClient {
             intents,
             callbacks,
             identify,
+            heartbeat_ack,
             heartbeat_count,
         }
     }
@@ -137,7 +140,9 @@ impl ezsockets::ClientExt for GatewayClient {
                 });
             }
             GatewayOpcode::HeartbeatAck => {
-                println!("Heartbeat Ack");
+                if self.heartbeat_ack {
+                    println!("Heartbeat Ack");
+                }
 
                 if !self.identify {
                     self.heartbeat_count += 1;
@@ -226,6 +231,7 @@ impl Client {
                     generate_intent_number(self.intents),
                     self.callbacks,
                     false,
+                    self.heartbeat_ack,
                     0,
                 )
             },
@@ -243,5 +249,9 @@ impl Client {
         });
 
         future.await.unwrap();
+    }
+
+    pub fn set_heartbeat_ack(&mut self, state: bool) {
+        self.heartbeat_ack = state;
     }
 }

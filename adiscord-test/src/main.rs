@@ -5,6 +5,8 @@ use dotenv_codegen::dotenv;
 #[tokio::main]
 async fn main() {
     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    client.set_heartbeat_ack(true);
+    
     client.add_intent(Intent::GUILDS);
     client.add_intent(Intent::GUILD_MESSAGES);
     client.add_intent(Intent::GUILD_MEMBERS);
