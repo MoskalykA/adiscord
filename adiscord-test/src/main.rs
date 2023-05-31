@@ -7,10 +7,10 @@ async fn main() {
     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
     client.set_heartbeat_ack(true);
 
-    client.add_intent(Intent::MESSAGE_CONTENT);
-    client.add_intent(Intent::GUILDS);
-    client.add_intent(Intent::GUILD_MESSAGES);
-    client.add_intent(Intent::GUILD_MEMBERS);
+    client.add_intent(Intent::MessageContent);
+    client.add_intent(Intent::Guilds);
+    client.add_intent(Intent::GuildMessages);
+    client.add_intent(Intent::GuildMembers);
 
     // Message
 
