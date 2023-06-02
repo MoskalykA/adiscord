@@ -1,6 +1,6 @@
 pub enum Intent {
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - GUILD_UPDATE
     /// - GUILD_DELETE
     /// - GUILD_ROLE_CREATE
@@ -22,7 +22,7 @@ pub enum Intent {
     Guilds = 1 << 0,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - GUILD_MEMBER_ADD
     /// - GUILD_MEMBER_UPDATE
     /// - GUILD_MEMBER_REMOVE
@@ -30,20 +30,20 @@ pub enum Intent {
     GuildMembers = 1 << 1,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - GUILD_AUDIT_LOG_ENTRY_CREATE
     /// - GUILD_BAN_ADD
     /// - GUILD_BAN_REMOVE
     GuildModeration = 1 << 2,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - GUILD_EMOJIS_UPDATE
     /// - GUILD_STICKERS_UPDATE
     GuildEmojisAndStickers = 1 << 3,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - GUILD_INTEGRATIONS_UPDATE
     /// - INTEGRATION_CREATE
     /// - INTEGRATION_UPDATE
@@ -51,28 +51,28 @@ pub enum Intent {
     GuildIntegrations = 1 << 4,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - WEBHOOKS_UPDATE
     GuildWebhooks = 1 << 5,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - INVITE_CREATE
     /// - INVITE_DELETE
     GuildInvites = 1 << 6,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - VOICE_STATE_UPDATE
     GuildVoiceStates = 1 << 7,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - PRESENCE_UPDATE
     GuildPresences = 1 << 8,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - MESSAGE_CREATE
     /// - MESSAGE_UPDATE
     /// - MESSAGE_DELETE
@@ -80,7 +80,7 @@ pub enum Intent {
     GuildMessages = 1 << 9,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - MESSAGE_REACTION_ADD
     /// - MESSAGE_REACTION_REMOVE
     /// - MESSAGE_REACTION_REMOVE_ALL
@@ -88,12 +88,12 @@ pub enum Intent {
     GuildMessageReactions = 1 << 10,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - TYPING_START
     GuildMessageTyping = 1 << 11,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - MESSAGE_CREATE
     /// - MESSAGE_UPDATE
     /// - MESSAGE_DELETE
@@ -101,7 +101,7 @@ pub enum Intent {
     DirectMessages = 1 << 12,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - MESSAGE_REACTION_ADD
     /// - MESSAGE_REACTION_REMOVE
     /// - MESSAGE_REACTION_REMOVE_ALL
@@ -109,14 +109,14 @@ pub enum Intent {
     DirectMessageReactions = 1 << 13,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - TYPING_START
     DirectMessageTyping = 1 << 14,
 
     MessageContent = 1 << 15,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - GUILD_SCHEDULED_EVENT_CREATE
     /// - GUILD_SCHEDULED_EVENT_UPDATE
     /// - GUILD_SCHEDULED_EVENT_DELETE
@@ -125,20 +125,19 @@ pub enum Intent {
     GuildScheduledEvents = 1 << 16,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - AUTO_MODERATION_RULE_CREATE
     /// - AUTO_MODERATION_RULE_UPDATE
     /// - AUTO_MODERATION_RULE_DELETE
     AutoModerationConfiguration = 1 << 20,
 
     /// Exhaustive list of events included:
-    /// 
+    ///
     /// - AUTO_MODERATION_RULE_CREATE
     /// - AUTO_MODERATION_RULE_UPDATE
     /// - AUTO_MODERATION_RULE_DELETE
     AutoModerationExecution = 1 << 21,
 }
-
 
 /// Generate the number of itents from an intent list
 pub fn generate_intent_number(intents: Vec<Intent>) -> u16 {
