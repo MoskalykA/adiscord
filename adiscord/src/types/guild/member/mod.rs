@@ -2,9 +2,9 @@ pub mod flags;
 
 use self::flags::MemberFlags;
 use crate::types::user::User;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct GuildMember {
     /// the user this guild member represents
     pub user: Option<User>,

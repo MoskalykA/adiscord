@@ -6,6 +6,9 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 pub enum ApplicationFlags {
     None,
 
+    /// Indicates if an app uses the Auto Moderation API
+    APPLICATION_AUTO_MODERATION_RULE_CREATE_BADGE = 1 << 6,
+
     /// Intent required for bots in 100 or more servers to receive presence_update events
     GATEWAY_PRESENCE = 1 << 12,
 

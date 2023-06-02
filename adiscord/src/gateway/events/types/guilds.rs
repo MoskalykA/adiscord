@@ -1,30 +1,31 @@
-pub mod default_message_notifications;
-pub mod explicit_content_filter;
-pub mod member;
-pub mod mfa_level;
-pub mod nsfw_level;
-pub mod premium_tier;
-pub mod preview;
-pub mod system_channel_flags;
-pub mod verification_level;
-pub mod welcome_screen;
-
-use self::{
-    default_message_notifications::DefaultMessageNotifications,
-    explicit_content_filter::ExplicitContentFilter, mfa_level::MFALevel, nsfw_level::NSFWLevel,
-    premium_tier::PremiumTier, system_channel_flags::SystemChannelFlags,
-    verification_level::VerificationLevel, welcome_screen::WelcomeScreen,
-};
-use super::{emoji::Emoji, feature::Feature, role::Role, sticker::Sticker};
 use serde::Deserialize;
+use crate::types::{guild::{verification_level::VerificationLevel, default_message_notifications::DefaultMessageNotifications, explicit_content_filter::ExplicitContentFilter, mfa_level::MFALevel, system_channel_flags::SystemChannelFlags, premium_tier::PremiumTier, welcome_screen::WelcomeScreen, nsfw_level::NSFWLevel, member::GuildMember}, role::Role, emoji::Emoji, feature::Feature, sticker::Sticker, channel::Channel};
 
 #[derive(Deserialize, Debug)]
-pub struct Guild {
+pub struct UnavailableGuild {
     /// guild id
     pub id: String,
 
+    /// unavailable or not
+    pub unavailable: bool,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct GuildCreate {
+    /// guild id
+    pub id: String,
+
+    /// GUILD AVAILABLE: 
+    ///     true if this guild is unavailable due to an outage
+    /// 
+    /// GUILD UNVAILABLE:
+    ///     unavailable or not
+    pub unavailable: Option<bool>,
+
+    // GUILD SECTION
+
     /// guild name (2-100 characters, excluding trailing and leading whitespace)
-    pub name: String,
+    pub name: Option<String>,
 
     /// icon hash
     pub icon: Option<String>,
@@ -42,7 +43,7 @@ pub struct Guild {
     pub owner: Option<bool>,
 
     /// id of owner
-    pub owner_id: String,
+    pub owner_id: Option<String>,
 
     /// total permissions for the user in the guild (excludes overwrites)
     pub permissions: Option<String>,
@@ -54,7 +55,7 @@ pub struct Guild {
     pub afk_channel_id: Option<String>,
 
     /// afk timeout in seconds, can be set to: 60, 300, 900, 1800, 3600
-    pub afk_timeout: u16,
+    pub afk_timeout: Option<u16>,
 
     /// true if the server widget is enabled
     pub widget_enabled: Option<bool>,
@@ -63,25 +64,25 @@ pub struct Guild {
     pub widget_channel_id: Option<String>,
 
     /// verification level required for the guild
-    pub verification_level: VerificationLevel,
+    pub verification_level: Option<VerificationLevel>,
 
     /// default message notifications level
-    pub default_message_notifications: DefaultMessageNotifications,
+    pub default_message_notifications: Option<DefaultMessageNotifications>,
 
     /// explicit content filter level
-    pub explicit_content_filter: ExplicitContentFilter,
+    pub explicit_content_filter: Option<ExplicitContentFilter>,
 
     /// roles in the guild
-    pub roles: Vec<Role>,
+    pub roles: Option<Vec<Role>>,
 
     /// custom guild emojis
     pub emojis: Vec<Emoji>,
 
     /// enabled guild features
-    pub features: Vec<Feature>,
+    pub features: Option<Vec<Feature>>,
 
     /// required MFA level for the guild
-    pub mfa_level: MFALevel,
+    pub mfa_level: Option<MFALevel>,
 
     /// application id of the guild creator if it is bot-created
     pub application_id: Option<String>,
@@ -90,7 +91,7 @@ pub struct Guild {
     pub system_channel_id: Option<String>,
 
     /// system channel flags
-    pub system_channel_flags: SystemChannelFlags,
+    pub system_channel_flags: Option<SystemChannelFlags>,
 
     /// the id of the channel where Community guilds can display rules and/or guidelines
     pub rules_channel_id: Option<String>,
@@ -111,13 +112,13 @@ pub struct Guild {
     pub banner: Option<String>,
 
     /// premium tier (Server Boost level)
-    pub premium_tier: PremiumTier,
+    pub premium_tier: Option<PremiumTier>,
 
     /// the number of boosts this guild currently has
     pub premium_subscription_count: Option<u16>,
 
     /// the preferred locale of a Community guild; used in server discovery and notices from Discord, and sent in interactions; defaults to "en-US"
-    pub preferred_locale: String,
+    pub preferred_locale: Option<String>,
 
     /// the id of the channel where admins and moderators of Community guilds receive notices from Discord
     pub public_updates_channel_id: Option<String>,
@@ -138,14 +139,44 @@ pub struct Guild {
     pub welcome_screen: Option<WelcomeScreen>,
 
     /// guild NSFW level
-    pub nsfw_level: NSFWLevel,
+    pub nsfw_level: Option<NSFWLevel>,
 
     /// custom guild stickers
-    pub stickers: Vec<Sticker>,
+    pub stickers: Option<Vec<Sticker>>,
 
     /// whether the guild has the boost progress bar enabled
-    pub premium_progress_bar_enabled: bool,
+    pub premium_progress_bar_enabled: Option<bool>,
 
     /// the id of the channel where admins and moderators of Community guilds receive safety alerts from Discord
-    pub safety_alerts_channel_id: Option<String>
+    pub safety_alerts_channel_id: Option<String>,
+
+    /// When this guild was joined at
+    pub joined_at: String,
+
+    /// true if this is considered a large guild
+    pub large: bool,
+
+    /// Total number of members in this guild
+    pub member_count: u32,
+
+    /// States of members currently in voice channels; lacks the guild_id key
+    pub voice_states	array of partial voice state objects	
+
+    /// Users in the guild
+    pub members: Vec<GuildMember>,
+
+    /// Channels in the guild
+    pub channels: Vec<Channel>,
+
+    /// All active threads in the guild that current user has permission to view
+    pub threads: Vec<Channel>,
+
+    /// Presences of the members in the guild, will only include non-offline members if the size is greater than large threshold
+    pub presences	array of partial presence update objects	
+
+    /// Stage instances in the guild
+    pub stage_instances	array of stage instance objects	
+
+    /// Scheduled events in the guild
+    pub guild_scheduled_events	array of guild scheduled event objects	
 }

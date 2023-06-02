@@ -1,5 +1,14 @@
+pub mod events;
 pub mod types;
 
+use self::events::types::channels::ChannelPinsUpdate;
+use self::events::types::guilds::GuildCreate;
+use self::events::types::ready::Ready;
+use self::events::types::thread::ThreadDelete;
+use self::events::types::thread::ThreadListSync;
+use self::events::types::thread::ThreadMemberUpdate;
+use self::events::types::thread::ThreadMembersUpdate;
+use self::events::types::webhooks::WebhookUpdate;
 use crate::gateway::GatewayOpcode::Identify;
 use crate::types::channel::message::Message;
 use crate::types::channel::Channel;
@@ -246,16 +255,38 @@ impl Client {
         }
     }
 
+    generate_event!(on_ready, "READY", Ready);
+
     generate_event!(on_message, "MESSAGE_CREATE", Message);
     generate_event!(on_message_update, "MESSAGE_UPDATE", Message);
 
     generate_event!(on_channel_create, "CHANNEL_CREATE", Channel);
     generate_event!(on_channel_update, "CHANNEL_UPDATE", Channel);
     generate_event!(on_channel_delete, "CHANNEL_DELETE", Channel);
+    generate_event!(
+        on_channel_pins_update,
+        "CHANNEL_PINS_UPDATE",
+        ChannelPinsUpdate
+    );
 
     generate_event!(on_thread_create, "THREAD_CREATE", Channel);
     generate_event!(on_thread_update, "THREAD_UPDATE", Channel);
-    generate_event!(on_thread_delete, "THREAD_DELETE", Channel);
+    generate_event!(on_thread_delete, "THREAD_DELETE", ThreadDelete);
+    generate_event!(on_thread_list_sync, "THREAD_LIST_SYNC", ThreadListSync);
+    generate_event!(
+        on_thread_member_update,
+        "THREAD_MEMBER_UPDATE",
+        ThreadMemberUpdate
+    );
+    generate_event!(
+        on_thread_members_update,
+        "THREAD_MEMBERS_UPDATE",
+        ThreadMembersUpdate
+    );
+
+    generate_event!(on_guild_create, "GUILD_CREATE", GuildCreate);
+
+    generate_event!(on_webhooks_update, "WEBHOOKS_UPDATE", WebhookUpdate);
 
     /// # Create a connection to Discord
     ///

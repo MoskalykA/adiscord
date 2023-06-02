@@ -1,7 +1,4 @@
-pub mod flags;
-
-use self::flags::ThreadMemberFlags;
-use crate::types::user::User;
+use crate::types::guild::member::GuildMember;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -16,8 +13,8 @@ pub struct ThreadMember {
     pub join_timestamp: String,
 
     /// Any user-thread settings, currently only used for notifications
-    pub flags: ThreadMemberFlags,
+    pub flags: u8,
 
     /// Additional information about the user
-    pub member: Option<User>,
+    pub member: Option<GuildMember>,
 }
