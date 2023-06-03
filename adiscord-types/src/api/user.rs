@@ -12,7 +12,7 @@ pub struct User {
     pub discriminator: String,
 
     /// the user's avatar hash
-    pub avatar: String,
+    pub avatar: Option<String>,
 
     /// whether the user belongs to an OAuth2 application
     pub bot: Option<bool>,
