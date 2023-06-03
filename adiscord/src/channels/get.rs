@@ -1,8 +1,8 @@
-use crate::Error;
+use crate::{Client, Error};
 use adiscord_types::api::channel::Channel;
 use reqwest::StatusCode;
 
-impl crate::Channel {
+impl Client {
     /// # Examples
     ///
     /// ```

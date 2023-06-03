@@ -296,7 +296,7 @@ impl Client {
         let (handle, future) = ezsockets::connect(
             |handle| {
                 GatewayClient::new(
-                    self.gateway.token,
+                    self.token,
                     handle,
                     generate_intent_number(self.gateway.intents),
                     self.gateway.callbacks,

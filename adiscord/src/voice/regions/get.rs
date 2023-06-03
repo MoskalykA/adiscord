@@ -1,8 +1,8 @@
-use crate::Error;
+use crate::{Client, Error};
 use adiscord_types::api::voice::VoiceRegion;
 use reqwest::StatusCode;
 
-impl crate::Voice {
+impl Client {
     /// # Examples
     ///
     /// ```

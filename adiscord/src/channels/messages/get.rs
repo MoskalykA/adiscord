@@ -1,4 +1,4 @@
-use crate::Error;
+use crate::{Client, Error};
 use adiscord_types::api::message::Message;
 use reqwest::StatusCode;
 use serde::Serialize;
@@ -18,7 +18,7 @@ pub struct Query {
     pub limit: Option<u8>,
 }
 
-impl crate::Channel {
+impl Client {
     /// # Examples
     ///
     /// ```

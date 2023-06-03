@@ -6,16 +6,14 @@ use std::{collections::HashMap, sync::Arc};
 pub type Callback = Arc<dyn Fn(Value) + Send + Sync>;
 
 pub struct Gateway {
-    pub token: String,
     pub intents: Vec<Intent>,
     pub callbacks: HashMap<String, Callback>,
     pub heartbeat_ack: bool,
 }
 
 impl Gateway {
-    pub fn new(token: String) -> Self {
+    pub fn new() -> Self {
         Self {
-            token,
             intents: Vec::new(),
             callbacks: HashMap::new(),
             heartbeat_ack: false,
