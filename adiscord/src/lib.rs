@@ -1,10 +1,6 @@
-pub mod channel;
-pub mod emoji;
-pub mod guild;
-pub mod sticker;
-pub mod types;
+pub mod channels;
+pub mod guilds;
 pub mod voice;
-pub mod webhook;
 
 #[cfg(feature = "gateway")]
 pub mod gateway;

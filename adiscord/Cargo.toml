@@ -12,6 +12,7 @@ license = "MIT"
 reqwest = { version = "0.11.14", features = ["json"] }
 serde = { version = "1.0.157", features = ["derive"] }
 serde_repr = "0.1.12"
+adiscord-types = { path = "../adiscord-types" }
 
 async-trait = { version = "0.1.68", optional = true }
 ezsockets = { version = "0.5.1", features = ["tls", "native-tls"], optional = true }
@@ -20,7 +21,7 @@ tracing-subscriber = { version = "0.3.17", optional = true }
 url = { version = "2.3.1", optional = true }
 serde_json = { version = "1.0.95", optional = true }
 tokio = { version = "1.27.0", features = ["time", "process"], optional = true }
-adiscord-intents = { version = "0.0.1", optional = true }
+adiscord-intents = { path = "../adiscord-intents", optional = true }
 
 [features]
-gateway = ["async-trait", "ezsockets", "tracing", "tracing-subscriber", "url", "serde_json", "tokio", "adiscord-intents"]
+gateway = ["async-trait", "ezsockets", "tracing", "tracing-subscriber", "url", "serde_json", "tokio", "adiscord-intents", "adiscord-types/gateway"]

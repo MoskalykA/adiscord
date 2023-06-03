@@ -1,1 +1,1 @@
-pub mod get_regions;
+pub mod regions;

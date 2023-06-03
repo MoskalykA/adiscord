@@ -1,6 +1,9 @@
-use super::Callback;
 use adiscord_intents::Intent;
-use std::collections::HashMap;
+use serde_json::Value;
+use std::{collections::HashMap, sync::Arc};
+
+/// This type is used in the gateway system for callbacks.
+pub type Callback = Arc<dyn Fn(Value) + Send + Sync>;
 
 pub struct Gateway {
     pub token: String,

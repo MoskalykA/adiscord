@@ -1,30 +1,17 @@
-pub mod events;
 pub mod types;
 
-use self::events::types::channels::ChannelPinsUpdate;
-use self::events::types::guilds::GuildCreate;
-use self::events::types::ready::Ready;
-use self::events::types::thread::ThreadDelete;
-use self::events::types::thread::ThreadListSync;
-use self::events::types::thread::ThreadMemberUpdate;
-use self::events::types::thread::ThreadMembersUpdate;
-use self::events::types::webhooks::WebhookUpdate;
-use crate::gateway::GatewayOpcode::Identify;
-use crate::types::channel::message::Message;
-use crate::types::channel::Channel;
-use crate::types::gateway::identify::connection::GatewayIdentifyConnection;
-use crate::types::gateway::identify::GatewayIdentify;
-use crate::types::gateway::opcode::GatewayOpcode;
-use crate::types::gateway::Gateway;
+use self::types::Callback;
 use crate::Client;
-use adiscord_intents::generate_intent_number;
-use adiscord_intents::Intent;
+use adiscord_intents::{generate_intent_number, Intent};
+use adiscord_types::api::{channel::Channel, message::Message};
+use adiscord_types::gateway::{
+    channel, guild, identify, opcode::Opcode, ready::Ready, thread, webhook, Gateway,
+};
 use async_trait::async_trait;
 use ezsockets::ClientConfig;
 use serde::Deserialize;
 use serde_json::to_string;
 use serde_json::to_value;
-use serde_json::Value;
 use std::collections::HashMap;
 use std::io::BufRead;
 use std::sync::Arc;
@@ -33,9 +20,6 @@ use tokio::time;
 use url::Url;
 
 const GATEWAY_URL: &str = "wss://gateway.discord.gg/?v=10&encoding=json";
-
-/// This type is used in the gateway system for callbacks.
-pub type Callback = Arc<dyn Fn(Value) + Send + Sync>;
 
 #[derive(Debug)]
 enum Call {
@@ -87,37 +71,37 @@ impl ezsockets::ClientExt for GatewayClient {
     async fn on_text(&mut self, text: String) -> Result<(), ezsockets::Error> {
         let gateway = serde_json::from_str::<Gateway>(&text).unwrap();
         match gateway.op {
-            GatewayOpcode::Dispatch => {
+            Opcode::Dispatch => {
                 let callback = self.callbacks.get(&gateway.t.unwrap());
                 if let Some(callback) = callback {
                     callback(gateway.d.unwrap());
                 }
             }
-            GatewayOpcode::Heartbeat => {
+            Opcode::Heartbeat => {
                 println!("Heartbeat");
             }
-            GatewayOpcode::Identify => {
+            Opcode::Identify => {
                 println!("Identify");
             }
-            GatewayOpcode::PresenceUpdate => {
+            Opcode::PresenceUpdate => {
                 println!("Presence Update");
             }
-            GatewayOpcode::VoiceStateUpdate => {
+            Opcode::VoiceStateUpdate => {
                 println!("Voice State Update");
             }
-            GatewayOpcode::Resume => {
+            Opcode::Resume => {
                 println!("Resume");
             }
-            GatewayOpcode::Reconnect => {
+            Opcode::Reconnect => {
                 println!("Reconnect");
             }
-            GatewayOpcode::RequestGuildMembers => {
+            Opcode::RequestGuildMembers => {
                 println!("Request Guild Members");
             }
-            GatewayOpcode::InvalidSession => {
+            Opcode::InvalidSession => {
                 println!("Invalid Session");
             }
-            GatewayOpcode::Hello => {
+            Opcode::Hello => {
                 let data = gateway.d.expect("Data is required");
                 let heartbeat: Heartbeat = serde_json::from_value(data).unwrap();
                 let interval = heartbeat.interval as u64;
@@ -149,7 +133,7 @@ impl ezsockets::ClientExt for GatewayClient {
                     }
                 });
             }
-            GatewayOpcode::HeartbeatAck => {
+            Opcode::HeartbeatAck => {
                 if self.heartbeat_ack {
                     println!("Heartbeat Ack");
                 }
@@ -158,9 +142,9 @@ impl ezsockets::ClientExt for GatewayClient {
                     self.heartbeat_count += 1;
 
                     if self.heartbeat_count == 2 {
-                        let data = GatewayIdentify {
+                        let data = identify::Identify {
                             token: self.token.clone(),
-                            properties: GatewayIdentifyConnection {
+                            properties: identify::IdentifyConnection {
                                 os: "windows".to_owned(),
                                 browser: "adiscord".to_owned(),
                                 device: "adiscord".to_owned(),
@@ -173,7 +157,7 @@ impl ezsockets::ClientExt for GatewayClient {
                         };
 
                         let identify = Gateway {
-                            op: Identify,
+                            op: Opcode::Identify,
                             d: Some(to_value(data).unwrap()),
                             s: None,
                             t: None,
@@ -266,27 +250,27 @@ impl Client {
     generate_event!(
         on_channel_pins_update,
         "CHANNEL_PINS_UPDATE",
-        ChannelPinsUpdate
+        channel::PinsUpdate
     );
 
     generate_event!(on_thread_create, "THREAD_CREATE", Channel);
     generate_event!(on_thread_update, "THREAD_UPDATE", Channel);
-    generate_event!(on_thread_delete, "THREAD_DELETE", ThreadDelete);
-    generate_event!(on_thread_list_sync, "THREAD_LIST_SYNC", ThreadListSync);
+    generate_event!(on_thread_delete, "THREAD_DELETE", thread::Delete);
+    generate_event!(on_thread_list_sync, "THREAD_LIST_SYNC", thread::ListSync);
     generate_event!(
         on_thread_member_update,
         "THREAD_MEMBER_UPDATE",
-        ThreadMemberUpdate
+        thread::MemberUpdate
     );
     generate_event!(
         on_thread_members_update,
         "THREAD_MEMBERS_UPDATE",
-        ThreadMembersUpdate
+        thread::MembersUpdate
     );
 
-    generate_event!(on_guild_create, "GUILD_CREATE", GuildCreate);
+    generate_event!(on_guild_create, "GUILD_CREATE", guild::Create);
 
-    generate_event!(on_webhooks_update, "WEBHOOKS_UPDATE", WebhookUpdate);
+    generate_event!(on_webhooks_update, "WEBHOOKS_UPDATE", webhook::Update);
 
     /// # Create a connection to Discord
     ///
