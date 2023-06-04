@@ -3,5 +3,6 @@
 members = [
     "adiscord",
     "adiscord-test",
-    "adiscord-intents"
+    "adiscord-intents",
+    "adiscord-types"
 ]
