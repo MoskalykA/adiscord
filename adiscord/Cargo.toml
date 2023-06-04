@@ -1,6 +1,6 @@
 [package]
 name = "adiscord"
-version = "0.0.5"
+version = "0.0.6"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
 description = "A Discord API wrapper for Rust"
@@ -12,7 +12,7 @@ license = "MIT"
 reqwest = { version = "0.11.14", features = ["json"] }
 serde = { version = "1.0.157", features = ["derive"] }
 serde_repr = "0.1.12"
-adiscord-types = "0.0.1" 
+adiscord-types = "0.0.2" 
 
 async-trait = { version = "0.1.68", optional = true }
 ezsockets = { version = "0.5.1", features = ["tls", "native-tls"], optional = true }
