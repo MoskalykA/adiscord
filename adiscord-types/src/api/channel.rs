@@ -192,7 +192,7 @@ pub struct Channel {
     pub bitrate: Option<i32>,
 
     /// the user limit of the voice channel
-    pub user_limit: Option<u8>,
+    pub user_limit: Option<u16>,
 
     /// amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected
     pub rate_limit_per_user: Option<u16>,

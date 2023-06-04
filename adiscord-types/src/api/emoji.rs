@@ -4,13 +4,13 @@ use serde::{Deserialize, Serialize};
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Emoji {
     /// emoji id
-    pub id: String,
+    pub id: Option<String>,
 
     /// emoji name
-    pub name: String,
+    pub name: Option<String>,
 
     /// roles allowed to use this emoji
-    pub roles: Vec<Role>,
+    pub roles: Option<Vec<Role>>,
 
     /// user that created this emoji
     pub user: Option<User>,

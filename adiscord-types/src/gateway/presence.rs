@@ -1,21 +1,20 @@
-use super::{activity::Activity, client};
-use crate::api::user::User;
+use super::{activity::Activity, client, user::UserPartial};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Update {
     /// User whose presence is being updated
-    pub user: User,
+    pub user: UserPartial,
 
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Option<String>,
 
     /// Either "idle", "dnd", "online", or "offline"
-    pub status: String,
+    pub status: Option<String>,
 
     /// User's current activities
-    pub activities: Vec<Activity>,
+    pub activities: Option<Vec<Activity>>,
 
     /// User's platform-dependent status
-    pub client_status: client::Status,
+    pub client_status: Option<client::Status>,
 }

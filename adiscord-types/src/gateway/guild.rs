@@ -22,7 +22,7 @@ pub struct Unavailable {
     pub id: String,
 
     /// unavailable or not
-    pub unavailable: bool,
+    pub unavailable: Option<bool>,
 }
 
 #[allow(non_camel_case_types)]
@@ -269,4 +269,22 @@ pub struct Create {
 
     /// Scheduled events in the guild
     pub guild_scheduled_events: Vec<Scheduled>,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct BanAdd {
+    /// ID of the guild
+    pub guild_id: String,
+
+    /// User who was banned
+    pub user: User,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct BanRemove {
+    /// ID of the guild
+    pub guild_id: String,
+
+    /// User who was banned
+    pub user: User,
 }

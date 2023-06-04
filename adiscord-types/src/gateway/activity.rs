@@ -17,12 +17,16 @@ pub struct Assets {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
-pub struct Button {
-    /// Text shown on the button (1-32 characters)
-    pub label: String,
+#[serde(untagged)]
+pub enum Button {
+    Complete {
+        /// Text shown on the button (1-32 characters)
+        label: String,
 
-    /// URL opened when clicking the button (1-512 characters)
-    pub url: String,
+        /// URL opened when clicking the button (1-512 characters)
+        url: String,
+    },
+    Partial(String),
 }
 
 #[derive(Deserialize, Serialize, Debug)]

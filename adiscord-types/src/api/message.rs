@@ -191,7 +191,7 @@ pub enum Type {
 #[derive(Deserialize, Serialize, Debug)]
 #[serde(untagged)]
 pub enum Nonce {
-    Integer(u64),
+    Integer(u32),
     String(String),
 }
 
