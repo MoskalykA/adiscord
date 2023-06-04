@@ -15,3 +15,6 @@ serde_json = { version = "1.0.95" }
 
 [features]
 gateway = []
+
+[package.metadata.docs.rs]
+features = ["gateway"]
