@@ -25,3 +25,6 @@ adiscord-intents = { version = "0.0.2", optional = true }
 
 [features]
 gateway = ["async-trait", "ezsockets", "tracing", "tracing-subscriber", "url", "serde_json", "tokio", "adiscord-intents", "adiscord-types/gateway"]
+
+[package.metadata.docs.rs]
+features = ["gateway"]
