@@ -248,6 +248,50 @@ impl Client {
         }
     }
 
+    /// # Add all intents
+    ///
+    /// This function will simply add all the available intents.
+    ///
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     client.all_intents();
+    /// }
+    /// ```
+    pub fn all_intents(&mut self) {
+        let all = vec![
+            Intent::Guilds,
+            Intent::GuildMembers,
+            Intent::GuildModeration,
+            Intent::GuildEmojisAndStickers,
+            Intent::GuildIntegrations,
+            Intent::GuildWebhooks,
+            Intent::GuildInvites,
+            Intent::GuildVoiceStates,
+            Intent::GuildPresences,
+            Intent::GuildMessages,
+            Intent::GuildMessageReactions,
+            Intent::GuildMessageTyping,
+            Intent::DirectMessages,
+            Intent::DirectMessageReactions,
+            Intent::DirectMessageTyping,
+            Intent::MessageContent,
+            Intent::GuildScheduledEvents,
+            Intent::AutoModerationConfiguration,
+            Intent::AutoModerationExecution,
+        ];
+
+        for intent in all {
+            self.gateway.intents.push(intent);
+        }
+    }
+
     generate_event!(on_ready, "READY", Ready);
 
     generate_event!(
