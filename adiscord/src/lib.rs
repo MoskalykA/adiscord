@@ -26,12 +26,6 @@ pub struct Error {
     pub message: String,
 }
 
-#[derive(PartialEq)]
-pub enum TokenType {
-    Bot,
-    Bearer,
-}
-
 impl Client {
     /// # Initiating the library
     ///
@@ -47,7 +41,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let client = Client::new("10", dotenv!("TOKEN"));
     /// }
     /// ```
     ///
@@ -59,20 +53,13 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bearer);
+    ///     let client = Client::new("10", dotenv!("TOKEN"));
     /// }
     /// ```
-    pub fn new(version: &str, token: &str, token_type: TokenType) -> Self {
+    pub fn new(version: &str, token: &str) -> Self {
         let url = format!("{BASE_URL}{version}");
         let client = reqwest::Client::new();
-        let token = format!(
-            "{} {token}",
-            if token_type == TokenType::Bot {
-                "Bot"
-            } else {
-                "Bearer"
-            }
-        );
+        let token = format!("Bot {token}");
 
         Self {
             url,

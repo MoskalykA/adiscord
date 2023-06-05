@@ -219,7 +219,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.add_intent(Intent::MessageContent);
     /// }
     /// ```
@@ -239,7 +239,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.add_intents(vec![ Intent::MessageContent ]);
     /// }
     /// ```
@@ -261,7 +261,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.all_intents();
     /// }
     /// ```
@@ -490,7 +490,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let client = Client::new("10", dotenv!("TOKEN"));
     ///     client.init().await;
     /// }
     /// ```
@@ -537,7 +537,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.set_heartbeat_ack(true);
     /// }
     /// ```
@@ -557,7 +557,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.set_heartbeat_ack_count(true);
     /// }
     /// ```
