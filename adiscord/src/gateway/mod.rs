@@ -67,7 +67,7 @@ impl GatewayClient {
     }
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize)]
 pub struct Heartbeat {
     #[serde(rename = "heartbeat_interval")]
     pub interval: f32,

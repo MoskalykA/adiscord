@@ -3,7 +3,7 @@ use crate::api::{
     integration::{Account, ExpireBehavior},
     user::User,
 };
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct IntegrationsUpdate {
@@ -11,7 +11,7 @@ pub struct IntegrationsUpdate {
     pub guild_id: String,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Create {
     /// integration id
     pub id: String,
@@ -63,7 +63,7 @@ pub struct Create {
     // todo: scopes, https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Update {
     /// integration id
     pub id: String,
@@ -115,7 +115,7 @@ pub struct Update {
     // todo: scopes, https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Delete {
     /// integration id
     pub id: String,

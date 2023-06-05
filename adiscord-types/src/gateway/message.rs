@@ -12,9 +12,9 @@ use crate::api::{
     sticker::{Item, Sticker},
     user::User,
 };
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Create {
     /// id of the message
     pub id: String,
@@ -117,7 +117,7 @@ pub struct Create {
     pub role_subscription_data: Option<RoleSubscriptionData>,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct Delete {
     /// id of the message
     pub id: String,
@@ -129,7 +129,7 @@ pub struct Delete {
     pub guild_id: Option<String>,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct DeleteBulk {
     /// IDs of the messages
     pub ids: Vec<String>,

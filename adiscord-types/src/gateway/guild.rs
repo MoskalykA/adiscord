@@ -13,7 +13,7 @@ use crate::api::{
     user::User,
     voice::VoiceState,
 };
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Unavailable {
@@ -26,7 +26,7 @@ pub struct Unavailable {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub enum EventStatus {
     SCHEDULED = 1,
     ACTIVE,
@@ -36,7 +36,7 @@ pub enum EventStatus {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Debug)]
 pub enum EventEntityTypes {
     STAGE_INSTANCE = 1,
     VOICE,
