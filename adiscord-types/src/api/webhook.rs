@@ -14,7 +14,7 @@ pub enum Type {
     Application,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Webhook {
     /// the id of the webhook
     pub id: String,

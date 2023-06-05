@@ -59,7 +59,7 @@ pub struct Member {
     pub communication_disabled_until: Option<String>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Channels {
     /// the channel's id
     pub channel_id: String,
@@ -74,7 +74,7 @@ pub struct Channels {
     pub emoji_name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct WelcomeScreen {
     /// the server description shown in the welcome screen
     pub description: String,
@@ -143,7 +143,7 @@ pub enum PremiumTier {
     Tier3,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Preview {
     /// guild id
     pub id: String,
@@ -223,7 +223,7 @@ pub enum VerificationLevel {
     VERY_HIGH,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Guild {
     /// guild id
     pub id: String,
