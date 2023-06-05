@@ -6,7 +6,7 @@ async fn main() {
     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
     client.set_heartbeat_ack(true);
     client.set_heartbeat_ack_count(true);
-    
+
     client.all_intents();
 
     // Ready
