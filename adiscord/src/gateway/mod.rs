@@ -40,9 +40,9 @@ struct GatewayClient {
     handle: ezsockets::Client<Self>,
     intents: u16,
     callbacks: HashMap<String, Callback>,
-    identify: bool,
     heartbeat_ack: bool,
-    heartbeat_count: u8,
+    heartbeat_count: u32,
+    heartbeat_ack_count: bool,
 }
 
 impl GatewayClient {
@@ -51,18 +51,18 @@ impl GatewayClient {
         handle: ezsockets::Client<Self>,
         intents: u16,
         callbacks: HashMap<String, Callback>,
-        identify: bool,
         heartbeat_ack: bool,
-        heartbeat_count: u8,
+        heartbeat_count: u32,
+        heartbeat_ack_count: bool,
     ) -> Self {
         Self {
             token,
             handle,
             intents,
             callbacks,
-            identify,
             heartbeat_ack,
             heartbeat_count,
+            heartbeat_ack_count,
         }
     }
 }
@@ -143,38 +143,39 @@ impl ezsockets::ClientExt for GatewayClient {
                 });
             }
             Opcode::HeartbeatAck => {
+                self.heartbeat_count += 1;
+
                 if self.heartbeat_ack {
-                    println!("Heartbeat Ack");
+                    if self.heartbeat_ack_count {
+                        println!("Heartbeat Ack -> {}", self.heartbeat_count);
+                    } else {
+                        println!("Heartbeat Ack");
+                    }
                 }
 
-                if !self.identify {
-                    self.heartbeat_count += 1;
+                if self.heartbeat_count == 2 {
+                    let data = identify::Identify {
+                        token: self.token.clone(),
+                        properties: identify::IdentifyConnection {
+                            os: "windows".to_owned(),
+                            browser: "adiscord".to_owned(),
+                            device: "adiscord".to_owned(),
+                        },
+                        compress: None,
+                        large_threshold: None,
+                        shard: None,
+                        presence: None,
+                        intents: self.intents,
+                    };
 
-                    if self.heartbeat_count == 2 {
-                        let data = identify::Identify {
-                            token: self.token.clone(),
-                            properties: identify::IdentifyConnection {
-                                os: "windows".to_owned(),
-                                browser: "adiscord".to_owned(),
-                                device: "adiscord".to_owned(),
-                            },
-                            compress: None,
-                            large_threshold: None,
-                            shard: None,
-                            presence: None,
-                            intents: self.intents,
-                        };
+                    let identify = Gateway {
+                        op: Opcode::Identify,
+                        d: Some(to_value(data).unwrap()),
+                        s: None,
+                        t: None,
+                    };
 
-                        let identify = Gateway {
-                            op: Opcode::Identify,
-                            d: Some(to_value(data).unwrap()),
-                            s: None,
-                            t: None,
-                        };
-
-                        self.handle.text(to_string(&identify).unwrap());
-                        self.identify = true;
-                    }
+                    self.handle.text(to_string(&identify).unwrap());
                 }
             }
         };
@@ -505,9 +506,9 @@ impl Client {
                     handle,
                     generate_intent_number(self.gateway.intents),
                     self.gateway.callbacks,
-                    false,
                     self.gateway.heartbeat_ack,
                     0,
+                    self.gateway.heartbeat_ack_count,
                 )
             },
             config,
@@ -544,5 +545,25 @@ impl Client {
     /// ```
     pub fn set_heartbeat_ack(&mut self, state: bool) {
         self.gateway.heartbeat_ack = state;
+    }
+
+    /// # "Heartbeat counter
+    ///
+    /// This function counts the number of heartbeats.
+    ///
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     client.set_heartbeat_ack_count(true);
+    /// }
+    /// ```
+    pub fn set_heartbeat_ack_count(&mut self, state: bool) {
+        self.gateway.heartbeat_ack_count = state;
     }
 }
