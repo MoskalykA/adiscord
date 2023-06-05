@@ -9,6 +9,7 @@ pub struct Gateway {
     pub intents: Vec<Intent>,
     pub callbacks: HashMap<String, Callback>,
     pub heartbeat_ack: bool,
+    pub heartbeat_ack_count: bool,
 }
 
 impl Gateway {
@@ -17,6 +18,7 @@ impl Gateway {
             intents: Vec::new(),
             callbacks: HashMap::new(),
             heartbeat_ack: false,
+            heartbeat_ack_count: false,
         }
     }
 }

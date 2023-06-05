@@ -1,7 +1,7 @@
 use super::guild;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct VoiceRegion {
     /// unique ID for the region
     pub id: String,
@@ -19,7 +19,7 @@ pub struct VoiceRegion {
     pub custom: bool,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct VoiceState {
     /// the guild id this voice state is for
     pub guild_id: Option<String>,

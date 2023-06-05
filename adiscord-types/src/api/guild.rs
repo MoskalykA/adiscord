@@ -1,10 +1,9 @@
 use super::{emoji::Emoji, feature::Feature, role::Role, sticker::Sticker, user::User};
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum MemberFlags {
     None,
 
@@ -60,7 +59,7 @@ pub struct Member {
     pub communication_disabled_until: Option<String>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Channels {
     /// the channel's id
     pub channel_id: String,
@@ -75,7 +74,7 @@ pub struct Channels {
     pub emoji_name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct WelcomeScreen {
     /// the server description shown in the welcome screen
     pub description: String,
@@ -84,9 +83,9 @@ pub struct WelcomeScreen {
     pub welcome_channels: Vec<Channels>,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum DefaultMessageNotifications {
     /// members will receive notifications for all messages by default
     ALL_MESSAGES,
@@ -95,9 +94,9 @@ pub enum DefaultMessageNotifications {
     ONLY_MENTIONS,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum ExplicitContentFilter {
     /// media content will not be scanned
     DISABLED,
@@ -109,8 +108,8 @@ pub enum ExplicitContentFilter {
     ALL_MEMBERS,
 }
 
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum MFALevel {
     /// guild has no MFA/2FA requirement for moderation actions
     None,
@@ -119,8 +118,8 @@ pub enum MFALevel {
     Elevated,
 }
 
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum NSFWLevel {
     Default,
     Explicit,
@@ -128,8 +127,8 @@ pub enum NSFWLevel {
     AgeRestricted,
 }
 
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum PremiumTier {
     /// guild has not unlocked any Server Boost perks
     None,
@@ -144,7 +143,7 @@ pub enum PremiumTier {
     Tier3,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Preview {
     /// guild id
     pub id: String,
@@ -168,10 +167,10 @@ pub struct Preview {
     pub features: Vec<Feature>,
 
     /// approximate number of members in this guild
-    pub approximate_member_count: i32,
+    pub approximate_member_count: u32,
 
     /// approximate number of online members in this guild
-    pub approximate_presence_count: i32,
+    pub approximate_presence_count: u32,
 
     /// the description for the guild
     pub description: Option<String>,
@@ -180,8 +179,8 @@ pub struct Preview {
     pub stickers: Vec<Sticker>,
 }
 
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum SystemChannelFlags {
     None,
 
@@ -204,9 +203,9 @@ pub enum SystemChannelFlags {
     SuppressRoleSubscriptionPurchaseNotificationReplies = 1 << 5,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum VerificationLevel {
     /// unrestricted
     NONE,
@@ -224,7 +223,7 @@ pub enum VerificationLevel {
     VERY_HIGH,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Guild {
     /// guild id
     pub id: String,

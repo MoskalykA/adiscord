@@ -1,30 +1,28 @@
 [package]
 name = "adiscord"
-version = "0.0.6"
+version = "0.0.7"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
-description = "A Discord API wrapper for Rust"
+description = "An API and Gateway Discord wrapper in Rust"
 documentation = "https://docs.rs/adiscord"
+readme = "README.md"
 repository = "https://github.com/MoskalykA/adiscord"
 license = "MIT"
 
 [dependencies]
 reqwest = { version = "0.11.14", features = ["json"] }
 serde = { version = "1.0.157", features = ["derive"] }
-serde_repr = "0.1.12"
-adiscord-types = "0.0.2" 
+adiscord-types = "0.0.3" 
 
 async-trait = { version = "0.1.68", optional = true }
 ezsockets = { version = "0.5.1", features = ["tls", "native-tls"], optional = true }
-tracing = { version = "0.1.37", optional = true }
-tracing-subscriber = { version = "0.3.17", optional = true }
 url = { version = "2.3.1", optional = true }
 serde_json = { version = "1.0.95", optional = true }
 tokio = { version = "1.27.0", features = ["time", "process"], optional = true }
-adiscord-intents = { version = "0.0.2", optional = true }
+adiscord-intents = { version = "0.0.3", optional = true }
 
 [features]
-gateway = ["async-trait", "ezsockets", "tracing", "tracing-subscriber", "url", "serde_json", "tokio", "adiscord-intents", "adiscord-types/gateway"]
+gateway = ["async-trait", "ezsockets", "url", "serde_json", "tokio", "adiscord-intents", "adiscord-types/gateway"]
 
 [package.metadata.docs.rs]
 features = ["gateway"]

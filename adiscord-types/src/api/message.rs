@@ -6,11 +6,10 @@ use super::{
 };
 use crate::api::{application::Application, role::Role, user::User};
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum ActivityType {
     JOIN = 1,
     SPECTATE,
@@ -27,9 +26,9 @@ pub struct Activity {
     pub party_id: Option<String>,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum InteractionType {
     PING = 1,
     APPLICATION_COMMAND,
@@ -56,8 +55,8 @@ pub struct Interaction {
     pub member: Option<User>,
 }
 
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Component {
     /// Container for other components
     ActionRow = 1,
@@ -84,9 +83,9 @@ pub enum Component {
     ChannelSelect,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u16)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Flags {
     None,
 
@@ -151,9 +150,9 @@ pub struct RoleSubscriptionData {
     pub is_renewal: bool,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Type {
     DEFAULT,
     RECIPIENT_ADD,

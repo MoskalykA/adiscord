@@ -30,7 +30,7 @@ pub struct Role {
     pub name: String,
 
     /// integer representation of hexadecimal color code
-    pub color: i128,
+    pub color: u32,
 
     /// if this role is pinned in the user listing
     pub hoist: bool,
@@ -42,7 +42,7 @@ pub struct Role {
     pub unicode_emoji: Option<String>,
 
     /// position of this role
-    pub position: i128,
+    pub position: u32,
 
     /// permission bit set
     pub permissions: String,

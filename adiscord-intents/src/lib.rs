@@ -140,10 +140,10 @@ pub enum Intent {
 }
 
 /// Generate the number of itents from an intent list
-pub fn generate_intent_number(intents: Vec<Intent>) -> u16 {
-    let mut intent_number: u16 = 0;
+pub fn generate_intent_number(intents: Vec<Intent>) -> u32 {
+    let mut intent_number: u32 = 0;
     for intent in intents {
-        intent_number += intent as u16;
+        intent_number += intent as u32;
     }
 
     intent_number

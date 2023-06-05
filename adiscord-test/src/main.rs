@@ -1,33 +1,13 @@
 use adiscord::Client;
-use adiscord_intents::Intent;
 use dotenv_codegen::dotenv;
 
 #[tokio::main]
 async fn main() {
-    let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    let mut client = Client::new("10", dotenv!("TOKEN"));
     client.set_heartbeat_ack(true);
+    client.set_heartbeat_ack_count(true);
 
-    client.add_intents(vec![
-        Intent::Guilds,
-        Intent::GuildMembers,
-        Intent::GuildModeration,
-        Intent::GuildEmojisAndStickers,
-        Intent::GuildIntegrations,
-        Intent::GuildWebhooks,
-        Intent::GuildInvites,
-        Intent::GuildVoiceStates,
-        Intent::GuildPresences,
-        Intent::GuildMessages,
-        Intent::GuildMessageReactions,
-        Intent::GuildMessageTyping,
-        Intent::DirectMessages,
-        Intent::DirectMessageReactions,
-        Intent::DirectMessageTyping,
-        Intent::MessageContent,
-        Intent::GuildScheduledEvents,
-        Intent::AutoModerationConfiguration,
-        Intent::AutoModerationExecution,
-    ]);
+    client.all_intents();
 
     // Ready
 

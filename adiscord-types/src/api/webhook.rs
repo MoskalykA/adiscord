@@ -1,9 +1,8 @@
 use super::{channel::Channel, guild::Guild, user::User};
-use serde::Deserialize;
-use serde_repr::Deserialize_repr;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Type {
     /// Incoming Webhooks can post messages to channels with a generated token
     Incoming = 1,
@@ -15,7 +14,7 @@ pub enum Type {
     Application,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Webhook {
     /// the id of the webhook
     pub id: String,

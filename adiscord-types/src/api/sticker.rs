@@ -1,9 +1,8 @@
 use super::user::User;
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum FormatType {
     PNG = 1,
     APNG,
@@ -23,8 +22,8 @@ pub struct Item {
     pub format_type: FormatType,
 }
 
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Type {
     /// an official sticker in a pack, part of Nitro or in a removed purchasable pack
     Standard = 1,
@@ -54,8 +53,6 @@ pub struct Sticker {
     #[deprecated]
     pub asset: Option<String>,
 
-    #[serde(rename = "type")]
-
     /// type of sticker
     pub r#type: Type,
 
@@ -72,5 +69,5 @@ pub struct Sticker {
     pub user: Option<User>,
 
     /// the standard sticker's sort order within its pack
-    pub sort_value: Option<i128>,
+    pub sort_value: Option<u32>,
 }

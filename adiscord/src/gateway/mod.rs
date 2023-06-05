@@ -40,9 +40,9 @@ struct GatewayClient {
     handle: ezsockets::Client<Self>,
     intents: u16,
     callbacks: HashMap<String, Callback>,
-    identify: bool,
     heartbeat_ack: bool,
-    heartbeat_count: u8,
+    heartbeat_count: u32,
+    heartbeat_ack_count: bool,
 }
 
 impl GatewayClient {
@@ -51,23 +51,23 @@ impl GatewayClient {
         handle: ezsockets::Client<Self>,
         intents: u16,
         callbacks: HashMap<String, Callback>,
-        identify: bool,
         heartbeat_ack: bool,
-        heartbeat_count: u8,
+        heartbeat_count: u32,
+        heartbeat_ack_count: bool,
     ) -> Self {
         Self {
             token,
             handle,
             intents,
             callbacks,
-            identify,
             heartbeat_ack,
             heartbeat_count,
+            heartbeat_ack_count,
         }
     }
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize)]
 pub struct Heartbeat {
     #[serde(rename = "heartbeat_interval")]
     pub interval: f32,
@@ -143,38 +143,39 @@ impl ezsockets::ClientExt for GatewayClient {
                 });
             }
             Opcode::HeartbeatAck => {
+                self.heartbeat_count += 1;
+
                 if self.heartbeat_ack {
-                    println!("Heartbeat Ack");
+                    if self.heartbeat_ack_count {
+                        println!("Heartbeat Ack -> {}", self.heartbeat_count);
+                    } else {
+                        println!("Heartbeat Ack");
+                    }
                 }
 
-                if !self.identify {
-                    self.heartbeat_count += 1;
+                if self.heartbeat_count == 2 {
+                    let data = identify::Identify {
+                        token: self.token.clone(),
+                        properties: identify::IdentifyConnection {
+                            os: "windows".to_owned(),
+                            browser: "adiscord".to_owned(),
+                            device: "adiscord".to_owned(),
+                        },
+                        compress: None,
+                        large_threshold: None,
+                        shard: None,
+                        presence: None,
+                        intents: self.intents,
+                    };
 
-                    if self.heartbeat_count == 2 {
-                        let data = identify::Identify {
-                            token: self.token.clone(),
-                            properties: identify::IdentifyConnection {
-                                os: "windows".to_owned(),
-                                browser: "adiscord".to_owned(),
-                                device: "adiscord".to_owned(),
-                            },
-                            compress: None,
-                            large_threshold: None,
-                            shard: None,
-                            presence: None,
-                            intents: self.intents,
-                        };
+                    let identify = Gateway {
+                        op: Opcode::Identify,
+                        d: Some(to_value(data).unwrap()),
+                        s: None,
+                        t: None,
+                    };
 
-                        let identify = Gateway {
-                            op: Opcode::Identify,
-                            d: Some(to_value(data).unwrap()),
-                            s: None,
-                            t: None,
-                        };
-
-                        self.handle.text(to_string(&identify).unwrap());
-                        self.identify = true;
-                    }
+                    self.handle.text(to_string(&identify).unwrap());
                 }
             }
         };
@@ -218,7 +219,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.add_intent(Intent::MessageContent);
     /// }
     /// ```
@@ -238,12 +239,56 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.add_intents(vec![ Intent::MessageContent ]);
     /// }
     /// ```
     pub fn add_intents(&mut self, intents: Vec<Intent>) {
         for intent in intents {
+            self.gateway.intents.push(intent);
+        }
+    }
+
+    /// # Add all intents
+    ///
+    /// This function will simply add all the available intents.
+    ///
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
+    ///     client.all_intents();
+    /// }
+    /// ```
+    pub fn all_intents(&mut self) {
+        let all = vec![
+            Intent::Guilds,
+            Intent::GuildMembers,
+            Intent::GuildModeration,
+            Intent::GuildEmojisAndStickers,
+            Intent::GuildIntegrations,
+            Intent::GuildWebhooks,
+            Intent::GuildInvites,
+            Intent::GuildVoiceStates,
+            Intent::GuildPresences,
+            Intent::GuildMessages,
+            Intent::GuildMessageReactions,
+            Intent::GuildMessageTyping,
+            Intent::DirectMessages,
+            Intent::DirectMessageReactions,
+            Intent::DirectMessageTyping,
+            Intent::MessageContent,
+            Intent::GuildScheduledEvents,
+            Intent::AutoModerationConfiguration,
+            Intent::AutoModerationExecution,
+        ];
+
+        for intent in all {
             self.gateway.intents.push(intent);
         }
     }
@@ -445,13 +490,11 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let client = Client::new("10", dotenv!("TOKEN"));
     ///     client.init().await;
     /// }
     /// ```
     pub async fn init(self) {
-        tracing_subscriber::fmt::init();
-
         let url = Url::parse(GATEWAY_URL).unwrap();
         let config = ClientConfig::new(url);
         let (handle, future) = ezsockets::connect(
@@ -461,9 +504,9 @@ impl Client {
                     handle,
                     generate_intent_number(self.gateway.intents),
                     self.gateway.callbacks,
-                    false,
                     self.gateway.heartbeat_ack,
                     0,
+                    self.gateway.heartbeat_ack_count,
                 )
             },
             config,
@@ -494,11 +537,31 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let mut client = Client::new("10", dotenv!("TOKEN"), adiscord::TokenType::Bot);
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
     ///     client.set_heartbeat_ack(true);
     /// }
     /// ```
     pub fn set_heartbeat_ack(&mut self, state: bool) {
         self.gateway.heartbeat_ack = state;
+    }
+
+    /// # "Heartbeat counter
+    ///
+    /// This function counts the number of heartbeats.
+    ///
+    /// ## Examples
+    ///
+    /// ```
+    /// use adiscord::Client;
+    /// use dotenv_codegen::dotenv;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let mut client = Client::new("10", dotenv!("TOKEN"));
+    ///     client.set_heartbeat_ack_count(true);
+    /// }
+    /// ```
+    pub fn set_heartbeat_ack_count(&mut self, state: bool) {
+        self.gateway.heartbeat_ack_count = state;
     }
 }
