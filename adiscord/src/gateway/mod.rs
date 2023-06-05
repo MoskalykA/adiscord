@@ -495,8 +495,6 @@ impl Client {
     /// }
     /// ```
     pub async fn init(self) {
-        tracing_subscriber::fmt::init();
-
         let url = Url::parse(GATEWAY_URL).unwrap();
         let config = ClientConfig::new(url);
         let (handle, future) = ezsockets::connect(
