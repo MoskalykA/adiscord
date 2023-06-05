@@ -1,6 +1,6 @@
 [package]
 name = "adiscord-intents"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
 description = "Calculate the number of intents from a list of enums"
