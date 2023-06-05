@@ -5,7 +5,6 @@ use super::{
     user::User,
 };
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Attachment {
@@ -40,9 +39,9 @@ pub struct Attachment {
     pub ephemeral: Option<bool>,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Flags {
     None,
 
@@ -53,9 +52,9 @@ pub enum Flags {
     REQUIRE_TAG = 1 << 4,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum ForumLayout {
     /// No default has been set for forum channel
     NOT_SET,
@@ -97,9 +96,9 @@ pub struct Overwrite {
     pub deny: String,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum SortOrder {
     /// Sort forum posts by activity
     LATEST_ACTIVITY,
@@ -108,9 +107,9 @@ pub enum SortOrder {
     CREATION_DATE,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum ChannelType {
     /// atext channel within a server
     GUILD_TEXT,
@@ -149,8 +148,8 @@ pub enum ChannelType {
     GUILD_FORUM,
 }
 
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum VideoQuality {
     /// Discord chooses the quality for optimal performance
     AUTO = 1,

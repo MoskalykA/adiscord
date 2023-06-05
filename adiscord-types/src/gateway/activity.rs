@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Assets {
@@ -71,9 +70,9 @@ pub struct Timestamps {
     pub end: Option<u64>,
 }
 
-#[allow(non_camel_case_types)]
-#[derive(Deserialize_repr, Serialize_repr, PartialEq, Debug)]
 #[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Type {
     Game,
     Streaming,

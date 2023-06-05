@@ -1,4 +1,4 @@
 pub mod api;
 
-#[cfg(feature = "gateway")]
+//#[cfg(feature = "gateway")]
 pub mod gateway;

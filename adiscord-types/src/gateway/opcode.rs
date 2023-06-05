@@ -1,7 +1,7 @@
-use serde_repr::{Deserialize_repr, Serialize_repr};
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize_repr, PartialEq, Debug, Serialize_repr)]
 #[repr(u8)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Opcode {
     /// Receive An event was dispatched.
     Dispatch,
