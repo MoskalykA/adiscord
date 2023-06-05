@@ -168,10 +168,10 @@ pub struct Preview {
     pub features: Vec<Feature>,
 
     /// approximate number of members in this guild
-    pub approximate_member_count: i32,
+    pub approximate_member_count: u32,
 
     /// approximate number of online members in this guild
-    pub approximate_presence_count: i32,
+    pub approximate_presence_count: u32,
 
     /// the description for the guild
     pub description: Option<String>,

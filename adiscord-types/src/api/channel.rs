@@ -22,7 +22,7 @@ pub struct Attachment {
     pub content_type: Option<String>,
 
     /// size of file in bytes
-    pub size: u64,
+    pub size: u32,
 
     /// source url of file
     pub url: String,

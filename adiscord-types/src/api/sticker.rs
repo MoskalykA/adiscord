@@ -54,8 +54,6 @@ pub struct Sticker {
     #[deprecated]
     pub asset: Option<String>,
 
-    #[serde(rename = "type")]
-
     /// type of sticker
     pub r#type: Type,
 
@@ -72,5 +70,5 @@ pub struct Sticker {
     pub user: Option<User>,
 
     /// the standard sticker's sort order within its pack
-    pub sort_value: Option<i128>,
+    pub sort_value: Option<u32>,
 }
