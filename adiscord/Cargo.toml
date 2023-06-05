@@ -3,8 +3,9 @@ name = "adiscord"
 version = "0.0.6"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
-description = "A Discord API wrapper for Rust"
+description = "An API and Gateway Discord wrapper in Rust"
 documentation = "https://docs.rs/adiscord"
+readme = "README.md"
 repository = "https://github.com/MoskalykA/adiscord"
 license = "MIT"
 
