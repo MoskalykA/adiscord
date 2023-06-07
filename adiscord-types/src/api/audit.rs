@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Change {
@@ -15,7 +16,7 @@ pub struct Change {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Event {
     /// Server settings were updated
     GUILD_UPDATE = 1,

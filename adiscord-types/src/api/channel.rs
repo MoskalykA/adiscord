@@ -5,6 +5,7 @@ use super::{
     user::User,
 };
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Attachment {
@@ -41,7 +42,7 @@ pub struct Attachment {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
     None,
 
@@ -54,7 +55,7 @@ pub enum Flags {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum ForumLayout {
     /// No default has been set for forum channel
     NOT_SET,
@@ -98,7 +99,7 @@ pub struct Overwrite {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum SortOrder {
     /// Sort forum posts by activity
     LATEST_ACTIVITY,
@@ -109,7 +110,7 @@ pub enum SortOrder {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum ChannelType {
     /// atext channel within a server
     GUILD_TEXT,
@@ -149,7 +150,7 @@ pub enum ChannelType {
 }
 
 #[repr(u8)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum VideoQuality {
     /// Discord chooses the quality for optimal performance
     AUTO = 1,

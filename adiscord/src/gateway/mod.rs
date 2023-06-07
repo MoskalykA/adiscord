@@ -38,7 +38,7 @@ enum Call {
 struct GatewayClient {
     token: String,
     handle: ezsockets::Client<Self>,
-    intents: u16,
+    intents: u32,
     callbacks: HashMap<String, Callback>,
     heartbeat_ack: bool,
     heartbeat_count: u32,
@@ -49,7 +49,7 @@ impl GatewayClient {
     fn new(
         token: String,
         handle: ezsockets::Client<Self>,
-        intents: u16,
+        intents: u32,
         callbacks: HashMap<String, Callback>,
         heartbeat_ack: bool,
         heartbeat_count: u32,

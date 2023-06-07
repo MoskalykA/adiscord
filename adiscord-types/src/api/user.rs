@@ -1,9 +1,12 @@
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[repr(u32)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
+    Unknow,
+
     /// Discord Employee
     STAFF = 1 << 0,
 
@@ -50,8 +53,9 @@ pub enum Flags {
     ACTIVE_DEVELOPER = 1 << 22,
 }
 
+#[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum PreniumType {
     NONE,
     NITRO_CLASSIC,

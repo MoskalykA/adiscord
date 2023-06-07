@@ -1,6 +1,6 @@
 [package]
 name = "adiscord-types"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
 description = "The large list of Discord API types and Gateway types"
@@ -10,8 +10,9 @@ repository = "https://github.com/MoskalykA/adiscord"
 license = "MIT"
 
 [dependencies]
-serde = { version = "1.0.157", features = ["derive"] }
-serde_json = { version = "1.0.95" }
+serde = { version = "1.0.163", features = ["derive"] }
+serde_json = { version = "1.0.96" }
+serde_repr = "0.1.12"
 
 [features]
 gateway = []
