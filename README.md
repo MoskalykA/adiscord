@@ -60,27 +60,7 @@ async fn main() {
     client.set_heartbeat_ack(true);
 
     // Send all the permissions you need from your bot to discord
-    client.add_intents(vec![
-        Intent::Guilds,
-        Intent::GuildMembers,
-        Intent::GuildModeration,
-        Intent::GuildEmojisAndStickers,
-        Intent::GuildIntegrations,
-        Intent::GuildWebhooks,
-        Intent::GuildInvites,
-        Intent::GuildVoiceStates,
-        Intent::GuildPresences,
-        Intent::GuildMessages,
-        Intent::GuildMessageReactions,
-        Intent::GuildMessageTyping,
-        Intent::DirectMessages,
-        Intent::DirectMessageReactions,
-        Intent::DirectMessageTyping,
-        Intent::MessageContent,
-        Intent::GuildScheduledEvents,
-        Intent::AutoModerationConfiguration,
-        Intent::AutoModerationExecution,
-    ]);
+    client.all_intents();
 
     // The ready event will be launched once your bot is connected
     client.on_ready(|ready| {
