@@ -1,9 +1,10 @@
 use super::{emoji::Emoji, feature::Feature, role::Role, sticker::Sticker, user::User};
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum MemberFlags {
     None,
 
@@ -85,7 +86,7 @@ pub struct WelcomeScreen {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum DefaultMessageNotifications {
     /// members will receive notifications for all messages by default
     ALL_MESSAGES,
@@ -96,7 +97,7 @@ pub enum DefaultMessageNotifications {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum ExplicitContentFilter {
     /// media content will not be scanned
     DISABLED,
@@ -109,7 +110,7 @@ pub enum ExplicitContentFilter {
 }
 
 #[repr(u8)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum MFALevel {
     /// guild has no MFA/2FA requirement for moderation actions
     None,
@@ -119,7 +120,7 @@ pub enum MFALevel {
 }
 
 #[repr(u8)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum NSFWLevel {
     Default,
     Explicit,
@@ -128,7 +129,7 @@ pub enum NSFWLevel {
 }
 
 #[repr(u8)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum PremiumTier {
     /// guild has not unlocked any Server Boost perks
     None,
@@ -180,7 +181,7 @@ pub struct Preview {
 }
 
 #[repr(u8)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum SystemChannelFlags {
     None,
 
@@ -205,7 +206,7 @@ pub enum SystemChannelFlags {
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum VerificationLevel {
     /// unrestricted
     NONE,

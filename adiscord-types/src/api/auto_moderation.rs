@@ -1,15 +1,18 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
+#[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum EventType {
     /// when a member sends or edits a message in the guild
     MESSAGE_SEND = 1,
 }
 
+#[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum TriggerType {
     /// check if content contains words from a user defined list of keywords
     KEYWORD = 1,
@@ -24,8 +27,9 @@ pub enum TriggerType {
     MENTION_SPAM,
 }
 
+#[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum KeywordPreset {
     /// words that may be considered forms of swearing or cursing
     PROFANITY = 1,
@@ -58,8 +62,9 @@ pub struct TriggerMetadata {
     pub mention_raid_protection_enabled: Option<bool>,
 }
 
+#[repr(u8)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum ActionType {
     /// blocks a member's message and prevents it from being posted. A custom explanation can be specified and shown to members whenever their message is blocked.
     BLOCK_MESSAGE = 1,

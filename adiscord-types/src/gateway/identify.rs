@@ -53,5 +53,5 @@ pub struct Identify {
     pub presence: Option<IdentifyPresence>,
 
     /// Gateway Intents you wish to receive
-    pub intents: u16,
+    pub intents: u32,
 }

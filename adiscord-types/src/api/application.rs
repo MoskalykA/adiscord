@@ -1,9 +1,10 @@
 use super::{team::Team, user::User};
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[repr(u32)]
 #[allow(non_camel_case_types)]
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
     None,
 

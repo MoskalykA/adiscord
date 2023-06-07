@@ -1,3 +1,4 @@
+#[repr(u32)]
 pub enum Intent {
     /// Exhaustive list of events included:
     ///
