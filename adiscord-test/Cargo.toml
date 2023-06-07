@@ -8,5 +8,5 @@ license = "MIT"
 [dependencies]
 dotenv_codegen = "0.15.0"
 tokio = { version = "1", features = ["rt-multi-thread"] }
-adiscord = { version = "0.0.7", features = ["gateway"] }
-adiscord-intents = "0.0.3"
+adiscord = { version = "0.0.8", features = ["gateway"] }
+adiscord-intents = "0.0.4"
