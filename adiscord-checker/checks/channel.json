@@ -1,0 +1,1189 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "the id of this channel"],
+      "1": ["type", "integer", "the type of channel"],
+      "2": [
+        "guild_id?",
+        "snowflake",
+        "the id of the guild (may be missing for some channel objects received over gateway guild dispatches)"
+      ],
+      "3": ["position?", "integer", "sorting position of the channel"],
+      "4": [
+        "permission_overwrites?",
+        "array of overwrite objects",
+        "explicit permission overwrites for members and roles"
+      ],
+      "5": ["name?", "?string", "the name of the channel (1-100 characters)"],
+      "6": [
+        "topic?",
+        "?string",
+        "the channel topic (0-4096 characters for GUILD_FORUM channels, 0-1024 characters for all others)"
+      ],
+      "7": ["nsfw?", "boolean", "whether the channel is nsfw"],
+      "8": [
+        "last_message_id?",
+        "?snowflake",
+        "the id of the last message sent in this channel (or thread for GUILD_FORUM channels) (may not point to an existing or valid message or thread)"
+      ],
+      "9": ["bitrate?", "integer", "the bitrate (in bits) of the voice channel"],
+      "10": ["user_limit?", "integer", "the user limit of the voice channel"],
+      "11": [
+        "rate_limit_per_user?*",
+        "integer",
+        "amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected"
+      ],
+      "12": ["recipients?", "array of user objects", "the recipients of the DM"],
+      "13": ["icon?", "?string", "icon hash of the group DM"],
+      "14": ["owner_id?", "snowflake", "id of the creator of the group DM or thread"],
+      "15": [
+        "application_id?",
+        "snowflake",
+        "application id of the group DM creator if it is bot-created"
+      ],
+      "16": [
+        "managed?",
+        "boolean",
+        "for group DM channels: whether the channel is managed by an application via the gdm.join OAuth2 scope"
+      ],
+      "17": [
+        "parent_id?",
+        "?snowflake",
+        "for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created"
+      ],
+      "18": [
+        "last_pin_timestamp?",
+        "?ISO8601 timestamp",
+        "when the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned."
+      ],
+      "19": [
+        "rtc_region?",
+        "?string",
+        "voice region id for the voice channel, automatic when set to null"
+      ],
+      "20": [
+        "video_quality_mode?",
+        "integer",
+        "the camera video quality mode of the voice channel, 1 when not present"
+      ],
+      "21": [
+        "message_count?**",
+        "integer",
+        "number of messages (not including the initial message or deleted messages) in a thread."
+      ],
+      "22": [
+        "member_count?",
+        "integer",
+        "an approximate count of users in a thread, stops counting at 50"
+      ],
+      "23": [
+        "thread_metadata?",
+        "a thread metadata object",
+        "thread-specific fields not needed by other channels"
+      ],
+      "24": [
+        "member?",
+        "a thread member object",
+        "thread member object for the current user, if they have joined the thread, only included on certain API endpoints"
+      ],
+      "25": [
+        "default_auto_archive_duration?",
+        "integer",
+        "default duration, copied onto newly created threads, in minutes, threads will stop showing in the channel list after the specified period of inactivity, can be set to: 60, 1440, 4320, 10080"
+      ],
+      "26": [
+        "permissions?",
+        "string",
+        "computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction"
+      ],
+      "27": ["flags?", "integer", "channel flags combined as a bitfield"],
+      "28": [
+        "total_message_sent?",
+        "integer",
+        "number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted"
+      ],
+      "29": [
+        "available_tags?",
+        "array of tag objects",
+        "the set of tags that can be used in a GUILD_FORUM channel"
+      ],
+      "30": [
+        "applied_tags?",
+        "array of snowflakes",
+        "the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel"
+      ],
+      "31": [
+        "default_reaction_emoji?",
+        "?default reaction object",
+        "the emoji to show in the add reaction button on a thread in a GUILD_FORUM channel"
+      ],
+      "32": [
+        "default_thread_rate_limit_per_user?",
+        "integer",
+        "the initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update."
+      ],
+      "33": [
+        "default_sort_order?",
+        "?integer",
+        "the default sort order type used to order posts in GUILD_FORUM channels. Defaults to null, which indicates a preferred sort order hasn't been set by a channel admin"
+      ],
+      "34": [
+        "default_forum_layout?",
+        "integer",
+        "the default forum layout view used to display posts in GUILD_FORUM channels. Defaults to 0, which indicates a layout view has not been set by a channel admin"
+      ]
+    }
+  },
+  {
+    "fields": ["Type", "ID", "Description"],
+    "childrens": {
+      "0": ["GUILD_TEXT", "0", "a text channel within a server"],
+      "1": ["DM", "1", "a direct message between users"],
+      "2": ["GUILD_VOICE", "2", "a voice channel within a server"],
+      "3": ["GROUP_DM", "3", "a direct message between multiple users"],
+      "4": ["GUILD_CATEGORY", "4", "an organizational category that contains up to 50 channels"],
+      "5": [
+        "GUILD_ANNOUNCEMENT",
+        "5",
+        "a channel that users can follow and crosspost into their own server (formerly news channels)"
+      ],
+      "6": [
+        "ANNOUNCEMENT_THREAD",
+        "10",
+        "a temporary sub-channel within a GUILD_ANNOUNCEMENT channel"
+      ],
+      "7": [
+        "PUBLIC_THREAD",
+        "11",
+        "a temporary sub-channel within a GUILD_TEXT or GUILD_FORUM channel"
+      ],
+      "8": [
+        "PRIVATE_THREAD",
+        "12",
+        "a temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission"
+      ],
+      "9": ["GUILD_STAGE_VOICE", "13", "a voice channel for hosting events with an audience"],
+      "10": ["GUILD_DIRECTORY", "14", "the channel in a hub containing the listed servers"],
+      "11": ["GUILD_FORUM", "15", "Channel that can only contain threads"]
+    }
+  },
+  {
+    "fields": ["Mode", "Value", "Description"],
+    "childrens": {
+      "0": ["AUTO", "1", "Discord chooses the quality for optimal performance"],
+      "1": ["FULL", "2", "720p"]
+    }
+  },
+  {
+    "fields": ["Flag", "Value", "Description"],
+    "childrens": {
+      "0": [
+        "PINNED",
+        "1 << 1",
+        "this thread is pinned to the top of its parent GUILD_FORUM channel"
+      ],
+      "1": [
+        "REQUIRE_TAG",
+        "1 << 4",
+        "whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field."
+      ]
+    }
+  },
+  {
+    "fields": ["Flag", "Value", "Description"],
+    "childrens": {
+      "0": ["LATEST_ACTIVITY", "0", "Sort forum posts by activity"],
+      "1": ["CREATION_DATE", "1", "Sort forum posts by creation time (from most recent to oldest)"]
+    }
+  },
+  {
+    "fields": ["Flag", "Value", "Description"],
+    "childrens": {
+      "0": ["NOT_SET", "0", "No default has been set for forum channel"],
+      "1": ["LIST_VIEW", "1", "Display posts as a list"],
+      "2": ["GALLERY_VIEW", "2", "Display posts as a collection of tiles"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "id of the message"],
+      "1": ["channel_id", "snowflake", "id of the channel the message was sent in"],
+      "2": [
+        "author*",
+        "user object",
+        "the author of this message (not guaranteed to be a valid user, see below)"
+      ],
+      "3": ["content**", "string", "contents of the message"],
+      "4": ["timestamp", "ISO8601 timestamp", "when this message was sent"],
+      "5": [
+        "edited_timestamp",
+        "?ISO8601 timestamp",
+        "when this message was edited (or null if never)"
+      ],
+      "6": ["tts", "boolean", "whether this was a TTS message"],
+      "7": ["mention_everyone", "boolean", "whether this message mentions everyone"],
+      "8": ["mentions", "array of user objects", "users specifically mentioned in the message"],
+      "9": [
+        "mention_roles",
+        "array of role object ids",
+        "roles specifically mentioned in this message"
+      ],
+      "10": [
+        "mention_channels?***",
+        "array of channel mention objects",
+        "channels specifically mentioned in this message"
+      ],
+      "11": ["attachments**", "array of attachment objects", "any attached files"],
+      "12": ["embeds**", "array of embed objects", "any embedded content"],
+      "13": ["reactions?", "array of reaction objects", "reactions to the message"],
+      "14": ["nonce?", "integer or string", "used for validating a message was sent"],
+      "15": ["pinned", "boolean", "whether this message is pinned"],
+      "16": [
+        "webhook_id?",
+        "snowflake",
+        "if the message is generated by a webhook, this is the webhook's id"
+      ],
+      "17": ["type", "integer", "type of message"],
+      "18": ["activity?", "message activity object", "sent with Rich Presence-related chat embeds"],
+      "19": [
+        "application?",
+        "partial application object",
+        "sent with Rich Presence-related chat embeds"
+      ],
+      "20": [
+        "application_id?",
+        "snowflake",
+        "if the message is an Interaction or application-owned webhook, this is the id of the application"
+      ],
+      "21": [
+        "message_reference?",
+        "message reference object",
+        "data showing the source of a crosspost, channel follow add, pin, or reply message"
+      ],
+      "22": ["flags?", "integer", "message flags combined as a bitfield"],
+      "23": [
+        "referenced_message?****",
+        "?message object",
+        "the message associated with the message_reference"
+      ],
+      "24": [
+        "interaction?",
+        "message interaction object",
+        "sent if the message is a response to an Interaction"
+      ],
+      "25": [
+        "thread?",
+        "channel object",
+        "the thread that was started from this message, includes thread member object"
+      ],
+      "26": [
+        "components?**",
+        "array of message components",
+        "sent if the message contains components like buttons, action rows, or other interactive components"
+      ],
+      "27": [
+        "sticker_items?",
+        "array of message sticker item objects",
+        "sent if the message contains stickers"
+      ],
+      "28": [
+        "stickers?",
+        "array of sticker objects",
+        "Deprecated the stickers sent with the message"
+      ],
+      "29": [
+        "position?",
+        "integer",
+        "A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the message in a thread in company with total_message_sent on parent thread"
+      ],
+      "30": [
+        "role_subscription_data?",
+        "role subscription data object",
+        "data of the role subscription purchase or renewal that prompted this ROLE_SUBSCRIPTION_PURCHASE message"
+      ]
+    }
+  },
+  {
+    "fields": ["Type", "Value", "Deletable"],
+    "childrens": {
+      "0": ["DEFAULT", "0", "true"],
+      "1": ["RECIPIENT_ADD", "1", "false"],
+      "2": ["RECIPIENT_REMOVE", "2", "false"],
+      "3": ["CALL", "3", "false"],
+      "4": ["CHANNEL_NAME_CHANGE", "4", "false"],
+      "5": ["CHANNEL_ICON_CHANGE", "5", "false"],
+      "6": ["CHANNEL_PINNED_MESSAGE", "6", "true"],
+      "7": ["USER_JOIN", "7", "true"],
+      "8": ["GUILD_BOOST", "8", "true"],
+      "9": ["GUILD_BOOST_TIER_1", "9", "true"],
+      "10": ["GUILD_BOOST_TIER_2", "10", "true"],
+      "11": ["GUILD_BOOST_TIER_3", "11", "true"],
+      "12": ["CHANNEL_FOLLOW_ADD", "12", "true"],
+      "13": ["GUILD_DISCOVERY_DISQUALIFIED", "14", "false"],
+      "14": ["GUILD_DISCOVERY_REQUALIFIED", "15", "false"],
+      "15": ["GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING", "16", "false"],
+      "16": ["GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING", "17", "false"],
+      "17": ["THREAD_CREATED", "18", "true"],
+      "18": ["REPLY", "19", "true"],
+      "19": ["CHAT_INPUT_COMMAND", "20", "true"],
+      "20": ["THREAD_STARTER_MESSAGE", "21", "false"],
+      "21": ["GUILD_INVITE_REMINDER", "22", "true"],
+      "22": ["CONTEXT_MENU_COMMAND", "23", "true"],
+      "23": ["AUTO_MODERATION_ACTION", "24", "true*"],
+      "24": ["ROLE_SUBSCRIPTION_PURCHASE", "25", "true"],
+      "25": ["INTERACTION_PREMIUM_UPSELL", "26", "true"],
+      "26": ["STAGE_START", "27", "true"],
+      "27": ["STAGE_END", "28", "true"],
+      "28": ["STAGE_SPEAKER", "29", "true"],
+      "29": ["STAGE_TOPIC", "31", "true"],
+      "30": ["GUILD_APPLICATION_PREMIUM_SUBSCRIPTION", "32", "false"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["type", "integer", "type of message activity"],
+      "1": ["party_id?", "string", "party_id from a Rich Presence event"]
+    }
+  },
+  {
+    "fields": ["Type", "Value"],
+    "childrens": {
+      "0": ["JOIN", "1"],
+      "1": ["SPECTATE", "2"],
+      "2": ["LISTEN", "3"],
+      "3": ["JOIN_REQUEST", "5"]
+    }
+  },
+  {
+    "fields": ["Flag", "Value", "Description"],
+    "childrens": {
+      "0": [
+        "CROSSPOSTED",
+        "1 << 0",
+        "this message has been published to subscribed channels (via Channel Following)"
+      ],
+      "1": [
+        "IS_CROSSPOST",
+        "1 << 1",
+        "this message originated from a message in another channel (via Channel Following)"
+      ],
+      "2": ["SUPPRESS_EMBEDS", "1 << 2", "do not include any embeds when serializing this message"],
+      "3": [
+        "SOURCE_MESSAGE_DELETED",
+        "1 << 3",
+        "the source message for this crosspost has been deleted (via Channel Following)"
+      ],
+      "4": ["URGENT", "1 << 4", "this message came from the urgent message system"],
+      "5": [
+        "HAS_THREAD",
+        "1 << 5",
+        "this message has an associated thread, with the same id as the message"
+      ],
+      "6": [
+        "EPHEMERAL",
+        "1 << 6",
+        "this message is only visible to the user who invoked the Interaction"
+      ],
+      "7": [
+        "LOADING",
+        "1 << 7",
+        "this message is an Interaction Response and the bot is \"thinking\""
+      ],
+      "8": [
+        "FAILED_TO_MENTION_SOME_ROLES_IN_THREAD",
+        "1 << 8",
+        "this message failed to mention some roles and add their members to the thread"
+      ],
+      "9": [
+        "SUPPRESS_NOTIFICATIONS",
+        "1 << 12",
+        "this message will not trigger push and desktop notifications"
+      ],
+      "10": ["IS_VOICE_MESSAGE", "1 << 13", "this message is a voice message"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["message_id?", "snowflake", "id of the originating message"],
+      "1": ["channel_id? *", "snowflake", "id of the originating message's channel"],
+      "2": ["guild_id?", "snowflake", "id of the originating message's guild"],
+      "3": [
+        "fail_if_not_exists?",
+        "boolean",
+        "when sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["channel_id", "snowflake", "source channel id"],
+      "1": ["webhook_id", "snowflake", "created target webhook id"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["count", "integer", "times this emoji has been used to react"],
+      "1": ["me", "boolean", "whether the current user reacted using this emoji"],
+      "2": ["emoji", "partial emoji object", "emoji information"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "role or user id"],
+      "1": ["type", "int", "either 0 (role) or 1 (member)"],
+      "2": ["allow", "string", "permission bit set"],
+      "3": ["deny", "string", "permission bit set"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["archived", "boolean", "whether the thread is archived"],
+      "1": [
+        "auto_archive_duration",
+        "integer",
+        "the thread will stop showing in the channel list after auto_archive_duration minutes of inactivity, can be set to: 60, 1440, 4320, 10080"
+      ],
+      "2": [
+        "archive_timestamp",
+        "ISO8601 timestamp",
+        "timestamp when the thread's archive status was last changed, used for calculating recent activity"
+      ],
+      "3": [
+        "locked",
+        "boolean",
+        "whether the thread is locked; when a thread is locked, only users with MANAGE_THREADS can unarchive it"
+      ],
+      "4": [
+        "invitable?",
+        "boolean",
+        "whether non-moderators can add other non-moderators to a thread; only available on private threads"
+      ],
+      "5": [
+        "create_timestamp?",
+        "?ISO8601 timestamp",
+        "timestamp when the thread was created; only populated for threads created after 2022-01-09"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id? *", "snowflake", "ID of the thread"],
+      "1": ["user_id? *", "snowflake", "ID of the user"],
+      "2": ["join_timestamp", "ISO8601 timestamp", "Time the user last joined the thread"],
+      "3": ["flags", "integer", "Any user-thread settings, currently only used for notifications"],
+      "4": ["member? * **", "guild member object", "Additional information about the user"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["emoji_id", "?snowflake", "the id of a guild's custom emoji"],
+      "1": ["emoji_name", "?string", "the unicode character of the emoji"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "the id of the tag"],
+      "1": ["name", "string", "the name of the tag (0-20 characters)"],
+      "2": [
+        "moderated",
+        "boolean",
+        "whether this tag can only be added to or removed from threads by a member with the MANAGE_THREADS permission"
+      ],
+      "3": ["emoji_id", "?snowflake", "the id of a guild's custom emoji *"],
+      "4": ["emoji_name", "?string", "the unicode character of the emoji *"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["title?", "string", "title of embed"],
+      "1": ["type?", "string", "type of embed (always \"rich\" for webhook embeds)"],
+      "2": ["description?", "string", "description of embed"],
+      "3": ["url?", "string", "url of embed"],
+      "4": ["timestamp?", "ISO8601 timestamp", "timestamp of embed content"],
+      "5": ["color?", "integer", "color code of the embed"],
+      "6": ["footer?", "embed footer object", "footer information"],
+      "7": ["image?", "embed image object", "image information"],
+      "8": ["thumbnail?", "embed thumbnail object", "thumbnail information"],
+      "9": ["video?", "embed video object", "video information"],
+      "10": ["provider?", "embed provider object", "provider information"],
+      "11": ["author?", "embed author object", "author information"],
+      "12": ["fields?", "array of embed field objects", "fields information"]
+    }
+  },
+  {
+    "fields": ["Type", "Description"],
+    "childrens": {
+      "0": ["rich", "generic embed rendered from embed attributes"],
+      "1": ["image", "image embed"],
+      "2": ["video", "video embed"],
+      "3": ["gifv", "animated gif image embed rendered as a video embed"],
+      "4": ["article", "article embed"],
+      "5": ["link", "link embed"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["url", "string", "source url of thumbnail (only supports http(s) and attachments)"],
+      "1": ["proxy_url?", "string", "a proxied url of the thumbnail"],
+      "2": ["height?", "integer", "height of thumbnail"],
+      "3": ["width?", "integer", "width of thumbnail"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["url?", "string", "source url of video"],
+      "1": ["proxy_url?", "string", "a proxied url of the video"],
+      "2": ["height?", "integer", "height of video"],
+      "3": ["width?", "integer", "width of video"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["url", "string", "source url of image (only supports http(s) and attachments)"],
+      "1": ["proxy_url?", "string", "a proxied url of the image"],
+      "2": ["height?", "integer", "height of image"],
+      "3": ["width?", "integer", "width of image"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name?", "string", "name of provider"],
+      "1": ["url?", "string", "url of provider"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of author"],
+      "1": ["url?", "string", "url of author (only supports http(s))"],
+      "2": ["icon_url?", "string", "url of author icon (only supports http(s) and attachments)"],
+      "3": ["proxy_icon_url?", "string", "a proxied url of author icon"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["text", "string", "footer text"],
+      "1": ["icon_url?", "string", "url of footer icon (only supports http(s) and attachments)"],
+      "2": ["proxy_icon_url?", "string", "a proxied url of footer icon"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the field"],
+      "1": ["value", "string", "value of the field"],
+      "2": ["inline?", "boolean", "whether or not this field should display inline"]
+    }
+  },
+  {
+    "fields": ["Field", "Limit"],
+    "childrens": {
+      "0": ["title", "256 characters"],
+      "1": ["description", "4096 characters"],
+      "2": ["fields", "Up to 25 field objects"],
+      "3": ["field.name", "256 characters"],
+      "4": ["field.value", "1024 characters"],
+      "5": ["footer.text", "2048 characters"],
+      "6": ["author.name", "256 characters"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "attachment id"],
+      "1": ["filename", "string", "name of file attached"],
+      "2": ["description?", "string", "description for the file (max 1024 characters)"],
+      "3": ["content_type?", "string", "the attachment's media type"],
+      "4": ["size", "integer", "size of file in bytes"],
+      "5": ["url", "string", "source url of file"],
+      "6": ["proxy_url", "string", "a proxied url of file"],
+      "7": ["height?", "?integer", "height of file (if image)"],
+      "8": ["width?", "?integer", "width of file (if image)"],
+      "9": ["ephemeral? *", "boolean", "whether this attachment is ephemeral"],
+      "10": [
+        "duration_secs?",
+        "float",
+        "the duration of the audio file (currently for voice messages)"
+      ],
+      "11": [
+        "waveform?",
+        "string",
+        "base64 encoded bytearray representing a sampled waveform (currently for voice messages)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "id of the channel"],
+      "1": ["guild_id", "snowflake", "id of the guild containing the channel"],
+      "2": ["type", "integer", "the type of channel"],
+      "3": ["name", "string", "the name of the channel"]
+    }
+  },
+  {
+    "fields": ["Type", "Value", "Description"],
+    "childrens": {
+      "0": ["Role Mentions", "\"roles\"", "Controls role mentions"],
+      "1": ["User Mentions", "\"users\"", "Controls user mentions"],
+      "2": ["Everyone Mentions", "\"everyone\"", "Controls @everyone and @here mentions"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "parse",
+        "array of allowed mention types",
+        "An array of allowed mention types to parse from the content."
+      ],
+      "1": ["roles", "list of snowflakes", "Array of role_ids to mention (Max size of 100)"],
+      "2": ["users", "list of snowflakes", "Array of user_ids to mention (Max size of 100)"],
+      "3": [
+        "replied_user",
+        "boolean",
+        "For replies, whether to mention the author of the message being replied to (default false)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "role_subscription_listing_id",
+        "snowflake",
+        "the id of the sku and listing that the user is subscribed to"
+      ],
+      "1": ["tier_name", "string", "the name of the tier that the user is subscribed to"],
+      "2": [
+        "total_months_subscribed",
+        "integer",
+        "the cumulative number of months that the user has been subscribed for"
+      ],
+      "3": [
+        "is_renewal",
+        "boolean",
+        "whether this notification is for a renewal rather than a new purchase"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "1-100 character channel name"],
+      "1": ["icon", "binary", "base64 encoded icon"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Channel Type"],
+    "childrens": {
+      "0": ["name", "string", "1-100 character channel name", "All"],
+      "1": [
+        "type",
+        "integer",
+        "the type of channel; only conversion between text and announcement is supported and only in guilds with the \"NEWS\" feature",
+        "Text, Announcement"
+      ],
+      "2": ["position", "?integer", "the position of the channel in the left-hand listing", "All"],
+      "3": [
+        "topic",
+        "?string",
+        "0-1024 character channel topic (0-4096 characters for GUILD_FORUM channels)",
+        "Text, Announcement, Forum"
+      ],
+      "4": [
+        "nsfw",
+        "?boolean",
+        "whether the channel is nsfw",
+        "Text, Voice, Announcement, Stage, Forum"
+      ],
+      "5": [
+        "rate_limit_per_user",
+        "?integer",
+        "amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected",
+        "Text, Voice, Stage, Forum"
+      ],
+      "6": [
+        "bitrate*",
+        "?integer",
+        "the bitrate (in bits) of the voice or stage channel; min 8000",
+        "Voice, Stage"
+      ],
+      "7": [
+        "user_limit",
+        "?integer",
+        "the user limit of the voice or stage channel, max 99 for voice channels and 10,000 for stage channels (0 refers to no limit)",
+        "Voice, Stage"
+      ],
+      "8": [
+        "permission_overwrites**",
+        "?array of partial overwrite objects",
+        "channel or category-specific permissions",
+        "All"
+      ],
+      "9": [
+        "parent_id",
+        "?snowflake",
+        "id of the new parent category for a channel",
+        "Text, Voice, Announcement, Stage, Forum"
+      ],
+      "10": [
+        "rtc_region",
+        "?string",
+        "channel voice region id, automatic when set to null",
+        "Voice, Stage"
+      ],
+      "11": [
+        "video_quality_mode",
+        "?integer",
+        "the camera video quality mode of the voice channel",
+        "Voice, Stage"
+      ],
+      "12": [
+        "default_auto_archive_duration",
+        "?integer",
+        "the default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity",
+        "Text, Announcement, Forum"
+      ],
+      "13": [
+        "flags?",
+        "integer",
+        "channel flags combined as a bitfield. Currently only REQUIRE_TAG (1 << 4) is supported.",
+        "Forum"
+      ],
+      "14": [
+        "available_tags?",
+        "array of tag objects",
+        "the set of tags that can be used in a GUILD_FORUM channel; limited to 20",
+        "Forum"
+      ],
+      "15": [
+        "default_reaction_emoji?",
+        "?default reaction object",
+        "the emoji to show in the add reaction button on a thread in a GUILD_FORUM channel",
+        "Forum"
+      ],
+      "16": [
+        "default_thread_rate_limit_per_user?",
+        "integer",
+        "the initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.",
+        "Text, Forum"
+      ],
+      "17": [
+        "default_sort_order?",
+        "?integer",
+        "the default sort order type used to order posts in GUILD_FORUM channels",
+        "Forum"
+      ],
+      "18": [
+        "default_forum_layout?",
+        "integer",
+        "the default forum layout type used to display posts in GUILD_FORUM channels",
+        "Forum"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "1-100 character channel name"],
+      "1": ["archived", "boolean", "whether the thread is archived"],
+      "2": [
+        "auto_archive_duration",
+        "integer",
+        "the thread will stop showing in the channel list after auto_archive_duration minutes of inactivity, can be set to: 60, 1440, 4320, 10080"
+      ],
+      "3": [
+        "locked",
+        "boolean",
+        "whether the thread is locked; when a thread is locked, only users with MANAGE_THREADS can unarchive it"
+      ],
+      "4": [
+        "invitable",
+        "boolean",
+        "whether non-moderators can add other non-moderators to a thread; only available on private threads"
+      ],
+      "5": [
+        "rate_limit_per_user",
+        "?integer",
+        "amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages, manage_thread, or manage_channel, are unaffected"
+      ],
+      "6": [
+        "flags?",
+        "integer",
+        "channel flags combined as a bitfield; PINNED can only be set for threads in forum channels"
+      ],
+      "7": [
+        "applied_tags?",
+        "array of snowflakes",
+        "the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel; limited to 5"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Default"],
+    "childrens": {
+      "0": ["around?", "snowflake", "Get messages around this message ID", "absent"],
+      "1": ["before?", "snowflake", "Get messages before this message ID", "absent"],
+      "2": ["after?", "snowflake", "Get messages after this message ID", "absent"],
+      "3": ["limit?", "integer", "Max number of messages to return (1-100)", "50"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["content?*", "string", "Message contents (up to 2000 characters)"],
+      "1": [
+        "nonce?",
+        "integer or string",
+        "Can be used to verify a message was sent (up to 25 characters). Value will appear in the Message Create event."
+      ],
+      "2": ["tts?", "boolean", "true if this is a TTS message"],
+      "3": ["embeds?*", "array of embed objects", "Up to 10 rich embeds (up to 6000 characters)"],
+      "4": ["allowed_mentions?", "allowed mention object", "Allowed mentions for the message"],
+      "5": ["message_reference?", "message reference", "Include to make your message a reply"],
+      "6": [
+        "components?*",
+        "array of message component objects",
+        "Components to include with the message"
+      ],
+      "7": [
+        "sticker_ids?*",
+        "array of snowflakes",
+        "IDs of up to 3 stickers in the server to send in the message"
+      ],
+      "8": ["files[n]?*", "file contents", "Contents of the file being sent. See Uploading Files"],
+      "9": [
+        "payload_json?",
+        "string",
+        "JSON-encoded body of non-file params, only for multipart/form-data requests. See Uploading Files"
+      ],
+      "10": [
+        "attachments?",
+        "array of partial attachment objects",
+        "Attachment objects with filename and description. See Uploading Files"
+      ],
+      "11": [
+        "flags?",
+        "integer",
+        "Message flags combined as a bitfield (only SUPPRESS_EMBEDS and SUPPRESS_NOTIFICATIONS can be set)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Default"],
+    "childrens": {
+      "0": ["after?", "snowflake", "Get users after this user ID", "absent"],
+      "1": ["limit?", "integer", "Max number of users to return (1-100)", "25"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["content", "string", "Message contents (up to 2000 characters)"],
+      "1": ["embeds", "array of embed objects", "Up to 10 rich embeds (up to 6000 characters)"],
+      "2": [
+        "flags",
+        "integer",
+        "Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset)"
+      ],
+      "3": ["allowed_mentions", "allowed mention object", "Allowed mentions for the message"],
+      "4": ["components", "array of message component", "Components to include with the message"],
+      "5": [
+        "files[n]",
+        "file contents",
+        "Contents of the file being sent/edited. See Uploading Files"
+      ],
+      "6": [
+        "payload_json",
+        "string",
+        "JSON-encoded body of non-file params (multipart/form-data only). See Uploading Files"
+      ],
+      "7": [
+        "attachments",
+        "array of attachment objects",
+        "Attached files to keep and possible descriptions for new files. See Uploading Files"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["messages", "array of snowflakes", "an array of message ids to delete (2-100)"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["allow?", "string?", "the bitwise value of all allowed permissions (default \"0\")"],
+      "1": ["deny?", "string?", "the bitwise value of all disallowed permissions (default \"0\")"],
+      "2": ["type", "integer", "0 for a role or 1 for a member"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Default"],
+    "childrens": {
+      "0": [
+        "max_age",
+        "integer",
+        "duration of invite in seconds before expiry, or 0 for never. between 0 and 604800 (7 days)",
+        "86400 (24 hours)"
+      ],
+      "1": ["max_uses", "integer", "max number of uses or 0 for unlimited. between 0 and 100", "0"],
+      "2": [
+        "temporary",
+        "boolean",
+        "whether this invite only grants temporary membership",
+        "false"
+      ],
+      "3": [
+        "unique",
+        "boolean",
+        "if true, don't try to reuse a similar invite (useful for creating many unique one time use invites)",
+        "false"
+      ],
+      "4": ["target_type", "integer", "the type of target for this voice channel invite", ""],
+      "5": [
+        "target_user_id",
+        "snowflake",
+        "the id of the user whose stream to display for this invite, required if target_type is 1, the user must be streaming in the channel",
+        ""
+      ],
+      "6": [
+        "target_application_id",
+        "snowflake",
+        "the id of the embedded application to open for this invite, required if target_type is 2, the application must have the EMBEDDED flag",
+        ""
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": { "0": ["webhook_channel_id", "snowflake", "id of target channel"] }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "access_token",
+        "string",
+        "access token of a user that has granted your app the gdm.join scope"
+      ],
+      "1": ["nick", "string", "nickname of the user being added"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "1-100 character channel name"],
+      "1": [
+        "auto_archive_duration?",
+        "integer",
+        "the thread will stop showing in the channel list after auto_archive_duration minutes of inactivity, can be set to: 60, 1440, 4320, 10080"
+      ],
+      "2": [
+        "rate_limit_per_user?",
+        "?integer",
+        "amount of seconds a user has to wait before sending another message (0-21600)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "1-100 character channel name"],
+      "1": [
+        "auto_archive_duration?",
+        "integer",
+        "the thread will stop showing in the channel list after auto_archive_duration minutes of inactivity, can be set to: 60, 1440, 4320, 10080"
+      ],
+      "2": ["type?*", "integer", "the type of thread to create"],
+      "3": [
+        "invitable?",
+        "boolean",
+        "whether non-moderators can add other non-moderators to a thread; only available when creating a private thread"
+      ],
+      "4": [
+        "rate_limit_per_user?",
+        "?integer",
+        "amount of seconds a user has to wait before sending another message (0-21600)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "1-100 character channel name"],
+      "1": [
+        "auto_archive_duration?*",
+        "integer",
+        "duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080"
+      ],
+      "2": [
+        "rate_limit_per_user?",
+        "?integer",
+        "amount of seconds a user has to wait before sending another message (0-21600)"
+      ],
+      "3": [
+        "message",
+        "a forum thread message params object",
+        "contents of the first message in the forum thread"
+      ],
+      "4": [
+        "applied_tags?",
+        "array of snowflakes",
+        "the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["content?*", "string", "Message contents (up to 2000 characters)"],
+      "1": ["embeds?*", "array of embed objects", "Up to 10 rich embeds (up to 6000 characters)"],
+      "2": ["allowed_mentions?", "allowed mention object", "Allowed mentions for the message"],
+      "3": [
+        "components?*",
+        "array of message component objects",
+        "Components to include with the message"
+      ],
+      "4": [
+        "sticker_ids?*",
+        "array of snowflakes",
+        "IDs of up to 3 stickers in the server to send in the message"
+      ],
+      "5": ["files[n]*", "file contents", "Contents of the file being sent. See Uploading Files"],
+      "6": [
+        "payload_json?",
+        "string",
+        "JSON-encoded body of non-file params, only for multipart/form-data requests. See Uploading Files"
+      ],
+      "7": [
+        "attachments?",
+        "array of partial attachment objects",
+        "Attachment objects with filename and description. See Uploading Files"
+      ],
+      "8": [
+        "flags?",
+        "integer",
+        "Message flags combined as a bitfield (only SUPPRESS_EMBEDS and SUPPRESS_NOTIFICATIONS can be set)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "with_member?",
+        "boolean",
+        "Whether to include a guild member object for the thread member"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "with_member?",
+        "boolean",
+        "Whether to include a guild member object for each thread member"
+      ],
+      "1": ["after?", "snowflake", "Get thread members after this user ID"],
+      "2": [
+        "limit?",
+        "integer",
+        "Max number of thread members to return (1-100). Defaults to 100."
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["before?", "ISO8601 timestamp", "returns threads archived before this timestamp"],
+      "1": ["limit?", "integer", "optional maximum number of threads to return"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["threads", "array of channel objects", "the public, archived threads"],
+      "1": [
+        "members",
+        "array of thread members objects",
+        "a thread member object for each returned thread the current user has joined"
+      ],
+      "2": [
+        "has_more",
+        "boolean",
+        "whether there are potentially additional threads that could be returned on a subsequent call"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["before?", "ISO8601 timestamp", "returns threads archived before this timestamp"],
+      "1": ["limit?", "integer", "optional maximum number of threads to return"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["threads", "array of channel objects", "the private, archived threads"],
+      "1": [
+        "members",
+        "array of thread members objects",
+        "a thread member object for each returned thread the current user has joined"
+      ],
+      "2": [
+        "has_more",
+        "boolean",
+        "whether there are potentially additional threads that could be returned on a subsequent call"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["before?", "snowflake", "returns threads before this id"],
+      "1": ["limit?", "integer", "optional maximum number of threads to return"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "threads",
+        "array of channel objects",
+        "the private, archived threads the current user has joined"
+      ],
+      "1": [
+        "members",
+        "array of thread members objects",
+        "a thread member object for each returned thread the current user has joined"
+      ],
+      "2": [
+        "has_more",
+        "boolean",
+        "whether there are potentially additional threads that could be returned on a subsequent call"
+      ]
+    }
+  }
+]

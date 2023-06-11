@@ -1,0 +1,244 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "the id of this rule"],
+      "1": ["guild_id", "snowflake", "the id of the guild which this rule belongs to"],
+      "2": ["name", "string", "the rule name"],
+      "3": ["creator_id", "snowflake", "the user which first created this rule"],
+      "4": ["event_type", "integer", "the rule event type"],
+      "5": ["trigger_type", "integer", "the rule trigger type"],
+      "6": ["trigger_metadata", "object", "the rule trigger metadata"],
+      "7": [
+        "actions",
+        "array of action objects",
+        "the actions which will execute when the rule is triggered"
+      ],
+      "8": ["enabled", "boolean", "whether the rule is enabled"],
+      "9": [
+        "exempt_roles",
+        "array of snowflakes",
+        "the role ids that should not be affected by the rule (Maximum of 20)"
+      ],
+      "10": [
+        "exempt_channels",
+        "array of snowflakes",
+        "the channel ids that should not be affected by the rule (Maximum of 50)"
+      ]
+    }
+  },
+  {
+    "fields": ["Trigger Type", "Value", "Description", "Max per Guild"],
+    "childrens": {
+      "0": [
+        "KEYWORD",
+        "1",
+        "check if content contains words from a user defined list of keywords",
+        "6"
+      ],
+      "1": ["SPAM", "3", "check if content represents generic spam", "1"],
+      "2": [
+        "KEYWORD_PRESET",
+        "4",
+        "check if content contains words from internal pre-defined wordsets",
+        "1"
+      ],
+      "3": [
+        "MENTION_SPAM",
+        "5",
+        "check if content contains more unique mentions than allowed",
+        "1"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Associated Trigger Types", "Description"],
+    "childrens": {
+      "0": [
+        "keyword_filter",
+        "array of strings *",
+        "KEYWORD",
+        "substrings which will be searched for in content (Maximum of 1000)"
+      ],
+      "1": [
+        "regex_patterns",
+        "array of strings **",
+        "KEYWORD",
+        "regular expression patterns which will be matched against content (Maximum of 10)"
+      ],
+      "2": [
+        "presets",
+        "array of keyword preset types",
+        "KEYWORD_PRESET",
+        "the internally pre-defined wordsets which will be searched for in content"
+      ],
+      "3": [
+        "allow_list",
+        "array of strings ***",
+        "KEYWORD, KEYWORD_PRESET",
+        "substrings which should not trigger the rule (Maximum of 100 or 1000)"
+      ],
+      "4": [
+        "mention_total_limit",
+        "integer",
+        "MENTION_SPAM",
+        "total number of unique role and user mentions allowed per message (Maximum of 50)"
+      ],
+      "5": [
+        "mention_raid_protection_enabled",
+        "boolean",
+        "MENTION_SPAM",
+        "whether to automatically detect mention raids"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Trigger Type", "MAX ARRAY LENGTH", "MAX CHARACTERS PER STRING"],
+    "childrens": {
+      "0": ["keyword_filter", "KEYWORD", "1000", "60"],
+      "1": ["regex_patterns", "KEYWORD", "10", "260"],
+      "2": ["allow_list", "KEYWORD", "100", "60"],
+      "3": ["allow_list", "KEYWORD_PRESET", "1000", "60"]
+    }
+  },
+  {
+    "fields": ["Preset Type", "Value", "Description"],
+    "childrens": {
+      "0": ["PROFANITY", "1", "words that may be considered forms of swearing or cursing"],
+      "1": ["SEXUAL_CONTENT", "2", "words that refer to sexually explicit behavior or activity"],
+      "2": ["SLURS", "3", "personal insults or words that may be considered hate speech"]
+    }
+  },
+  {
+    "fields": ["Event Type", "Value", "Description"],
+    "childrens": {
+      "0": ["MESSAGE_SEND", "1", "when a member sends or edits a message in the guild"]
+    }
+  },
+  {
+    "fields": ["Keyword", "Matches"],
+    "childrens": {
+      "0": ["cat*", "catch, Catapult, CAttLE"],
+      "1": ["tra*", "train, trade, TRAditional"],
+      "2": ["the mat*", "the matrix"]
+    }
+  },
+  {
+    "fields": ["Keyword", "Matches"],
+    "childrens": {
+      "0": ["*cat", "wildcat, copyCat"],
+      "1": ["*tra", "extra, ultra, orchesTRA"],
+      "2": ["*the mat", "breathe mat"]
+    }
+  },
+  {
+    "fields": ["Keyword", "Matches"],
+    "childrens": {
+      "0": ["*cat*", "location, eduCation"],
+      "1": ["*tra*", "abstracted, outrage"],
+      "2": ["*the mat*", "breathe matter"]
+    }
+  },
+  {
+    "fields": ["Keyword", "Matches"],
+    "childrens": { "0": ["cat", "cat"], "1": ["train", "train"], "2": ["the mat", "the mat"] }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["type", "action type", "the type of action"],
+      "1": [
+        "metadata? *",
+        "action metadata",
+        "additional metadata needed during execution for this specific action type"
+      ]
+    }
+  },
+  {
+    "fields": ["Action Type", "Value", "Description"],
+    "childrens": {
+      "0": [
+        "BLOCK_MESSAGE",
+        "1",
+        "blocks a member's message and prevents it from being posted. A custom explanation can be specified and shown to members whenever their message is blocked."
+      ],
+      "1": ["SEND_ALERT_MESSAGE", "2", "logs user content to a specified channel"],
+      "2": ["TIMEOUT", "3", "timeout user for a specified duration *"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Associated Action Types", "Description", "Constraints"],
+    "childrens": {
+      "0": [
+        "channel_id",
+        "snowflake",
+        "SEND_ALERT_MESSAGE",
+        "channel to which user content should be logged",
+        "existing channel"
+      ],
+      "1": [
+        "duration_seconds",
+        "integer",
+        "TIMEOUT",
+        "timeout duration in seconds",
+        "maximum of 2419200 seconds (4 weeks)"
+      ],
+      "2": [
+        "custom_message?",
+        "string",
+        "BLOCK_MESSAGE",
+        "additional explanation that will be shown to members whenever their message is blocked",
+        "maximum of 150 characters"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "the rule name"],
+      "1": ["event_type", "integer", "the event type"],
+      "2": ["trigger_type", "integer", "the trigger type"],
+      "3": ["trigger_metadata? *", "object", "the trigger metadata"],
+      "4": [
+        "actions",
+        "array of action objects",
+        "the actions which will execute when the rule is triggered"
+      ],
+      "5": ["enabled?", "boolean", "whether the rule is enabled (False by default)"],
+      "6": [
+        "exempt_roles?",
+        "array of snowflakes",
+        "the role ids that should not be affected by the rule (Maximum of 20)"
+      ],
+      "7": [
+        "exempt_channels?",
+        "array of snowflakes",
+        "the channel ids that should not be affected by the rule (Maximum of 50)"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "the rule name"],
+      "1": ["event_type", "integer", "the event type"],
+      "2": ["trigger_metadata? *", "object", "the trigger metadata"],
+      "3": [
+        "actions",
+        "array of action objects",
+        "the actions which will execute when the rule is triggered"
+      ],
+      "4": ["enabled", "boolean", "whether the rule is enabled"],
+      "5": [
+        "exempt_roles",
+        "array of snowflakes",
+        "the role ids that should not be affected by the rule (Maximum of 20)"
+      ],
+      "6": [
+        "exempt_channels",
+        "array of snowflakes",
+        "the channel ids that should not be affected by the rule (Maximum of 50)"
+      ]
+    }
+  }
+]

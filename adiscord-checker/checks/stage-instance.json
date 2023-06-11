@@ -1,0 +1,53 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "The id of this Stage instance"],
+      "1": ["guild_id", "snowflake", "The guild id of the associated Stage channel"],
+      "2": ["channel_id", "snowflake", "The id of the associated Stage channel"],
+      "3": ["topic", "string", "The topic of the Stage instance (1-120 characters)"],
+      "4": ["privacy_level", "integer", "The privacy level of the Stage instance"],
+      "5": [
+        "discoverable_disabled",
+        "boolean",
+        "Whether or not Stage Discovery is disabled (deprecated)"
+      ],
+      "6": [
+        "guild_scheduled_event_id",
+        "?snowflake",
+        "The id of the scheduled event for this Stage instance"
+      ]
+    }
+  },
+  {
+    "fields": ["Level", "Value", "Description"],
+    "childrens": {
+      "0": ["PUBLIC", "1", "The Stage instance is visible publicly. (deprecated)"],
+      "1": ["GUILD_ONLY", "2", "The Stage instance is visible to only guild members."]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["channel_id", "snowflake", "The id of the Stage channel"],
+      "1": ["topic", "string", "The topic of the Stage instance (1-120 characters)"],
+      "2": [
+        "privacy_level?",
+        "integer",
+        "The privacy level of the Stage instance (default GUILD_ONLY)"
+      ],
+      "3": [
+        "send_start_notification? *",
+        "boolean",
+        "Notify @everyone that a Stage instance has started"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["topic?", "string", "The topic of the Stage instance (1-120 characters)"],
+      "1": ["privacy_level?", "integer", "The privacy level of the Stage instance"]
+    }
+  }
+]

@@ -1,0 +1,91 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "id of the sticker"],
+      "1": ["pack_id?", "snowflake", "for standard stickers, id of the pack the sticker is from"],
+      "2": ["name", "string", "name of the sticker"],
+      "3": ["description", "?string", "description of the sticker"],
+      "4": ["tags*", "string", "autocomplete/suggestion tags for the sticker (max 200 characters)"],
+      "5": [
+        "asset?",
+        "string",
+        "Deprecated previously the sticker asset hash, now an empty string"
+      ],
+      "6": ["type", "integer", "type of sticker"],
+      "7": ["format_type", "integer", "type of sticker format"],
+      "8": [
+        "available?",
+        "boolean",
+        "whether this guild sticker can be used, may be false due to loss of Server Boosts"
+      ],
+      "9": ["guild_id?", "snowflake", "id of the guild that owns this sticker"],
+      "10": ["user?", "user object", "the user that uploaded the guild sticker"],
+      "11": ["sort_value?", "integer", "the standard sticker's sort order within its pack"]
+    }
+  },
+  {
+    "fields": ["Type", "Value", "Description"],
+    "childrens": {
+      "0": [
+        "STANDARD",
+        "1",
+        "an official sticker in a pack, part of Nitro or in a removed purchasable pack"
+      ],
+      "1": ["GUILD", "2", "a sticker uploaded to a guild for the guild's members"]
+    }
+  },
+  {
+    "fields": ["Type", "Value"],
+    "childrens": { "0": ["PNG", "1"], "1": ["APNG", "2"], "2": ["LOTTIE", "3"], "3": ["GIF", "4"] }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "id of the sticker"],
+      "1": ["name", "string", "name of the sticker"],
+      "2": ["format_type", "integer", "type of sticker format"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "id of the sticker pack"],
+      "1": ["stickers", "array of sticker objects", "the stickers in the pack"],
+      "2": ["name", "string", "name of the sticker pack"],
+      "3": ["sku_id", "snowflake", "id of the pack's SKU"],
+      "4": [
+        "cover_sticker_id?",
+        "snowflake",
+        "id of a sticker in the pack which is shown as the pack's icon"
+      ],
+      "5": ["description", "string", "description of the sticker pack"],
+      "6": ["banner_asset_id?", "snowflake", "id of the sticker pack's banner image"]
+    }
+  },
+  {
+    "fields": ["Field", "Type"],
+    "childrens": { "0": ["sticker_packs", "array of sticker pack objects"] }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the sticker (2-30 characters)"],
+      "1": ["description", "string", "description of the sticker (empty or 2-100 characters)"],
+      "2": ["tags", "string", "autocomplete/suggestion tags for the sticker (max 200 characters)"],
+      "3": [
+        "file",
+        "file contents",
+        "the sticker file to upload, must be a PNG, APNG, GIF, or Lottie JSON file, max 512 KB"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the sticker (2-30 characters)"],
+      "1": ["description", "?string", "description of the sticker (2-100 characters)"],
+      "2": ["tags", "string", "autocomplete/suggestion tags for the sticker (max 200 characters)"]
+    }
+  }
+]

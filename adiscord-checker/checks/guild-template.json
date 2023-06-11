@@ -1,0 +1,47 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["code", "string", "the template code (unique ID)"],
+      "1": ["name", "string", "template name"],
+      "2": ["description", "?string", "the description for the template"],
+      "3": ["usage_count", "integer", "number of times this template has been used"],
+      "4": ["creator_id", "snowflake", "the ID of the user who created the template"],
+      "5": ["creator", "user object", "the user who created the template"],
+      "6": ["created_at", "ISO8601 timestamp", "when this template was created"],
+      "7": [
+        "updated_at",
+        "ISO8601 timestamp",
+        "when this template was last synced to the source guild"
+      ],
+      "8": ["source_guild_id", "snowflake", "the ID of the guild this template is based on"],
+      "9": [
+        "serialized_source_guild",
+        "partial guild object",
+        "the guild snapshot this template contains"
+      ],
+      "10": ["is_dirty", "?boolean", "whether the template has unsynced changes"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the guild (2-100 characters)"],
+      "1": ["icon?", "image data", "base64 128x128 image for the guild icon"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the template (1-100 characters)"],
+      "1": ["description?", "?string", "description for the template (0-120 characters)"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name?", "string", "name of the template (1-100 characters)"],
+      "1": ["description?", "?string", "description for the template (0-120 characters)"]
+    }
+  }
+]

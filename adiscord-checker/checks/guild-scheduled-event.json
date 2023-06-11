@@ -1,0 +1,160 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "snowflake", "the id of the scheduled event"],
+      "1": ["guild_id", "snowflake", "the guild id which the scheduled event belongs to"],
+      "2": [
+        "channel_id **",
+        "?snowflake",
+        "the channel id in which the scheduled event will be hosted, or null if scheduled entity type is EXTERNAL"
+      ],
+      "3": ["creator_id? *", "?snowflake", "the id of the user that created the scheduled event *"],
+      "4": ["name", "string", "the name of the scheduled event (1-100 characters)"],
+      "5": [
+        "description?",
+        "?string",
+        "the description of the scheduled event (1-1000 characters)"
+      ],
+      "6": ["scheduled_start_time", "ISO8601 timestamp", "the time the scheduled event will start"],
+      "7": [
+        "scheduled_end_time **",
+        "?ISO8601 timestamp",
+        "the time the scheduled event will end, required if entity_type is EXTERNAL"
+      ],
+      "8": ["privacy_level", "privacy level", "the privacy level of the scheduled event"],
+      "9": ["status", "event status", "the status of the scheduled event"],
+      "10": ["entity_type", "scheduled entity type", "the type of the scheduled event"],
+      "11": [
+        "entity_id",
+        "?snowflake",
+        "the id of an entity associated with a guild scheduled event"
+      ],
+      "12": [
+        "entity_metadata **",
+        "?entity metadata",
+        "additional metadata for the guild scheduled event"
+      ],
+      "13": ["creator?", "user object", "the user that created the scheduled event"],
+      "14": ["user_count?", "integer", "the number of users subscribed to the scheduled event"],
+      "15": ["image?", "?string", "the cover image hash of the scheduled event"]
+    }
+  },
+  {
+    "fields": ["Level", "Value", "Description"],
+    "childrens": {
+      "0": ["GUILD_ONLY", "2", "the scheduled event is only accessible to guild members"]
+    }
+  },
+  {
+    "fields": ["Type", "Value"],
+    "childrens": { "0": ["STAGE_INSTANCE", "1"], "1": ["VOICE", "2"], "2": ["EXTERNAL", "3"] }
+  },
+  {
+    "fields": ["Entity Type", "channel_id", "entity_metadata", "scheduled_end_time"],
+    "childrens": {
+      "0": ["STAGE_INSTANCE", "value", "null", "-"],
+      "1": ["VOICE", "value", "null", "-"],
+      "2": ["EXTERNAL", "null", "value *", "value"]
+    }
+  },
+  {
+    "fields": ["Type", "Value"],
+    "childrens": {
+      "0": ["SCHEDULED", "1"],
+      "1": ["ACTIVE", "2"],
+      "2": ["COMPLETED *", "3"],
+      "3": ["CANCELED  *", "4"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": { "0": ["location? *", "string", "location of the event (1-100 characters)"] }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "guild_scheduled_event_id",
+        "snowflake",
+        "the scheduled event id which the user subscribed to"
+      ],
+      "1": ["user", "user", "user which subscribed to an event"],
+      "2": [
+        "member?",
+        "guild member",
+        "guild member data for this user for the guild which this event belongs to, if any"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["with_user_count?", "boolean", "include number of users subscribed to each event"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["channel_id? *", "snowflake *", "the channel id of the scheduled event."],
+      "1": ["entity_metadata? **", "entity metadata", "the entity metadata of the scheduled event"],
+      "2": ["name", "string", "the name of the scheduled event"],
+      "3": ["privacy_level", "privacy level", "the privacy level of the scheduled event"],
+      "4": [
+        "scheduled_start_time",
+        "ISO8601 timestamp",
+        "the time to schedule the scheduled event"
+      ],
+      "5": [
+        "scheduled_end_time? **",
+        "ISO8601 timestamp",
+        "the time when the scheduled event is scheduled to end"
+      ],
+      "6": ["description?", "string", "the description of the scheduled event"],
+      "7": ["entity_type", "entity type", "the entity type of the scheduled event"],
+      "8": ["image?", "image data", "the cover image of the scheduled event"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["with_user_count?", "boolean", "include number of users subscribed to this event"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "channel_id? *",
+        "?snowflake",
+        "the channel id of the scheduled event, set to null if changing entity type to EXTERNAL"
+      ],
+      "1": ["entity_metadata?", "?entity metadata", "the entity metadata of the scheduled event"],
+      "2": ["name?", "string", "the name of the scheduled event"],
+      "3": ["privacy_level?", "privacy level", "the privacy level of the scheduled event"],
+      "4": [
+        "scheduled_start_time?",
+        "ISO8601 timestamp",
+        "the time to schedule the scheduled event"
+      ],
+      "5": [
+        "scheduled_end_time? *",
+        "ISO8601 timestamp",
+        "the time when the scheduled event is scheduled to end"
+      ],
+      "6": ["description?", "?string", "the description of the scheduled event"],
+      "7": ["entity_type? *", "event entity type", "the entity type of the scheduled event"],
+      "8": ["status?", "event status", "the status of the scheduled event"],
+      "9": ["image?", "image data", "the cover image of the scheduled event"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Default"],
+    "childrens": {
+      "0": ["limit?", "number", "number of users to return (up to maximum 100)", "100"],
+      "1": ["with_member?", "boolean", "include guild member data if it exists", "false"],
+      "2": ["before? *", "snowflake", "consider only users before given user id", "null"],
+      "3": ["after? *", "snowflake", "consider only users after given user id", "null"]
+    }
+  }
+]
