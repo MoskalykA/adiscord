@@ -67,7 +67,7 @@ impl Client {
             client,
 
             #[cfg(feature = "gateway")]
-            gateway: Gateway::new(),
+            gateway: Gateway::default(),
         }
     }
 }
