@@ -20,9 +20,10 @@ url = { version = "2.3.1", optional = true }
 serde_json = { version = "1.0.96", optional = true }
 tokio = { version = "1.28.2", features = ["time", "process"], optional = true }
 adiscord-intents = { version = "0.0.4", optional = true }
+os_info = { version = "3.7.0", default-features = false, optional = true }
 
 [features]
-gateway = ["async-trait", "ezsockets", "url", "serde_json", "tokio", "adiscord-intents", "adiscord-types/gateway"]
+gateway = ["async-trait", "ezsockets", "url", "serde_json", "tokio", "adiscord-intents", "adiscord-types/gateway", "os_info"]
 
 [package.metadata.docs.rs]
 features = ["gateway"]

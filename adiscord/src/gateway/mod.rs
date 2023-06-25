@@ -157,7 +157,7 @@ impl ezsockets::ClientExt for GatewayClient {
                     let data = identify::Identify {
                         token: self.token.clone(),
                         properties: identify::IdentifyConnection {
-                            os: "windows".to_owned(),
+                            os: os_info::get().os_type().to_string().to_lowercase(),
                             browser: "adiscord".to_owned(),
                             device: "adiscord".to_owned(),
                         },
