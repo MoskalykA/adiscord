@@ -2,6 +2,7 @@
 pub enum Intent {
     /// Exhaustive list of events included:
     ///
+    /// - GUILD_CREATE
     /// - GUILD_UPDATE
     /// - GUILD_DELETE
     /// - GUILD_ROLE_CREATE
@@ -16,7 +17,7 @@ pub enum Intent {
     /// - THREAD_DELETE
     /// - THREAD_LIST_SYNC
     /// - THREAD_MEMBER_UPDATE
-    /// - THREAD_MEMBERS_UPDATE *
+    /// - THREAD_MEMBERS_UPDATE
     /// - STAGE_INSTANCE_CREATE
     /// - STAGE_INSTANCE_UPDATE
     /// - STAGE_INSTANCE_DELETE
@@ -27,7 +28,7 @@ pub enum Intent {
     /// - GUILD_MEMBER_ADD
     /// - GUILD_MEMBER_UPDATE
     /// - GUILD_MEMBER_REMOVE
-    /// - THREAD_MEMBERS_UPDATE *
+    /// - THREAD_MEMBERS_UPDATE
     GuildMembers = 1 << 1,
 
     /// Exhaustive list of events included:
@@ -134,9 +135,7 @@ pub enum Intent {
 
     /// Exhaustive list of events included:
     ///
-    /// - AUTO_MODERATION_RULE_CREATE
-    /// - AUTO_MODERATION_RULE_UPDATE
-    /// - AUTO_MODERATION_RULE_DELETE
+    /// - AUTO_MODERATION_ACTION_EXECUTION
     AutoModerationExecution = 1 << 21,
 }
 
