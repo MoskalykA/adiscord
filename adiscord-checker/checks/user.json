@@ -52,7 +52,8 @@
         "the type of Nitro subscription on a user's account",
         "identify"
       ],
-      "15": ["public_flags?", "integer", "the public flags on a user's account", "identify"]
+      "15": ["public_flags?", "integer", "the public flags on a user's account", "identify"],
+      "16": ["avatar_decoration?", "?string", "the user's avatar decoration hash", "identify"]
     }
   },
   {
@@ -178,7 +179,14 @@
     "childrens": {
       "0": ["before", "snowflake", "get guilds before this guild ID", "false", "absent"],
       "1": ["after", "snowflake", "get guilds after this guild ID", "false", "absent"],
-      "2": ["limit", "integer", "max number of guilds to return (1-200)", "false", "200"]
+      "2": ["limit", "integer", "max number of guilds to return (1-200)", "false", "200"],
+      "3": [
+        "with_counts",
+        "boolean",
+        "include approximate member and presence counts in response",
+        "false",
+        "false"
+      ]
     }
   },
   {

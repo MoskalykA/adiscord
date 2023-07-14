@@ -93,12 +93,12 @@
       "36": [
         "approximate_member_count?",
         "integer",
-        "approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true"
+        "approximate number of members in this guild, returned from the GET /guilds/<id> and /users/@me/guilds endpoints when with_counts is true"
       ],
       "37": [
         "approximate_presence_count?",
         "integer",
-        "approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true"
+        "approximate number of non-offline members in this guild, returned from the GET /guilds/<id> and /users/@me/guilds  endpoints when with_counts is true"
       ],
       "38": [
         "welcome_screen?",
@@ -463,7 +463,8 @@
         "array of snowflakes",
         "Channel IDs that members get opted into automatically"
       ],
-      "3": ["enabled", "boolean", "Whether onboarding is enabled in the guild"]
+      "3": ["enabled", "boolean", "Whether onboarding is enabled in the guild"],
+      "4": ["mode", "onboarding mode", "Current mode of onboarding"]
     }
   },
   {
@@ -507,6 +508,17 @@
       "3": ["emoji", "emoji object", "Emoji of the option"],
       "4": ["title", "string", "Title of the option"],
       "5": ["description", "?string", "Description of the option"]
+    }
+  },
+  {
+    "fields": ["Name", "Value", "Description"],
+    "childrens": {
+      "0": ["ONBOARDING_DEFAULT", "0", "Counts only Default Channels towards constraints"],
+      "1": [
+        "ONBOARDING_ADVANCED",
+        "1",
+        "Counts Default Channels and Questions towards constraints"
+      ]
     }
   },
   {
@@ -692,6 +704,12 @@
         "default_sort_order",
         "integer",
         "the default sort order type used to order posts in GUILD_FORUM channels",
+        "Forum"
+      ],
+      "16": [
+        "default_forum_layout",
+        "integer",
+        "the default forum layout view used to display posts in GUILD_FORUM channels",
         "Forum"
       ]
     }
@@ -963,6 +981,23 @@
         "channels linked in the welcome screen and their display options"
       ],
       "2": ["description", "string", "the server description to show in the welcome screen"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "prompts",
+        "array of onboarding prompt objects",
+        "Prompts shown during onboarding and in customize community"
+      ],
+      "1": [
+        "default_channel_ids",
+        "array of snowflakes",
+        "Channel IDs that members get opted into automatically"
+      ],
+      "2": ["enabled", "boolean", "Whether onboarding is enabled in the guild"],
+      "3": ["mode", "onboarding mode", "Current mode of onboarding"]
     }
   },
   {

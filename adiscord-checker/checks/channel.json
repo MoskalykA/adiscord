@@ -626,6 +626,17 @@
         "waveform?",
         "string",
         "base64 encoded bytearray representing a sampled waveform (currently for voice messages)"
+      ],
+      "12": ["flags?", "integer", "attachment flags combined as a bitfield"]
+    }
+  },
+  {
+    "fields": ["Flag", "Value", "Description"],
+    "childrens": {
+      "0": [
+        "IS_REMIX",
+        "1 << 2",
+        "this attachment has been edited using the remix feature on mobile"
       ]
     }
   },

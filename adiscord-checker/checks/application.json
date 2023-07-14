@@ -38,40 +38,46 @@
       "13": [
         "guild_id?",
         "snowflake",
-        "if this application is a game sold on Discord, this field will be the guild to which it has been linked"
+        "guild associated with the app. For example, a developer support server."
       ],
-      "14": [
+      "14": ["guild?", "partial guild object", "a partial object of the associated guild"],
+      "15": [
         "primary_sku_id?",
         "snowflake",
         "if this application is a game sold on Discord, this field will be the id of the \"Game SKU\" that is created, if exists"
       ],
-      "15": [
+      "16": [
         "slug?",
         "string",
         "if this application is a game sold on Discord, this field will be the URL slug that links to the store page"
       ],
-      "16": [
+      "17": [
         "cover_image?",
         "string",
         "the application's default rich presence invite cover image hash"
       ],
-      "17": ["flags?", "integer", "the application's public flags"],
-      "18": [
+      "18": ["flags?", "integer", "the application's public flags"],
+      "19": [
+        "approximate_guild_count?",
+        "integer",
+        "an approximate count of the app's guild membership."
+      ],
+      "20": [
         "tags?",
         "array of strings",
         "up to 5 tags describing the content and functionality of the application"
       ],
-      "19": [
+      "21": [
         "install_params?",
         "install params object",
         "settings for the application's default in-app authorization link, if enabled"
       ],
-      "20": [
+      "22": [
         "custom_install_url?",
         "string",
         "the application's default custom authorization link, if enabled"
       ],
-      "21": [
+      "23": [
         "role_connections_verification_url?",
         "string",
         "the application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration"
