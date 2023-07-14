@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::user::User;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -19,7 +20,7 @@ pub struct Member {
     pub permissions: Vec<String>,
 
     /// the id of the parent team of which they are a member
-    pub team_id: String,
+    pub team_id: Snowflake,
 
     /// the avatar, discriminator, id, and username of the user
     pub user: User,
@@ -31,7 +32,7 @@ pub struct Team {
     pub icon: Option<String>,
 
     /// the unique id of the team
-    pub id: String,
+    pub id: Snowflake,
 
     /// the members of the team
     pub members: Vec<Member>,
@@ -40,5 +41,5 @@ pub struct Team {
     pub name: String,
 
     /// the user id of the current team owner
-    pub owner_user_id: String,
+    pub owner_user_id: Snowflake,
 }

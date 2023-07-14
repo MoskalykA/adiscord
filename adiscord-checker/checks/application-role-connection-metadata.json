@@ -1,0 +1,70 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["type", "ApplicationRoleConnectionMetadataType", "type of metadata value"],
+      "1": [
+        "key",
+        "string",
+        "dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters)"
+      ],
+      "2": ["name", "string", "name of the metadata field (1-100 characters)"],
+      "3": [
+        "name_localizations?",
+        "dictionary with keys in available locales",
+        "translations of the name"
+      ],
+      "4": ["description", "string", "description of the metadata field (1-200 characters)"],
+      "5": [
+        "description_localizations?",
+        "dictionary with keys in available locales",
+        "translations of the description"
+      ]
+    }
+  },
+  {
+    "fields": ["Type", "Value", "Description"],
+    "childrens": {
+      "0": [
+        "INTEGER_LESS_THAN_OR_EQUAL",
+        "1",
+        "the metadata value (integer) is less than or equal to the guild's configured value (integer)"
+      ],
+      "1": [
+        "INTEGER_GREATER_THAN_OR_EQUAL",
+        "2",
+        "the metadata value (integer) is greater than or equal to the guild's configured value (integer)"
+      ],
+      "2": [
+        "INTEGER_EQUAL",
+        "3",
+        "the metadata value (integer) is equal to the guild's configured value (integer)"
+      ],
+      "3": [
+        "INTEGER_NOT_EQUAL",
+        "4",
+        "the metadata value (integer) is not equal to the guild's configured value (integer)"
+      ],
+      "4": [
+        "DATETIME_LESS_THAN_OR_EQUAL",
+        "5",
+        "the metadata value (ISO8601 string) is less than or equal to the guild's configured value (integer; days before current date)"
+      ],
+      "5": [
+        "DATETIME_GREATER_THAN_OR_EQUAL",
+        "6",
+        "the metadata value (ISO8601 string) is greater than or equal to the guild's configured value (integer; days before current date)"
+      ],
+      "6": [
+        "BOOLEAN_EQUAL",
+        "7",
+        "the metadata value (integer) is equal to the guild's configured value (integer; 1)"
+      ],
+      "7": [
+        "BOOLEAN_NOT_EQUAL",
+        "8",
+        "the metadata value (integer) is not equal to the guild's configured value (integer; 1)"
+      ]
+    }
+  }
+]

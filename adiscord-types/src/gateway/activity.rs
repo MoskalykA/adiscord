@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use crate::Snowflake;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Assets {
@@ -35,7 +36,7 @@ pub struct Emoji {
     pub name: String,
 
     /// ID of the emoji
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// Whether the emoji is animated
     pub animated: Option<bool>,
@@ -44,7 +45,7 @@ pub struct Emoji {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Party {
     /// ID of the party
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// Used to show the party's current and maximum size
     pub size: Option<(u32, u32)>,
@@ -101,7 +102,7 @@ pub struct Activity {
     pub timestamps: Option<Timestamps>,
 
     /// Application ID for the game
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 
     /// What the player is currently doing
     pub details: Option<String>,

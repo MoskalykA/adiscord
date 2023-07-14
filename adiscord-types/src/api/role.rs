@@ -1,18 +1,19 @@
 use serde::{Deserialize, Serialize};
+use crate::Snowflake;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Tags {
     /// the id of the bot this role belongs to
-    pub bot_id: Option<String>,
+    pub bot_id: Option<Snowflake>,
 
     /// the id of the integration this role belongs to
-    pub integration_id: Option<String>,
+    pub integration_id: Option<Snowflake>,
 
     /// whether this is the guild's Booster role
     pub premium_subscriber: Option<bool>,
 
     /// the id of this role's subscription sku and listing
-    pub subscription_listing_id: Option<String>,
+    pub subscription_listing_id: Option<Snowflake>,
 
     /// whether this role is available for purchase
     pub available_for_purchase: Option<bool>,
@@ -24,7 +25,7 @@ pub struct Tags {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Role {
     /// role id
-    pub id: String,
+    pub id: Snowflake,
 
     /// role name
     pub name: String,

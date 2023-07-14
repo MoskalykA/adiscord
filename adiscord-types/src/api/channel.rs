@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::{
     forum,
     reaction::DefaultReaction,
@@ -7,10 +8,18 @@ use super::{
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
+#[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
+pub enum AttachmentFlags {
+    /// this attachment has been edited using the remix feature on mobile
+    IS_REMIX = 1 << 2
+}
+
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Attachment {
     /// attachment id
-    pub id: String,
+    pub id: Snowflake,
 
     /// name of file attached
     pub filename: String,
@@ -38,6 +47,15 @@ pub struct Attachment {
 
     /// whether this attachment is ephemeral
     pub ephemeral: Option<bool>,
+
+    /// the duration of the audio file (currently for voice messages)
+    pub duration_secs: Option<f32>,
+
+    /// base64 encoded bytearray representing a sampled waveform (currently for voice messages)
+    pub waveform: Option<String>,
+
+    /// attachment flags combined as a bitfield
+    pub flags: Option<AttachmentFlags>
 }
 
 #[repr(u8)]
@@ -70,10 +88,10 @@ pub enum ForumLayout {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Mention {
     /// id of the channel
-    pub id: String,
+    pub id: Snowflake,
 
     /// id of the guild containing the channel
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// the type of channel
     pub r#type: ChannelType,
@@ -85,7 +103,7 @@ pub struct Mention {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Overwrite {
     /// role or user id
-    pub id: String,
+    pub id: Snowflake,
 
     /// either 0 (role) or 1 (member)
     pub r#type: u8,
@@ -162,13 +180,13 @@ pub enum VideoQuality {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Channel {
     /// the id of this channel
-    pub id: String,
+    pub id: Snowflake,
 
     /// the type of channel
     pub r#type: ChannelType,
 
     // the id of the guild (may be missing for some channel objects received over gateway guild dispatches)
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// sorting position of the channel
     pub position: Option<i32>,
@@ -186,7 +204,7 @@ pub struct Channel {
     pub nsfw: Option<bool>,
 
     /// the id of the last message sent in this channel (or thread for GUILD_FORUM channels) (may not point to an existing or valid message or thread)
-    pub last_message_id: Option<String>,
+    pub last_message_id: Option<Snowflake>,
 
     /// the bitrate (in bits) of the voice channel
     pub bitrate: Option<i32>,
@@ -204,16 +222,16 @@ pub struct Channel {
     pub icon: Option<String>,
 
     /// id of the creator of the group DM or thread
-    pub owner_id: Option<String>,
+    pub owner_id: Option<Snowflake>,
 
     /// application id of the group DM creator if it is bot-created
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 
     /// for group DM channels: whether the channel is managed by an application via the gdm.join OAuth2 scope
     pub managed: Option<bool>,
 
     /// for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created
-    pub parent_id: Option<String>,
+    pub parent_id: Option<Snowflake>,
 
     /// when the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned.
     pub last_pin_timestamp: Option<String>,
@@ -252,7 +270,7 @@ pub struct Channel {
     pub available_tags: Option<Vec<forum::Tags>>,
 
     /// the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
-    pub applied_tags: Option<Vec<String>>,
+    pub applied_tags: Option<Vec<Snowflake>>,
 
     /// the emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
     pub default_reaction_emoji: Option<DefaultReaction>,

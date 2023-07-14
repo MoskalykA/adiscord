@@ -1,9 +1,10 @@
 use serde::{Deserialize, Serialize};
+use crate::Snowflake;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Tags {
     /// the id of the tag
-    pub id: String,
+    pub id: Snowflake,
 
     /// the name of the tag (0-20 characters)
     pub name: String,
@@ -12,7 +13,7 @@ pub struct Tags {
     pub moderated: bool,
 
     /// the id of a guild's custom emoji *
-    pub emoji_id: Option<String>,
+    pub emoji_id: Option<Snowflake>,
 
     /// the unicode character of the emoji *
     pub emoji_name: Option<String>,

@@ -1,10 +1,11 @@
+use crate::Snowflake;
 use super::guild;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct VoiceRegion {
     /// unique ID for the region
-    pub id: String,
+    pub id: Snowflake,
 
     /// name of the region
     pub name: String,
@@ -22,19 +23,19 @@ pub struct VoiceRegion {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct VoiceState {
     /// the guild id this voice state is for
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// the channel id this user is connected to
-    pub channel_id: Option<String>,
+    pub channel_id: Option<Snowflake>,
 
     /// the user id this voice state is for
-    pub user_id: String,
+    pub user_id: Snowflake,
 
     /// the guild member this voice state is for
     pub member: Option<guild::Member>,
 
     /// the session id for this voice state
-    pub session_id: String,
+    pub session_id: Snowflake,
 
     /// whether this user is deafened by the server
     pub deaf: bool,

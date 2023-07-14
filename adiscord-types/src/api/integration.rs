@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::{application::Application, user::User};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -13,7 +14,7 @@ pub enum ExpireBehavior {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Account {
     /// id of the account
-    id: String,
+    id: Snowflake,
 
     /// name of the account
     name: String,
@@ -22,7 +23,7 @@ pub struct Account {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Integration {
     /// integration id
-    pub id: String,
+    pub id: Snowflake,
 
     /// integration name
     pub name: String,
@@ -37,7 +38,7 @@ pub struct Integration {
     pub syncing: Option<bool>,
 
     /// id that this integration uses for "subscribers"
-    pub role_id: Option<String>,
+    pub role_id: Option<Snowflake>,
 
     /// whether emoticons should be synced for this integration (twitch only currently)
     pub enable_emoticons: Option<bool>,

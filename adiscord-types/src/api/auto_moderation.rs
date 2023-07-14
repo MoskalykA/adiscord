@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use crate::Snowflake;
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
@@ -88,16 +89,16 @@ pub struct Action {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Rule {
     /// the id of this rule
-    pub id: String,
+    pub id: Snowflake,
 
     /// the id of the guild which this rule belongs to
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// the rule name
     pub name: String,
 
     /// the user which first created this rule
-    pub creator_id: String,
+    pub creator_id: Snowflake,
 
     /// the rule event type
     pub event_type: EventType,
@@ -115,10 +116,10 @@ pub struct Rule {
     pub enabled: bool,
 
     /// the role ids that should not be affected by the rule (Maximum of 20)
-    pub exempt_roles: Vec<String>,
+    pub exempt_roles: Vec<Snowflake>,
 
     /// the channel ids that should not be affected by the rule (Maximum of 50)
-    pub exempt_channels: Vec<String>,
+    pub exempt_channels: Vec<Snowflake>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -139,13 +140,13 @@ pub struct Execution {
     pub user_id: String,
 
     /// ID of the channel in which user content was posted
-    pub channel_id: Option<String>,
+    pub channel_id: Option<Snowflake>,
 
     /// ID of any user message which content belongs to *
-    pub message_id: Option<String>,
+    pub message_id: Option<Snowflake>,
 
     /// ID of any system auto moderation messages posted as a result of this action **
-    pub alert_system_message_id: Option<String>,
+    pub alert_system_message_id: Option<Snowflake>,
 
     /// User-generated text content
     pub content: String,

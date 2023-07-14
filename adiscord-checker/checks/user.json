@@ -1,0 +1,227 @@
+[
+  {
+    "fields": ["Field", "Type", "Description", "Required OAuth2 Scope"],
+    "childrens": {
+      "0": ["id", "snowflake", "the user's id", "identify"],
+      "1": [
+        "username",
+        "string",
+        "the user's username, not unique across the platform",
+        "identify"
+      ],
+      "2": ["discriminator", "string", "the user's Discord-tag", "identify"],
+      "3": [
+        "global_name",
+        "?string",
+        "the user's display name, if it is set. For bots, this is the application name",
+        "identify"
+      ],
+      "4": ["avatar", "?string", "the user's avatar hash", "identify"],
+      "5": ["bot?", "boolean", "whether the user belongs to an OAuth2 application", "identify"],
+      "6": [
+        "system?",
+        "boolean",
+        "whether the user is an Official Discord System user (part of the urgent message system)",
+        "identify"
+      ],
+      "7": [
+        "mfa_enabled?",
+        "boolean",
+        "whether the user has two factor enabled on their account",
+        "identify"
+      ],
+      "8": ["banner?", "?string", "the user's banner hash", "identify"],
+      "9": [
+        "accent_color?",
+        "?integer",
+        "the user's banner color encoded as an integer representation of hexadecimal color code",
+        "identify"
+      ],
+      "10": ["locale?", "string", "the user's chosen language option", "identify"],
+      "11": [
+        "verified?",
+        "boolean",
+        "whether the email on this account has been verified",
+        "email"
+      ],
+      "12": ["email?", "?string", "the user's email", "email"],
+      "13": ["flags?", "integer", "the flags on a user's account", "identify"],
+      "14": [
+        "premium_type?",
+        "integer",
+        "the type of Nitro subscription on a user's account",
+        "identify"
+      ],
+      "15": ["public_flags?", "integer", "the public flags on a user's account", "identify"],
+      "16": ["avatar_decoration?", "?string", "the user's avatar decoration hash", "identify"]
+    }
+  },
+  {
+    "fields": ["Value", "Name", "Description"],
+    "childrens": {
+      "0": ["1 << 0", "STAFF", "Discord Employee"],
+      "1": ["1 << 1", "PARTNER", "Partnered Server Owner"],
+      "2": ["1 << 2", "HYPESQUAD", "HypeSquad Events Member"],
+      "3": ["1 << 3", "BUG_HUNTER_LEVEL_1", "Bug Hunter Level 1"],
+      "4": ["1 << 6", "HYPESQUAD_ONLINE_HOUSE_1", "House Bravery Member"],
+      "5": ["1 << 7", "HYPESQUAD_ONLINE_HOUSE_2", "House Brilliance Member"],
+      "6": ["1 << 8", "HYPESQUAD_ONLINE_HOUSE_3", "House Balance Member"],
+      "7": ["1 << 9", "PREMIUM_EARLY_SUPPORTER", "Early Nitro Supporter"],
+      "8": ["1 << 10", "TEAM_PSEUDO_USER", "User is a team"],
+      "9": ["1 << 14", "BUG_HUNTER_LEVEL_2", "Bug Hunter Level 2"],
+      "10": ["1 << 16", "VERIFIED_BOT", "Verified Bot"],
+      "11": ["1 << 17", "VERIFIED_DEVELOPER", "Early Verified Bot Developer"],
+      "12": ["1 << 18", "CERTIFIED_MODERATOR", "Moderator Programs Alumni"],
+      "13": [
+        "1 << 19",
+        "BOT_HTTP_INTERACTIONS",
+        "Bot uses only HTTP interactions and is shown in the online member list"
+      ],
+      "14": ["1 << 22", "ACTIVE_DEVELOPER", "User is an Active Developer"]
+    }
+  },
+  {
+    "fields": ["Value", "Name"],
+    "childrens": {
+      "0": ["0", "None"],
+      "1": ["1", "Nitro Classic"],
+      "2": ["2", "Nitro"],
+      "3": ["3", "Nitro Basic"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "string", "id of the connection account"],
+      "1": ["name", "string", "the username of the connection account"],
+      "2": ["type", "string", "the service of this connection"],
+      "3": ["revoked?", "boolean", "whether the connection is revoked"],
+      "4": ["integrations?", "array", "an array of partial server integrations"],
+      "5": ["verified", "boolean", "whether the connection is verified"],
+      "6": ["friend_sync", "boolean", "whether friend sync is enabled for this connection"],
+      "7": [
+        "show_activity",
+        "boolean",
+        "whether activities related to this connection will be shown in presence updates"
+      ],
+      "8": [
+        "two_way_link",
+        "boolean",
+        "whether this connection has a corresponding third party OAuth2 token"
+      ],
+      "9": ["visibility", "integer", "visibility of this connection"]
+    }
+  },
+  {
+    "fields": ["Value", "Name"],
+    "childrens": {
+      "0": ["battlenet", "Battle.net"],
+      "1": ["ebay", "eBay"],
+      "2": ["epicgames", "Epic Games"],
+      "3": ["facebook", "Facebook"],
+      "4": ["github", "GitHub"],
+      "5": ["instagram", "Instagram"],
+      "6": ["leagueoflegends", "League of Legends"],
+      "7": ["paypal", "PayPal"],
+      "8": ["playstation", "PlayStation Network"],
+      "9": ["reddit", "Reddit"],
+      "10": ["riotgames", "Riot Games"],
+      "11": ["spotify", "Spotify"],
+      "12": ["skype *", "Skype"],
+      "13": ["steam", "Steam"],
+      "14": ["tiktok", "TikTok"],
+      "15": ["twitch", "Twitch"],
+      "16": ["twitter", "Twitter"],
+      "17": ["xbox", "Xbox"],
+      "18": ["youtube", "YouTube"]
+    }
+  },
+  {
+    "fields": ["Value", "Name", "Description"],
+    "childrens": {
+      "0": ["0", "None", "invisible to everyone except the user themselves"],
+      "1": ["1", "Everyone", "visible to everyone"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "platform_name",
+        "?string",
+        "the vanity name of the platform a bot has connected (max 50 characters)"
+      ],
+      "1": [
+        "platform_username",
+        "?string",
+        "the username on the platform a bot has connected (max 100 characters)"
+      ],
+      "2": [
+        "metadata",
+        "object",
+        "object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "username",
+        "string",
+        "user's username, if changed may cause the user's discriminator to be randomized."
+      ],
+      "1": ["avatar", "?image data", "if passed, modifies the user's avatar"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Required", "Default"],
+    "childrens": {
+      "0": ["before", "snowflake", "get guilds before this guild ID", "false", "absent"],
+      "1": ["after", "snowflake", "get guilds after this guild ID", "false", "absent"],
+      "2": ["limit", "integer", "max number of guilds to return (1-200)", "false", "200"],
+      "3": [
+        "with_counts",
+        "boolean",
+        "include approximate member and presence counts in response",
+        "false",
+        "false"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": { "0": ["recipient_id", "snowflake", "the recipient to open a DM channel with"] }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "access_tokens",
+        "array of strings",
+        "access tokens of users that have granted your app the gdm.join scope"
+      ],
+      "1": ["nicks", "dict", "a dictionary of user ids to their respective nicknames"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "platform_name?",
+        "string",
+        "the vanity name of the platform a bot has connected (max 50 characters)"
+      ],
+      "1": [
+        "platform_username?",
+        "string",
+        "the username on the platform a bot has connected (max 100 characters)"
+      ],
+      "2": [
+        "metadata?",
+        "object",
+        "object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected"
+      ]
+    }
+  }
+]

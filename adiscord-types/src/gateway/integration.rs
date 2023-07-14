@@ -1,23 +1,23 @@
-use crate::api::{
+use crate::{api::{
     application::Application,
     integration::{Account, ExpireBehavior},
     user::User,
-};
+}, Snowflake};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct IntegrationsUpdate {
     /// ID of the guild whose integrations were updated
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Create {
     /// integration id
-    pub id: String,
+    pub id: Snowflake,
 
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// integration name
     pub name: String,
@@ -32,7 +32,7 @@ pub struct Create {
     pub syncing: Option<bool>,
 
     /// id that this integration uses for "subscribers"
-    pub role_id: Option<String>,
+    pub role_id: Option<Snowflake>,
 
     /// whether emoticons should be synced for this integration (twitch only currently)
     pub enable_emoticons: Option<bool>,
@@ -66,10 +66,10 @@ pub struct Create {
 #[derive(Deserialize, Debug)]
 pub struct Update {
     /// integration id
-    pub id: String,
+    pub id: Snowflake,
 
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// integration name
     pub name: String,
@@ -84,7 +84,7 @@ pub struct Update {
     pub syncing: Option<bool>,
 
     /// id that this integration uses for "subscribers"
-    pub role_id: Option<String>,
+    pub role_id: Option<Snowflake>,
 
     /// whether emoticons should be synced for this integration (twitch only currently)
     pub enable_emoticons: Option<bool>,
@@ -118,11 +118,11 @@ pub struct Update {
 #[derive(Deserialize, Debug)]
 pub struct Delete {
     /// integration id
-    pub id: String,
+    pub id: Snowflake,
 
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// ID of the bot/OAuth2 application for this discord integration
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 }

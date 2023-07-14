@@ -1,0 +1,42 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["guild_id?", "snowflake", "the guild id this voice state is for"],
+      "1": ["channel_id", "?snowflake", "the channel id this user is connected to"],
+      "2": ["user_id", "snowflake", "the user id this voice state is for"],
+      "3": ["member?", "guild member object", "the guild member this voice state is for"],
+      "4": ["session_id", "string", "the session id for this voice state"],
+      "5": ["deaf", "boolean", "whether this user is deafened by the server"],
+      "6": ["mute", "boolean", "whether this user is muted by the server"],
+      "7": ["self_deaf", "boolean", "whether this user is locally deafened"],
+      "8": ["self_mute", "boolean", "whether this user is locally muted"],
+      "9": ["self_stream?", "boolean", "whether this user is streaming using \"Go Live\""],
+      "10": ["self_video", "boolean", "whether this user's camera is enabled"],
+      "11": ["suppress", "boolean", "whether this user's permission to speak is denied"],
+      "12": [
+        "request_to_speak_timestamp",
+        "?ISO8601 timestamp",
+        "the time at which the user requested to speak"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "string", "unique ID for the region"],
+      "1": ["name", "string", "name of the region"],
+      "2": [
+        "optimal",
+        "boolean",
+        "true for a single server that is closest to the current user's client"
+      ],
+      "3": [
+        "deprecated",
+        "boolean",
+        "whether this is a deprecated voice region (avoid switching to these)"
+      ],
+      "4": ["custom", "boolean", "whether this is a custom voice region (used for events/etc)"]
+    }
+  }
+]

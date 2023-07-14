@@ -1,0 +1,34 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["id", "?snowflake", "emoji id"],
+      "1": ["name", "?string (can be null only in reaction emoji objects)", "emoji name"],
+      "2": ["roles?", "array of role object ids", "roles allowed to use this emoji"],
+      "3": ["user?", "user object", "user that created this emoji"],
+      "4": ["require_colons?", "boolean", "whether this emoji must be wrapped in colons"],
+      "5": ["managed?", "boolean", "whether this emoji is managed"],
+      "6": ["animated?", "boolean", "whether this emoji is animated"],
+      "7": [
+        "available?",
+        "boolean",
+        "whether this emoji can be used, may be false due to loss of Server Boosts"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the emoji"],
+      "1": ["image", "image data", "the 128x128 emoji image"],
+      "2": ["roles", "array of snowflakes", "roles allowed to use this emoji"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["name", "string", "name of the emoji"],
+      "1": ["roles", "?array of snowflakes", "roles allowed to use this emoji"]
+    }
+  }
+]

@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::{channel::Channel, guild::Guild, user::User};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -18,16 +19,16 @@ pub enum Type {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Webhook {
     /// the id of the webhook
-    pub id: String,
+    pub id: Snowflake,
 
     /// the type of the webhook
     pub r#type: Type,
 
     /// the guild id this webhook is for, if any
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// the channel id this webhook is for, if any
-    pub channel_id: Option<String>,
+    pub channel_id: Option<Snowflake>,
 
     /// the user this webhook was created by (not returned when getting a webhook with its token)
     pub user: Option<User>,
@@ -42,7 +43,7 @@ pub struct Webhook {
     pub token: Option<String>,
 
     /// the bot/OAuth2 application that created this webhook
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 
     /// the guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
     pub source_guild: Option<Guild>,

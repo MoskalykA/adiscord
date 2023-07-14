@@ -1,0 +1,301 @@
+[
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": [
+        "application_commands",
+        "array of application commands objects",
+        "List of application commands referenced in the audit log"
+      ],
+      "1": [
+        "audit_log_entries",
+        "array of audit log entry objects",
+        "List of audit log entries, sorted from most to least recent"
+      ],
+      "2": [
+        "auto_moderation_rules",
+        "array of auto moderation rule objects",
+        "List of auto moderation rules referenced in the audit log"
+      ],
+      "3": [
+        "guild_scheduled_events",
+        "array of guild scheduled event objects",
+        "List of guild scheduled events referenced in the audit log"
+      ],
+      "4": [
+        "integrations",
+        "array of partial integration objects",
+        "List of partial integration objects"
+      ],
+      "5": [
+        "threads",
+        "array of thread-specific channel objects",
+        "List of threads referenced in the audit log*"
+      ],
+      "6": ["users", "array of user objects", "List of users referenced in the audit log"],
+      "7": ["webhooks", "array of webhook objects", "List of webhooks referenced in the audit log"]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["target_id", "?string", "ID of the affected entity (webhook, user, role, etc.)"],
+      "1": ["changes?", "array of audit log change objects", "Changes made to the target_id"],
+      "2": ["user_id", "?snowflake", "User or app that made the changes"],
+      "3": ["id", "snowflake", "ID of the entry"],
+      "4": ["action_type", "audit log event", "Type of action that occurred"],
+      "5": ["options?", "optional audit entry info", "Additional info for certain event types"],
+      "6": ["reason?", "string", "Reason for the change (1-512 characters)"]
+    }
+  },
+  {
+    "fields": ["Event", "Value", "Description", "Object Changed"],
+    "childrens": {
+      "0": ["GUILD_UPDATE", "1", "Server settings were updated", "Guild"],
+      "1": ["CHANNEL_CREATE", "10", "Channel was created", "Channel"],
+      "2": ["CHANNEL_UPDATE", "11", "Channel settings were updated", "Channel"],
+      "3": ["CHANNEL_DELETE", "12", "Channel was deleted", "Channel"],
+      "4": [
+        "CHANNEL_OVERWRITE_CREATE",
+        "13",
+        "Permission overwrite was added to a channel",
+        "Channel Overwrite"
+      ],
+      "5": [
+        "CHANNEL_OVERWRITE_UPDATE",
+        "14",
+        "Permission overwrite was updated for a channel",
+        "Channel Overwrite"
+      ],
+      "6": [
+        "CHANNEL_OVERWRITE_DELETE",
+        "15",
+        "Permission overwrite was deleted from a channel",
+        "Channel Overwrite"
+      ],
+      "7": ["MEMBER_KICK", "20", "Member was removed from server", ""],
+      "8": ["MEMBER_PRUNE", "21", "Members were pruned from server", ""],
+      "9": ["MEMBER_BAN_ADD", "22", "Member was banned from server", ""],
+      "10": ["MEMBER_BAN_REMOVE", "23", "Server ban was lifted for a member", ""],
+      "11": ["MEMBER_UPDATE", "24", "Member was updated in server", "Member"],
+      "12": [
+        "MEMBER_ROLE_UPDATE",
+        "25",
+        "Member was added or removed from a role",
+        "Partial Role*"
+      ],
+      "13": ["MEMBER_MOVE", "26", "Member was moved to a different voice channel", ""],
+      "14": ["MEMBER_DISCONNECT", "27", "Member was disconnected from a voice channel", ""],
+      "15": ["BOT_ADD", "28", "Bot user was added to server", ""],
+      "16": ["ROLE_CREATE", "30", "Role was created", "Role"],
+      "17": ["ROLE_UPDATE", "31", "Role was edited", "Role"],
+      "18": ["ROLE_DELETE", "32", "Role was deleted", "Role"],
+      "19": ["INVITE_CREATE", "40", "Server invite was created", "Invite and Invite Metadata*"],
+      "20": ["INVITE_UPDATE", "41", "Server invite was updated", "Invite and Invite Metadata*"],
+      "21": ["INVITE_DELETE", "42", "Server invite was deleted", "Invite and Invite Metadata*"],
+      "22": ["WEBHOOK_CREATE", "50", "Webhook was created", "Webhook*"],
+      "23": ["WEBHOOK_UPDATE", "51", "Webhook properties or channel were updated", "Webhook*"],
+      "24": ["WEBHOOK_DELETE", "52", "Webhook was deleted", "Webhook*"],
+      "25": ["EMOJI_CREATE", "60", "Emoji was created", "Emoji"],
+      "26": ["EMOJI_UPDATE", "61", "Emoji name was updated", "Emoji"],
+      "27": ["EMOJI_DELETE", "62", "Emoji was deleted", "Emoji"],
+      "28": ["MESSAGE_DELETE", "72", "Single message was deleted", ""],
+      "29": ["MESSAGE_BULK_DELETE", "73", "Multiple messages were deleted", ""],
+      "30": ["MESSAGE_PIN", "74", "Message was pinned to a channel", ""],
+      "31": ["MESSAGE_UNPIN", "75", "Message was unpinned from a channel", ""],
+      "32": ["INTEGRATION_CREATE", "80", "App was added to server", "Integration"],
+      "33": [
+        "INTEGRATION_UPDATE",
+        "81",
+        "App was updated (as an example, its scopes were updated)",
+        "Integration"
+      ],
+      "34": ["INTEGRATION_DELETE", "82", "App was removed from server", "Integration"],
+      "35": [
+        "STAGE_INSTANCE_CREATE",
+        "83",
+        "Stage instance was created (stage channel becomes live)",
+        "Stage Instance"
+      ],
+      "36": [
+        "STAGE_INSTANCE_UPDATE",
+        "84",
+        "Stage instance details were updated",
+        "Stage Instance"
+      ],
+      "37": [
+        "STAGE_INSTANCE_DELETE",
+        "85",
+        "Stage instance was deleted (stage channel no longer live)",
+        "Stage Instance"
+      ],
+      "38": ["STICKER_CREATE", "90", "Sticker was created", "Sticker"],
+      "39": ["STICKER_UPDATE", "91", "Sticker details were updated", "Sticker"],
+      "40": ["STICKER_DELETE", "92", "Sticker was deleted", "Sticker"],
+      "41": ["GUILD_SCHEDULED_EVENT_CREATE", "100", "Event was created", "Guild Scheduled Event"],
+      "42": ["GUILD_SCHEDULED_EVENT_UPDATE", "101", "Event was updated", "Guild Scheduled Event"],
+      "43": ["GUILD_SCHEDULED_EVENT_DELETE", "102", "Event was cancelled", "Guild Scheduled Event"],
+      "44": ["THREAD_CREATE", "110", "Thread was created in a channel", "Thread"],
+      "45": ["THREAD_UPDATE", "111", "Thread was updated", "Thread"],
+      "46": ["THREAD_DELETE", "112", "Thread was deleted", "Thread"],
+      "47": [
+        "APPLICATION_COMMAND_PERMISSION_UPDATE",
+        "121",
+        "Permissions were updated for a command",
+        "Command Permission*"
+      ],
+      "48": [
+        "AUTO_MODERATION_RULE_CREATE",
+        "140",
+        "Auto Moderation rule was created",
+        "Auto Moderation Rule"
+      ],
+      "49": [
+        "AUTO_MODERATION_RULE_UPDATE",
+        "141",
+        "Auto Moderation rule was updated",
+        "Auto Moderation Rule"
+      ],
+      "50": [
+        "AUTO_MODERATION_RULE_DELETE",
+        "142",
+        "Auto Moderation rule was deleted",
+        "Auto Moderation Rule"
+      ],
+      "51": ["AUTO_MODERATION_BLOCK_MESSAGE", "143", "Message was blocked by Auto Moderation", ""],
+      "52": [
+        "AUTO_MODERATION_FLAG_TO_CHANNEL",
+        "144",
+        "Message was flagged by Auto Moderation",
+        ""
+      ],
+      "53": [
+        "AUTO_MODERATION_USER_COMMUNICATION_DISABLED",
+        "145",
+        "Member was timed out by Auto Moderation",
+        ""
+      ],
+      "54": [
+        "CREATOR_MONETIZATION_REQUEST_CREATED",
+        "150",
+        "Creator monetization request was created",
+        ""
+      ],
+      "55": [
+        "CREATOR_MONETIZATION_TERMS_ACCEPTED",
+        "151",
+        "Creator monetization terms were accepted",
+        ""
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description", "Event Types"],
+    "childrens": {
+      "0": [
+        "application_id",
+        "snowflake",
+        "ID of the app whose permissions were targeted",
+        "APPLICATION_COMMAND_PERMISSION_UPDATE"
+      ],
+      "1": [
+        "auto_moderation_rule_name",
+        "string",
+        "Name of the Auto Moderation rule that was triggered",
+        "AUTO_MODERATION_BLOCK_MESSAGE & AUTO_MODERATION_FLAG_TO_CHANNEL & AUTO_MODERATION_USER_COMMUNICATION_DISABLED"
+      ],
+      "2": [
+        "auto_moderation_rule_trigger_type",
+        "string",
+        "Trigger type of the Auto Moderation rule that was triggered",
+        "AUTO_MODERATION_BLOCK_MESSAGE & AUTO_MODERATION_FLAG_TO_CHANNEL & AUTO_MODERATION_USER_COMMUNICATION_DISABLED"
+      ],
+      "3": [
+        "channel_id",
+        "snowflake",
+        "Channel in which the entities were targeted",
+        "MEMBER_MOVE & MESSAGE_PIN & MESSAGE_UNPIN & MESSAGE_DELETE & STAGE_INSTANCE_CREATE & STAGE_INSTANCE_UPDATE & STAGE_INSTANCE_DELETE & AUTO_MODERATION_BLOCK_MESSAGE & AUTO_MODERATION_FLAG_TO_CHANNEL & AUTO_MODERATION_USER_COMMUNICATION_DISABLED"
+      ],
+      "4": [
+        "count",
+        "string",
+        "Number of entities that were targeted",
+        "MESSAGE_DELETE & MESSAGE_BULK_DELETE & MEMBER_DISCONNECT & MEMBER_MOVE"
+      ],
+      "5": [
+        "delete_member_days",
+        "string",
+        "Number of days after which inactive members were kicked",
+        "MEMBER_PRUNE"
+      ],
+      "6": [
+        "id",
+        "snowflake",
+        "ID of the overwritten entity",
+        "CHANNEL_OVERWRITE_CREATE & CHANNEL_OVERWRITE_UPDATE & CHANNEL_OVERWRITE_DELETE"
+      ],
+      "7": ["members_removed", "string", "Number of members removed by the prune", "MEMBER_PRUNE"],
+      "8": [
+        "message_id",
+        "snowflake",
+        "ID of the message that was targeted",
+        "MESSAGE_PIN & MESSAGE_UNPIN"
+      ],
+      "9": [
+        "role_name",
+        "string",
+        "Name of the role if type is \"0\" (not present if type is \"1\")",
+        "CHANNEL_OVERWRITE_CREATE & CHANNEL_OVERWRITE_UPDATE & CHANNEL_OVERWRITE_DELETE"
+      ],
+      "10": [
+        "type",
+        "string",
+        "Type of overwritten entity - role (\"0\") or member (\"1\")",
+        "CHANNEL_OVERWRITE_CREATE & CHANNEL_OVERWRITE_UPDATE & CHANNEL_OVERWRITE_DELETE"
+      ]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["new_value?", "mixed (matches object field's type)", "New value of the key"],
+      "1": ["old_value?", "mixed (matches object field's type)", "Old value of the key"],
+      "2": ["key", "string", "Name of the changed entity, with a few exceptions"]
+    }
+  },
+  {
+    "fields": ["Object Changed", "Change Key Exceptions", "Change Object Exceptions"],
+    "childrens": {
+      "0": [
+        "Command Permission",
+        "snowflake as key",
+        "The changes array contains objects with a key field representing the entity whose command was affected (role, channel, or user ID), a previous permissions object (with an old_value key), and an updated permissions object (with a new_value key)"
+      ],
+      "1": [
+        "Invite and Invite Metadata",
+        "Additional channel_id key (instead of object's channel.id)",
+        ""
+      ],
+      "2": [
+        "Partial Role",
+        "$add and $remove as keys",
+        "new_value is an array of objects that contain the role id and name"
+      ],
+      "3": ["Webhook", "avatar_hash key (instead of avatar)", ""]
+    }
+  },
+  {
+    "fields": ["Field", "Type", "Description"],
+    "childrens": {
+      "0": ["user_id?", "snowflake", "Entries from a specific user ID"],
+      "1": ["action_type?", "integer", "Entries for a specific audit log event"],
+      "2": ["before?", "snowflake", "Entries with ID less than a specific audit log entry ID"],
+      "3": ["after?", "snowflake", "Entries with ID greater than a specific audit log entry ID"],
+      "4": [
+        "limit?",
+        "integer",
+        "Maximum number of entries (between 1-100) to return, defaults to 50"
+      ]
+    }
+  }
+]
