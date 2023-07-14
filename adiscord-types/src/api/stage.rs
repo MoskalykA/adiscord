@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use crate::Snowflake;
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]
@@ -15,13 +16,13 @@ pub enum PrivacyLevel {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct StageInstance {
     /// The id of this Stage instance
-    id: String,
+    id: Snowflake,
 
     /// The guild id of the associated Stage channel
-    guild_id: String,
+    guild_id: Snowflake,
 
     /// The id of the associated Stage channel
-    channel_id: String,
+    channel_id: Snowflake,
 
     /// The topic of the Stage instance (1-120 characters)
     topic: String,
@@ -33,5 +34,5 @@ pub struct StageInstance {
     discoverable_disabled: bool,
 
     /// The id of the scheduled event for this Stage instance
-    guild_scheduled_event_id: Option<String>,
+    guild_scheduled_event_id: Option<Snowflake>,
 }

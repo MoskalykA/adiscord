@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::user::User;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -14,7 +15,7 @@ pub enum FormatType {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Item {
     /// id of the sticker
-    pub id: String,
+    pub id: Snowflake,
 
     /// name of the sticker
     pub name: String,
@@ -36,10 +37,10 @@ pub enum Type {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Sticker {
     /// id of the sticker
-    pub id: String,
+    pub id: Snowflake,
 
     /// for standard stickers, id of the pack the sticker is from
-    pub pack_id: Option<String>,
+    pub pack_id: Option<Snowflake>,
 
     /// name of the sticker
     pub name: String,
@@ -64,7 +65,7 @@ pub struct Sticker {
     pub available: Option<bool>,
 
     /// id of the guild that owns this sticker
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// the user that uploaded the guild sticker
     pub user: Option<User>,

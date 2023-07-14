@@ -1,5 +1,5 @@
 use super::presence;
-use crate::api::{
+use crate::{api::{
     channel::Channel,
     emoji::Emoji,
     feature::Feature,
@@ -12,14 +12,14 @@ use crate::api::{
     sticker::Sticker,
     user::User,
     voice::VoiceState,
-};
+}, Snowflake};
 use serde::Deserialize;
 use serde_repr::Deserialize_repr;
 
 #[derive(Deserialize, Debug)]
 pub struct Unavailable {
     /// guild id
-    pub id: String,
+    pub id: Snowflake,
 
     /// unavailable or not
     pub unavailable: Option<bool>,
@@ -53,16 +53,16 @@ pub struct EventEntityMetadata {
 #[derive(Deserialize, Debug)]
 pub struct Scheduled {
     /// the id of the scheduled event
-    pub id: String,
+    pub id: Snowflake,
 
     /// the guild id which the scheduled event belongs to
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// the channel id in which the scheduled event will be hosted, or null if scheduled entity type is EXTERNAL
-    pub channel_id: Option<String>,
+    pub channel_id: Option<Snowflake>,
 
     /// the id of the user that created the scheduled event *
-    pub creator_id: Option<String>,
+    pub creator_id: Option<Snowflake>,
 
     /// the name of the scheduled event (1-100 characters)
     pub name: String,
@@ -86,7 +86,7 @@ pub struct Scheduled {
     pub entity_type: EventEntityTypes,
 
     /// the id of an entity associated with a guild scheduled event
-    pub entity_id: Option<String>,
+    pub entity_id: Option<Snowflake>,
 
     /// additional metadata for the guild scheduled event
     pub entity_metadata: Option<EventEntityMetadata>,
@@ -104,7 +104,7 @@ pub struct Scheduled {
 #[derive(Deserialize, Debug)]
 pub struct Create {
     /// guild id
-    pub id: String,
+    pub id: Snowflake,
 
     /// GUILD AVAILABLE:
     ///     true if this guild is unavailable due to an outage
@@ -133,7 +133,7 @@ pub struct Create {
     pub owner: Option<bool>,
 
     /// id of owner
-    pub owner_id: Option<String>,
+    pub owner_id: Option<Snowflake>,
 
     /// total permissions for the user in the guild (excludes overwrites)
     pub permissions: Option<String>,
@@ -142,7 +142,7 @@ pub struct Create {
     pub region: Option<String>,
 
     /// id of afk channel
-    pub afk_channel_id: Option<String>,
+    pub afk_channel_id: Option<Snowflake>,
 
     /// afk timeout in seconds, can be set to: 60, 300, 900, 1800, 3600
     pub afk_timeout: Option<u16>,
@@ -151,7 +151,7 @@ pub struct Create {
     pub widget_enabled: Option<bool>,
 
     /// the channel id that the widget will generate an invite to, or null if set to no invite
-    pub widget_channel_id: Option<String>,
+    pub widget_channel_id: Option<Snowflake>,
 
     /// verification level required for the guild
     pub verification_level: Option<VerificationLevel>,
@@ -175,16 +175,16 @@ pub struct Create {
     pub mfa_level: Option<MFALevel>,
 
     /// application id of the guild creator if it is bot-created
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 
     /// the id of the channel where guild notices such as welcome messages and boost events are posted
-    pub system_channel_id: Option<String>,
+    pub system_channel_id: Option<Snowflake>,
 
     /// system channel flags
     pub system_channel_flags: Option<SystemChannelFlags>,
 
     /// the id of the channel where Community guilds can display rules and/or guidelines
-    pub rules_channel_id: Option<String>,
+    pub rules_channel_id: Option<Snowflake>,
 
     /// the maximum number of presences for the guild (null is always returned, apart from the largest of guilds)
     pub max_presences: Option<u32>,
@@ -211,7 +211,7 @@ pub struct Create {
     pub preferred_locale: Option<String>,
 
     /// the id of the channel where admins and moderators of Community guilds receive notices from Discord
-    pub public_updates_channel_id: Option<String>,
+    pub public_updates_channel_id: Option<Snowflake>,
 
     /// the maximum amount of users in a video channel
     pub max_video_channel_users: Option<u16>,
@@ -238,7 +238,7 @@ pub struct Create {
     pub premium_progress_bar_enabled: Option<bool>,
 
     /// the id of the channel where admins and moderators of Community guilds receive safety alerts from Discord
-    pub safety_alerts_channel_id: Option<String>,
+    pub safety_alerts_channel_id: Option<Snowflake>,
 
     /// When this guild was joined at
     pub joined_at: String,
@@ -274,7 +274,7 @@ pub struct Create {
 #[derive(Deserialize, Debug)]
 pub struct BanAdd {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// User who was banned
     pub user: User,
@@ -283,7 +283,7 @@ pub struct BanAdd {
 #[derive(Deserialize, Debug)]
 pub struct BanRemove {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// User who was banned
     pub user: User,

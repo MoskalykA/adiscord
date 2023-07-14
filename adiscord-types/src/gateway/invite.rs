@@ -1,10 +1,10 @@
-use crate::api::{application::Application, user::User};
+use crate::{api::{application::Application, user::User}, Snowflake};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Create {
     /// Channel the invite is for
-    pub channel_id: String,
+    pub channel_id: Snowflake,
 
     /// Unique invite code
     pub code: String,
@@ -13,7 +13,7 @@ pub struct Create {
     pub created_at: String,
 
     /// Guild of the invite
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// User that created the invite
     pub inviter: Option<User>,
@@ -43,10 +43,10 @@ pub struct Create {
 #[derive(Deserialize, Debug)]
 pub struct Delete {
     /// Channel of the invite
-    pub channel_id: String,
+    pub channel_id: Snowflake,
 
     /// Guild of the invite
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// Unique invite code
     pub code: String,

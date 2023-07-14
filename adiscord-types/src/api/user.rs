@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use crate::Snowflake;
 
 #[repr(u32)]
 #[allow(non_camel_case_types)]
@@ -66,7 +67,7 @@ pub enum PreniumType {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct User {
     /// the user's id
-    pub id: String,
+    pub id: Snowflake,
 
     /// the user's username, not unique across the platform
     pub username: String,

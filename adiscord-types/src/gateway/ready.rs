@@ -1,5 +1,5 @@
 use super::{application, guild};
-use crate::api::user::User;
+use crate::{api::user::User, Snowflake};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
@@ -14,7 +14,7 @@ pub struct Ready {
     pub guilds: Vec<guild::Unavailable>,
 
     /// Used for resuming connections
-    pub session_id: String,
+    pub session_id: Snowflake,
 
     /// Gateway URL for resuming connections
     pub resume_gateway_url: String,

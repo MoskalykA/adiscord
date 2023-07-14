@@ -1,13 +1,14 @@
+use crate::Snowflake;
 use super::guild;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct ThreadMember {
     /// ID of the thread
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// ID of the user
-    pub user_id: Option<String>,
+    pub user_id: Option<Snowflake>,
 
     /// Time the user last joined the thread
     pub join_timestamp: String,

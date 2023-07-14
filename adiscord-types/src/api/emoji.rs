@@ -1,10 +1,11 @@
+use crate::Snowflake;
 use super::{role::Role, user::User};
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Emoji {
     /// emoji id
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// emoji name
     pub name: Option<String>,

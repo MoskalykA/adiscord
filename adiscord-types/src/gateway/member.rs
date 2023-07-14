@@ -1,19 +1,18 @@
-use crate::api::{guild::Member, user::User};
+use crate::{api::{guild::Member, user::User}, Snowflake};
 use serde::Deserialize;
 use serde_json::Value;
-
 use super::presence;
 
 #[derive(Deserialize, Debug)]
 pub struct Add {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Remove {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// User who was removed
     pub user: User,
@@ -22,7 +21,7 @@ pub struct Remove {
 #[derive(Deserialize, Debug)]
 pub struct Update {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// User role ids
     pub roles: Vec<String>,
@@ -58,7 +57,7 @@ pub struct Update {
 #[derive(Deserialize, Debug)]
 pub struct Chunk {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// Set of guild members
     pub members: Vec<Member>,

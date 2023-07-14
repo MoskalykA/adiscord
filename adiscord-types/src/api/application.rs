@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::{team::Team, user::User, guild::Guild};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -51,7 +52,7 @@ pub struct InstallParams {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Application {
     /// the id of the app
-    pub id: String,
+    pub id: Snowflake,
 
     /// the name of the app
     pub name: String,
@@ -91,13 +92,13 @@ pub struct Application {
     pub team: Option<Team>,
 
     /// guild associated with the app. For example, a developer support server.
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// a partial object of the associated guild
     pub guild: Option<Guild>,
 
     /// if this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
-    pub primary_sku_id: Option<String>,
+    pub primary_sku_id: Option<Snowflake>,
 
     /// if this application is a game sold on Discord, this field will be the URL slug that links to the store page
     pub slug: Option<String>,

@@ -1,13 +1,13 @@
-use crate::api::{
+use crate::{api::{
     channel::{Channel, ChannelType},
     thread::ThreadMember,
-};
+}, Snowflake};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct ListSync {
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// Parent channel IDs whose threads are being synced. If omitted, then threads were synced for the entire guild. This array may contain channel_ids that have no active threads as well, so you know to clear that data.
     pub channel_ids: Option<Vec<String>>,
@@ -22,13 +22,13 @@ pub struct ListSync {
 #[derive(Deserialize, Debug)]
 pub struct MemberUpdate {
     /// ID of the thread
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// ID of the user
-    pub user_id: Option<String>,
+    pub user_id: Option<Snowflake>,
 
     /// Time the user last joined the thread
     pub join_timestamp: String,
@@ -43,10 +43,10 @@ pub struct MemberUpdate {
 #[derive(Deserialize, Debug)]
 pub struct MembersUpdate {
     /// ID of the thread
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// ID of the guild
-    pub guild_id: String,
+    pub guild_id: Snowflake,
 
     /// Approximate number of members in the thread, capped at 50
     pub member_count: u8,
@@ -61,14 +61,14 @@ pub struct MembersUpdate {
 #[derive(Deserialize, Debug)]
 pub struct Delete {
     /// the id of this channel
-    pub id: String,
+    pub id: Snowflake,
 
     /// the type of channel
     pub r#type: ChannelType,
 
     // the id of the guild (may be missing for some channel objects received over gateway guild dispatches)
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created
-    pub parent_id: Option<String>,
+    pub parent_id: Option<Snowflake>,
 }

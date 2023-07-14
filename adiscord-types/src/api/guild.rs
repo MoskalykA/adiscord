@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::{emoji::Emoji, feature::Feature, role::Role, sticker::Sticker, user::User};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -63,13 +64,13 @@ pub struct Member {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Channels {
     /// the channel's id
-    pub channel_id: String,
+    pub channel_id: Snowflake,
 
     /// the description shown for the channel
     pub description: String,
 
     /// the emoji id, if the emoji is custom
-    pub emoji_id: String,
+    pub emoji_id: Snowflake,
 
     /// the emoji name if custom, the unicode character if standard, or null if no emoji is set
     pub emoji_name: String,
@@ -147,7 +148,7 @@ pub enum PremiumTier {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Preview {
     /// guild id
-    pub id: String,
+    pub id: Snowflake,
 
     /// guild name (2-100 characters, excluding trailing and leading whitespace)
     pub name: String,
@@ -227,7 +228,7 @@ pub enum VerificationLevel {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Guild {
     /// guild id
-    pub id: String,
+    pub id: Snowflake,
 
     /// guild name (2-100 characters, excluding trailing and leading whitespace)
     pub name: String,
@@ -248,7 +249,7 @@ pub struct Guild {
     pub owner: Option<bool>,
 
     /// id of owner
-    pub owner_id: String,
+    pub owner_id: Snowflake,
 
     /// total permissions for the user in the guild (excludes overwrites)
     pub permissions: Option<String>,
@@ -257,7 +258,7 @@ pub struct Guild {
     pub region: Option<String>,
 
     /// id of afk channel
-    pub afk_channel_id: Option<String>,
+    pub afk_channel_id: Option<Snowflake>,
 
     /// afk timeout in seconds, can be set to: 60, 300, 900, 1800, 3600
     pub afk_timeout: u16,
@@ -266,7 +267,7 @@ pub struct Guild {
     pub widget_enabled: Option<bool>,
 
     /// the channel id that the widget will generate an invite to, or null if set to no invite
-    pub widget_channel_id: Option<String>,
+    pub widget_channel_id: Option<Snowflake>,
 
     /// verification level required for the guild
     pub verification_level: VerificationLevel,
@@ -290,16 +291,16 @@ pub struct Guild {
     pub mfa_level: MFALevel,
 
     /// application id of the guild creator if it is bot-created
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 
     /// the id of the channel where guild notices such as welcome messages and boost events are posted
-    pub system_channel_id: Option<String>,
+    pub system_channel_id: Option<Snowflake>,
 
     /// system channel flags
     pub system_channel_flags: SystemChannelFlags,
 
     /// the id of the channel where Community guilds can display rules and/or guidelines
-    pub rules_channel_id: Option<String>,
+    pub rules_channel_id: Option<Snowflake>,
 
     /// the maximum number of presences for the guild (null is always returned, apart from the largest of guilds)
     pub max_presences: Option<u32>,
@@ -326,7 +327,7 @@ pub struct Guild {
     pub preferred_locale: String,
 
     /// the id of the channel where admins and moderators of Community guilds receive notices from Discord
-    pub public_updates_channel_id: Option<String>,
+    pub public_updates_channel_id: Option<Snowflake>,
 
     /// the maximum amount of users in a video channel
     pub max_video_channel_users: Option<u16>,
@@ -353,5 +354,5 @@ pub struct Guild {
     pub premium_progress_bar_enabled: bool,
 
     /// the id of the channel where admins and moderators of Community guilds receive safety alerts from Discord
-    pub safety_alerts_channel_id: Option<String>,
+    pub safety_alerts_channel_id: Option<Snowflake>,
 }

@@ -1,3 +1,4 @@
+use crate::Snowflake;
 use super::{activity::Activity, client, user::UserPartial};
 use serde::Deserialize;
 
@@ -7,7 +8,7 @@ pub struct Update {
     pub user: UserPartial,
 
     /// ID of the guild
-    pub guild_id: Option<String>,
+    pub guild_id: Option<Snowflake>,
 
     /// Either "idle", "dnd", "online", or "offline"
     pub status: Option<String>,

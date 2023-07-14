@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use crate::Snowflake;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Change {
@@ -190,7 +191,7 @@ pub enum Event {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct EntryInfo {
     /// ID of the app whose permissions were targeted
-    pub application_id: Option<String>,
+    pub application_id: Option<Snowflake>,
 
     /// Name of the Auto Moderation rule that was triggered
     pub auto_moderation_rule_name: Option<String>,
@@ -199,7 +200,7 @@ pub struct EntryInfo {
     pub auto_moderation_rule_trigger_type: Option<String>,
 
     /// Channel in which the entities were targeted
-    pub channel_id: Option<String>,
+    pub channel_id: Option<Snowflake>,
 
     /// Number of entities that were targeted
     pub count: Option<String>,
@@ -208,13 +209,13 @@ pub struct EntryInfo {
     pub delete_member_days: Option<String>,
 
     /// ID of the overwritten entity
-    pub id: Option<String>,
+    pub id: Option<Snowflake>,
 
     /// Number of members removed by the prune
     pub members_removed: Option<String>,
 
     /// ID of the message that was targeted
-    pub message_id: Option<String>,
+    pub message_id: Option<Snowflake>,
 
     /// Name of the role if type is "0" (not present if type is "1")
     pub role_name: Option<String>,
@@ -226,16 +227,16 @@ pub struct EntryInfo {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct LogEntry {
     /// ID of the affected entity (webhook, user, role, etc.)
-    pub target_id: Option<String>,
+    pub target_id: Option<Snowflake>,
 
     /// Changes made to the target_id
     pub changes: Option<Vec<Change>>,
 
     /// User or app that made the changes
-    pub user_id: Option<String>,
+    pub user_id: Option<Snowflake>,
 
     /// ID of the entry
-    pub id: String,
+    pub id: Snowflake,
 
     /// Type of action that occurred
     pub action_type: Event,
