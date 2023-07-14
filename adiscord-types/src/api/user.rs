@@ -109,4 +109,7 @@ pub struct User {
 
     /// the public flags on a user's account
     pub public_flags: Option<Flags>,
+
+    /// the user's avatar decoration hash
+    pub avatar_decoration: Option<String>
 }

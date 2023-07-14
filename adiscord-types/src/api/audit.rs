@@ -179,6 +179,12 @@ pub enum Event {
 
     /// Member was timed out by Auto Moderation
     AUTO_MODERATION_USER_COMMUNICATION_DISABLED = 145,
+
+    /// Creator monetization request was created
+    CREATOR_MONETIZATION_REQUEST_CREATED = 150,
+
+    /// Creator monetization terms were accepted
+    CREATOR_MONETIZATION_TERMS_ACCEPTED
 }
 
 #[derive(Deserialize, Serialize, Debug)]

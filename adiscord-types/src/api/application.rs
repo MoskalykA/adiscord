@@ -1,4 +1,4 @@
-use super::{team::Team, user::User};
+use super::{team::Team, user::User, guild::Guild};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
@@ -90,8 +90,11 @@ pub struct Application {
     /// if the application belongs to a team, this will be a list of the members of that team
     pub team: Option<Team>,
 
-    /// if this application is a game sold on Discord, this field will be the guild to which it has been linked
+    /// guild associated with the app. For example, a developer support server.
     pub guild_id: Option<String>,
+
+    /// a partial object of the associated guild
+    pub guild: Option<Guild>,
 
     /// if this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
     pub primary_sku_id: Option<String>,
@@ -104,6 +107,9 @@ pub struct Application {
 
     /// the application's public flags
     pub flags: Option<Flags>,
+
+    /// an approximate count of the app's guild membership.
+    pub approximate_guild_count: Option<u32>,
 
     /// up to 5 tags describing the content and functionality of the application
     pub tags: Option<Vec<String>>,

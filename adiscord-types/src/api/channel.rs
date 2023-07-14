@@ -7,6 +7,14 @@ use super::{
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
+#[repr(u8)]
+#[allow(non_camel_case_types)]
+#[derive(Deserialize_repr, Serialize_repr, Debug)]
+pub enum AttachmentFlags {
+    /// this attachment has been edited using the remix feature on mobile
+    IS_REMIX = 1 << 2
+}
+
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Attachment {
     /// attachment id
@@ -38,6 +46,15 @@ pub struct Attachment {
 
     /// whether this attachment is ephemeral
     pub ephemeral: Option<bool>,
+
+    /// the duration of the audio file (currently for voice messages)
+    pub duration_secs: Option<f32>,
+
+    /// base64 encoded bytearray representing a sampled waveform (currently for voice messages)
+    pub waveform: Option<String>,
+
+    /// attachment flags combined as a bitfield
+    pub flags: Option<AttachmentFlags>
 }
 
 #[repr(u8)]

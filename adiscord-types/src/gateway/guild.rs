@@ -219,10 +219,10 @@ pub struct Create {
     /// the maximum amount of users in a stage video channel
     pub max_stage_video_channel_users: Option<u16>,
 
-    /// approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true
+    /// approximate number of members in this guild, returned from the GET /guilds/<id> and /users/@me/guilds endpoints when with_counts is true
     pub approximate_member_count: Option<u32>,
 
-    /// approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true
+    /// approximate number of non-offline members in this guild, returned from the GET /guilds/<id> and /users/@me/guilds  endpoints when with_counts is true
     pub approximate_presence_count: Option<u32>,
 
     /// the welcome screen of a Community guild, shown to new members, returned in an Invite's guild object
