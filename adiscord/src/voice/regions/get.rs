@@ -1,4 +1,4 @@
-use crate::{Client, Error};
+use crate::{Client, Error, BASE_URL};
 use adiscord_types::api::voice::VoiceRegion;
 use reqwest::StatusCode;
 
@@ -14,7 +14,7 @@ impl Client {
     pub async fn get_regions(&self) -> Result<Vec<VoiceRegion>, Error> {
         let response = self
             .client
-            .get(format!("{}/voice/regions", self.url))
+            .get(format!("{}/voice/regions", BASE_URL))
             .send()
             .await
             .unwrap();

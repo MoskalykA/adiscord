@@ -1,4 +1,4 @@
-use crate::{Client, Error};
+use crate::{Client, Error, BASE_URL};
 use adiscord_types::api::message::Message;
 use reqwest::StatusCode;
 use serde::Serialize;
@@ -58,7 +58,7 @@ impl Client {
     ) -> Result<Vec<Message>, Error> {
         let response = self
             .client
-            .get(format!("{}/channels/{index}/messages", self.url))
+            .get(format!("{}/channels/{index}/messages", BASE_URL))
             .query(&query)
             .send()
             .await

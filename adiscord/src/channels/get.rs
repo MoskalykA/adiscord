@@ -1,4 +1,4 @@
-use crate::{Client, Error};
+use crate::{Client, Error, BASE_URL};
 use adiscord_types::api::channel::Channel;
 use reqwest::StatusCode;
 
@@ -14,7 +14,7 @@ impl Client {
     pub async fn get(&self, index: &str) -> Result<Channel, Error> {
         let response = self
             .client
-            .get(format!("{}/channels/{index}", self.url))
+            .get(format!("{}/channels/{index}", BASE_URL))
             .send()
             .await
             .unwrap();

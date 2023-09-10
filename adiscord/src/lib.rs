@@ -10,13 +10,12 @@ use gateway::types::Gateway;
 use reqwest::header;
 use serde::Deserialize;
 
-const BASE_URL: &str = "https://discord.com/api/v";
+const BASE_URL: &str = "https://discord.com/api/v10";
 
 pub struct Client {
-    pub url: String,
-
     #[cfg(feature = "gateway")]
     pub token: String,
+
     pub client: reqwest::Client,
 
     #[cfg(feature = "gateway")]
@@ -44,7 +43,7 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let client = Client::new("10", dotenv!("TOKEN"));
+    ///     let client = Client::new(dotenv!("TOKEN"));
     /// }
     /// ```
     ///
@@ -56,11 +55,10 @@ impl Client {
     ///
     /// #[tokio::main]
     /// async fn main() {
-    ///     let client = Client::new("10", dotenv!("TOKEN"));
+    ///     let client = Client::new(dotenv!("TOKEN"));
     /// }
     /// ```
-    pub fn new(version: &str, my_token: &str) -> Self {
-        let url = format!("{BASE_URL}{version}");
+    pub fn new(my_token: &str) -> Self {
         let mut token = String::with_capacity(76);
         token.push_str("Bot ");
         token.push_str(my_token);
@@ -77,10 +75,9 @@ impl Client {
             .unwrap();
 
         Self {
-            url,
-
             #[cfg(feature = "gateway")]
             token,
+
             client,
 
             #[cfg(feature = "gateway")]

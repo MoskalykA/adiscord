@@ -1,4 +1,4 @@
-use crate::{Client, Error};
+use crate::{Client, Error, BASE_URL};
 use adiscord_types::api::message::Message;
 use reqwest::StatusCode;
 
@@ -20,7 +20,7 @@ impl Client {
             .client
             .get(format!(
                 "{}/channels/{index}/messages/{message_index}",
-                self.url
+                BASE_URL
             ))
             .send()
             .await

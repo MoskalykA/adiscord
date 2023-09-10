@@ -3,7 +3,7 @@ use dotenv_codegen::dotenv;
 
 #[tokio::main]
 async fn main() {
-    let mut client = Client::new("10", dotenv!("TOKEN"));
+    let mut client = Client::new(dotenv!("TOKEN"));
     client.set_heartbeat_ack(true);
     client.set_heartbeat_ack_count(true);
 
