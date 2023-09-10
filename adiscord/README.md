@@ -34,7 +34,7 @@ use dotenv_codegen::dotenv;
 #[tokio::main]
 async fn main() {
     // Client initialisation
-    let mut client = Client::new("10", dotenv!("TOKEN"));
+    let mut client = Client::new(dotenv!("TOKEN"));
 
     // Recover a server from its ID
     match client.guild.get("1089521338286342195").await {
@@ -54,7 +54,7 @@ use dotenv_codegen::dotenv;
 #[tokio::main]
 async fn main() {
     // Client initialisation
-    let mut client = Client::new("10", dotenv!("TOKEN"));
+    let mut client = Client::new(dotenv!("TOKEN"));
 
     // Receive heartbeat messages, delete this line if you do not wish to do so
     client.set_heartbeat_ack(true);
