@@ -59,7 +59,6 @@ impl Client {
         let response = self
             .client
             .get(format!("{}/channels/{index}/messages", self.url))
-            .header("Authorization", self.token.clone())
             .query(&query)
             .send()
             .await

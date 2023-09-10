@@ -15,7 +15,6 @@ impl Client {
         let response = self
             .client
             .get(format!("{}/voice/regions", self.url))
-            .header("Authorization", self.token.clone())
             .send()
             .await
             .unwrap();

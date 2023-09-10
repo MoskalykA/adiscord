@@ -7,12 +7,15 @@ pub mod gateway;
 
 #[cfg(feature = "gateway")]
 use gateway::types::Gateway;
+use reqwest::header;
 use serde::Deserialize;
 
 const BASE_URL: &str = "https://discord.com/api/v";
 
 pub struct Client {
     pub url: String,
+
+    #[cfg(feature = "gateway")]
     pub token: String,
     pub client: reqwest::Client,
 
@@ -56,13 +59,27 @@ impl Client {
     ///     let client = Client::new("10", dotenv!("TOKEN"));
     /// }
     /// ```
-    pub fn new(version: &str, token: &str) -> Self {
+    pub fn new(version: &str, my_token: &str) -> Self {
         let url = format!("{BASE_URL}{version}");
-        let client = reqwest::Client::new();
-        let token = format!("Bot {token}");
+        let mut token = String::with_capacity(76);
+        token.push_str("Bot ");
+        token.push_str(my_token);
+
+        let mut headers = header::HeaderMap::new();
+        headers.insert(
+            "Authorization",
+            header::HeaderValue::from_str(my_token).unwrap(),
+        );
+
+        let client = reqwest::Client::builder()
+            .default_headers(headers)
+            .build()
+            .unwrap();
 
         Self {
             url,
+
+            #[cfg(feature = "gateway")]
             token,
             client,
 

@@ -1,4 +1,4 @@
-use crate::{Error};
+use crate::Error;
 use adiscord_types::api::stickers::Sticker;
 use reqwest::StatusCode;
 
@@ -15,7 +15,6 @@ impl crate::Sticker {
         let response = self
             .client
             .get(format!("{}/guilds/{index}/stickers", self.url))
-            .header("Authorization", self.token.clone())
             .send()
             .await
             .unwrap();

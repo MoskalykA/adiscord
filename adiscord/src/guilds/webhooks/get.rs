@@ -15,7 +15,6 @@ impl crate::Webhook {
         let response = self
             .client
             .get(format!("{}/guilds/{index}/webhooks", self.url))
-            .header("Authorization", self.token.clone())
             .send()
             .await
             .unwrap();

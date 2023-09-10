@@ -1,4 +1,4 @@
-use crate::{Error};
+use crate::Error;
 use adiscord_types::api::guilds::members::GuildMember;
 use reqwest::StatusCode;
 use serde::Serialize;
@@ -47,7 +47,6 @@ impl crate::Guild {
         let response = self
             .client
             .get(format!("{}/guilds/{index}/members", self.url))
-            .header("Authorization", self.token.clone())
             .query(&query)
             .send()
             .await

@@ -1,4 +1,4 @@
-use crate::{Error};
+use crate::Error;
 use adiscord_types::api::guilds::previews::Preview;
 use reqwest::StatusCode;
 
@@ -15,7 +15,6 @@ impl crate::Guild {
         let response = self
             .client
             .get(format!("{}/guilds/{index}/preview", self.url))
-            .header("Authorization", self.token.clone())
             .send()
             .await
             .unwrap();

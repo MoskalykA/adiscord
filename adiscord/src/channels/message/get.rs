@@ -22,7 +22,6 @@ impl Client {
                 "{}/channels/{index}/messages/{message_index}",
                 self.url
             ))
-            .header("Authorization", self.token.clone())
             .send()
             .await
             .unwrap();
