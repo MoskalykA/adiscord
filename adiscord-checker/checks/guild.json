@@ -21,7 +21,7 @@
       "8": [
         "permissions? *",
         "string",
-        "total permissions for the user in the guild (excludes overwrites)"
+        "total permissions for the user in the guild (excludes overwrites and implicit permissions)"
       ],
       "9": ["region? **", "?string", "voice region id for the guild (deprecated)"],
       "10": ["afk_channel_id", "?snowflake", "id of afk channel"],
@@ -637,7 +637,12 @@
     "childrens": {
       "0": ["name", "string", "channel name (1-100 characters)", "All"],
       "1": ["type", "integer", "the type of channel", "All"],
-      "2": ["topic", "string", "channel topic (0-1024 characters)", "Text, Announcement, Forum"],
+      "2": [
+        "topic",
+        "string",
+        "channel topic (0-1024 characters)",
+        "Text, Announcement, Forum, Media"
+      ],
       "3": [
         "bitrate*",
         "integer",
@@ -649,7 +654,7 @@
         "rate_limit_per_user",
         "integer",
         "amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected",
-        "Text, Voice, Stage, Forum"
+        "Text, Voice, Stage, Forum, Media"
       ],
       "6": ["position", "integer", "sorting position of the channel", "All"],
       "7": [
@@ -662,7 +667,7 @@
         "parent_id",
         "snowflake",
         "id of the parent category for a channel",
-        "Text, Voice, Announcement, Stage, Forum"
+        "Text, Voice, Announcement, Stage, Forum, Media"
       ],
       "9": [
         "nsfw",
@@ -686,25 +691,25 @@
         "default_auto_archive_duration",
         "integer",
         "the default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity",
-        "Text, Announcement, Forum"
+        "Text, Announcement, Forum, Media"
       ],
       "13": [
         "default_reaction_emoji",
         "default reaction object",
-        "emoji to show in the add reaction button on a thread in a GUILD_FORUM channel",
-        "Forum"
+        "emoji to show in the add reaction button on a thread in a GUILD_FORUM or a GUILD_MEDIA channel",
+        "Forum, Media"
       ],
       "14": [
         "available_tags",
         "array of tag objects",
-        "set of tags that can be used in a GUILD_FORUM channel",
-        "Forum"
+        "set of tags that can be used in a GUILD_FORUM or a GUILD_MEDIA channel",
+        "Forum, Media"
       ],
       "15": [
         "default_sort_order",
         "integer",
-        "the default sort order type used to order posts in GUILD_FORUM channels",
-        "Forum"
+        "the default sort order type used to order posts in GUILD_FORUM and GUILD_MEDIA channels",
+        "Forum, Media"
       ],
       "16": [
         "default_forum_layout",
@@ -718,13 +723,13 @@
     "fields": ["Field", "Type", "Description"],
     "childrens": {
       "0": ["id", "snowflake", "channel id"],
-      "1": ["position", "?integer", "sorting position of the channel"],
+      "1": ["position?", "?integer", "sorting position of the channel"],
       "2": [
-        "lock_permissions",
+        "lock_permissions?",
         "?boolean",
         "syncs the permission overwrites with the new parent, if moving to a new category"
       ],
-      "3": ["parent_id", "?snowflake", "the new parent ID for the channel that is moved"]
+      "3": ["parent_id?", "?snowflake", "the new parent ID for the channel that is moved"]
     }
   },
   {

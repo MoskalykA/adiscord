@@ -252,6 +252,12 @@
         "string",
         "Type of overwritten entity - role (\"0\") or member (\"1\")",
         "CHANNEL_OVERWRITE_CREATE & CHANNEL_OVERWRITE_UPDATE & CHANNEL_OVERWRITE_DELETE"
+      ],
+      "11": [
+        "integration_type",
+        "string",
+        "The type of integration which performed the action",
+        "MEMBER_KICK & MEMBER_ROLE_UPDATE"
       ]
     }
   },

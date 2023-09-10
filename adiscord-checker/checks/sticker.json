@@ -27,11 +27,7 @@
   {
     "fields": ["Type", "Value", "Description"],
     "childrens": {
-      "0": [
-        "STANDARD",
-        "1",
-        "an official sticker in a pack, part of Nitro or in a removed purchasable pack"
-      ],
+      "0": ["STANDARD", "1", "an official sticker in a pack"],
       "1": ["GUILD", "2", "a sticker uploaded to a guild for the guild's members"]
     }
   },
