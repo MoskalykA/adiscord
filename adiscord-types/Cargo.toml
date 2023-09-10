@@ -1,6 +1,6 @@
 [package]
 name = "adiscord-types"
-version = "0.0.5"
+version = "0.0.6"
 authors = ["MoskalykA <100430077+MoskalykA@users.noreply.github.com>"]
 edition = "2021"
 description = "The large list of Discord API types and Gateway types"
