@@ -1,5 +1,6 @@
 use crate::{api::emoji::Emoji, Snowflake};
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct DefaultReaction {
@@ -11,13 +12,31 @@ pub struct DefaultReaction {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
+pub struct CountDetails {
+    /// Count of super reactions
+    burst: u16,
+
+    /// Count of normal reactions
+    normal: u16
+}
+
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Reaction {
-    /// times this emoji has been used to react
+    /// Total number of times this emoji has been used to react (including super reacts)
     pub count: u16,
 
-    /// whether the current user reacted using this emoji
+    /// Reaction count details object
+    pub count_details: CountDetails,
+
+    /// Whether the current user reacted using this emoji
     pub me: bool,
+
+    /// Whether the current user super-reacted using this emoji
+    pub me_burst: bool,
 
     /// emoji information
     pub emoji: Emoji,
+
+    /// HEX colors used for super reaction
+    pub burst_colors: Value
 }

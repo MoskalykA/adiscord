@@ -251,7 +251,7 @@ pub struct Guild {
     /// id of owner
     pub owner_id: Snowflake,
 
-    /// total permissions for the user in the guild (excludes overwrites)
+    /// total permissions for the user in the guild (excludes overwrites and implicit permissions)
     pub permissions: Option<String>,
 
     /// voice region id for the guild (deprecated)

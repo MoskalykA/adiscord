@@ -58,17 +58,20 @@ pub struct Attachment {
     pub flags: Option<AttachmentFlags>
 }
 
-#[repr(u8)]
+#[repr(u16)]
 #[allow(non_camel_case_types)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
     None,
 
-    /// this thread is pinned to the top of its parent GUILD_FORUM channel
+    /// this thread is pinned to the top of its parent GUILD_FORUM or GUILD_MEDIA channel
     PINNED = 1 << 1,
 
-    /// whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field.
+    /// whether a tag is required to be specified when creating a thread in a GUILD_FORUM or a GUILD_MEDIA channel. Tags are specified in the applied_tags field.
     REQUIRE_TAG = 1 << 4,
+
+    /// when set hides the embedded media download options. Available only for media channels
+    HIDE_MEDIA_DOWNLOAD_OPTIONS = 1 << 15
 }
 
 #[repr(u8)]
@@ -165,6 +168,9 @@ pub enum ChannelType {
 
     /// Channel that can only contain threads
     GUILD_FORUM,
+
+    /// Channel that can only contain threads, similar to GUILD_FORUM channels
+    GUILD_MEDIA
 }
 
 #[repr(u8)]
@@ -197,13 +203,13 @@ pub struct Channel {
     /// the name of the channel (1-100 characters)
     pub name: Option<String>,
 
-    /// the channel topic (0-4096 characters for GUILD_FORUM channels, 0-1024 characters for all others)
+    /// the channel topic (0-4096 characters for GUILD_FORUM and GUILD_MEDIA channels, 0-1024 characters for all others)
     pub topic: Option<String>,
 
     /// whether the channel is nsfw
     pub nsfw: Option<bool>,
 
-    /// the id of the last message sent in this channel (or thread for GUILD_FORUM channels) (may not point to an existing or valid message or thread)
+    /// the id of the last message sent in this channel (or thread for GUILD_FORUM or GUILD_MEDIA channels) (may not point to an existing or valid message or thread)
     pub last_message_id: Option<Snowflake>,
 
     /// the bitrate (in bits) of the voice channel
@@ -257,7 +263,7 @@ pub struct Channel {
     /// default duration, copied onto newly created threads, in minutes, threads will stop showing in the channel list after the specified period of inactivity, can be set to: 60, 1440, 4320, 10080
     pub default_auto_archive_duration: Option<u16>,
 
-    /// computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
+    /// computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction. This does not include implicit permissions, which may need to be checked separately
     pub permissions: Option<String>,
 
     /// channel flags combined as a bitfield
@@ -266,19 +272,19 @@ pub struct Channel {
     /// number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted
     pub total_message_sent: Option<i32>,
 
-    /// the set of tags that can be used in a GUILD_FORUM channel
+    /// the set of tags that can be used in a GUILD_FORUM or a GUILD_MEDIA channel
     pub available_tags: Option<Vec<forum::Tags>>,
 
-    /// the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+    /// the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or a GUILD_MEDIA channel
     pub applied_tags: Option<Vec<Snowflake>>,
 
-    /// the emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+    /// the emoji to show in the add reaction button on a thread in a GUILD_FORUM or a GUILD_MEDIA channel
     pub default_reaction_emoji: Option<DefaultReaction>,
 
     /// the initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
     pub default_thread_rate_limit_per_user: Option<i32>,
 
-    /// the default sort order type used to order posts in GUILD_FORUM channels. Defaults to null, which indicates a preferred sort order hasn't been set by a channel admin
+    /// the default sort order type used to order posts in GUILD_FORUM and GUILD_MEDIA channels. Defaults to null, which indicates a preferred sort order hasn't been set by a channel admin
     pub default_sort_order: Option<SortOrder>,
 
     /// the default forum layout view used to display posts in GUILD_FORUM channels. Defaults to 0, which indicates a layout view has not been set by a channel admin

@@ -27,7 +27,7 @@ pub struct Item {
 #[repr(u8)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Type {
-    /// an official sticker in a pack, part of Nitro or in a removed purchasable pack
+    /// an official sticker in a pack
     Standard = 1,
 
     /// a sticker uploaded to a guild for the guild's members

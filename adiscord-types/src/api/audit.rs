@@ -222,6 +222,9 @@ pub struct EntryInfo {
 
     /// Type of overwritten entity - role ("0") or member ("1")
     pub r#type: Option<String>,
+
+    /// The type of integration which performed the action
+    pub integration_type: String
 }
 
 #[derive(Deserialize, Serialize, Debug)]
