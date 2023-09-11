@@ -226,6 +226,7 @@ pub enum VerificationLevel {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
+#[serde(untagged)]
 pub enum Permission {
     String(String),
     Number(u32),
