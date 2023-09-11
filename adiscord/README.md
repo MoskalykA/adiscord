@@ -23,13 +23,13 @@ cargo add tokio --features rt-multi-thread
 
 ## Usage
 
-(These examples require dotenv to be installed in order to have .env files. Here is the command `cargo add dotenv`)
+(These examples require dotenv to be installed in order to have .env files. Here is the command `cargo add dotenvy_macro`)
 
 ### Example with the API
 
 ```rust
 use adiscord::Client;
-use dotenv_codegen::dotenv;
+use dotenvy_macro::dotenv;
 
 #[tokio::main]
 async fn main() {
@@ -49,7 +49,7 @@ async fn main() {
 ```rust
 use adiscord::Client;
 use adiscord_intents::Intent;
-use dotenv_codegen::dotenv;
+use dotenvy_macro::dotenv;
 
 #[tokio::main]
 async fn main() {

@@ -39,7 +39,7 @@ impl Client {
     ///
     /// ```
     /// use adiscord::Client;
-    /// use dotenv_codegen::dotenv;
+    /// use dotenvy_macro::dotenv;
     ///
     /// #[tokio::main]
     /// async fn main() {
@@ -51,7 +51,7 @@ impl Client {
     ///
     /// ```
     /// use adiscord::Client;
-    /// use dotenv_codegen::dotenv;
+    /// use dotenvy_macro::dotenv;
     ///
     /// #[tokio::main]
     /// async fn main() {

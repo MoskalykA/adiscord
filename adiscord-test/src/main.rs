@@ -1,5 +1,5 @@
 use adiscord::Client;
-use dotenv_codegen::dotenv;
+use dotenvy_macro::dotenv;
 
 #[tokio::main]
 async fn main() {
