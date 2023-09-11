@@ -1,5 +1,5 @@
-use crate::Snowflake;
 use super::{role::Role, user::User};
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]

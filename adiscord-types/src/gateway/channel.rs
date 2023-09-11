@@ -1,5 +1,5 @@
-use serde::Deserialize;
 use crate::Snowflake;
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct PinsUpdate {

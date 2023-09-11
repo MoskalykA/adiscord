@@ -1,5 +1,5 @@
+use super::{guild::Guild, team::Team, user::User};
 use crate::Snowflake;
-use super::{team::Team, user::User, guild::Guild};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 

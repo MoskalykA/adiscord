@@ -1,17 +1,20 @@
-use crate::{api::{
-    application::Application,
-    channel::{Attachment, Channel, Mention},
-    embed::Embed,
-    guild::Member,
-    message::{
-        Activity, Component, Flags, Interaction, Message, Nonce, Reference, RoleSubscriptionData,
-        Type,
+use crate::{
+    api::{
+        application::Application,
+        channel::{Attachment, Channel, Mention},
+        embed::Embed,
+        guild::Member,
+        message::{
+            Activity, Component, Flags, Interaction, Message, Nonce, Reference,
+            RoleSubscriptionData, Type,
+        },
+        reaction::Reaction,
+        role::Role,
+        sticker::{Item, Sticker},
+        user::User,
     },
-    reaction::Reaction,
-    role::Role,
-    sticker::{Item, Sticker},
-    user::User,
-}, Snowflake};
+    Snowflake,
+};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]

@@ -1,4 +1,7 @@
-use crate::{api::{application::Application, user::User}, Snowflake};
+use crate::{
+    api::{application::Application, user::User},
+    Snowflake,
+};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]

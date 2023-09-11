@@ -1,4 +1,7 @@
-use crate::{api::{emoji::Emoji, guild::Member}, Snowflake};
+use crate::{
+    api::{emoji::Emoji, guild::Member},
+    Snowflake,
+};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]

@@ -1,5 +1,5 @@
-use crate::Snowflake;
 use super::{channel::Channel, guild::Guild, user::User};
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 

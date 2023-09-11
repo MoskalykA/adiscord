@@ -1,5 +1,5 @@
-use crate::Snowflake;
 use super::{emoji::Emoji, feature::Feature, role::Role, sticker::Sticker, user::User};
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
@@ -226,6 +226,12 @@ pub enum VerificationLevel {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
+pub enum Permission {
+    String(String),
+    Number(u32),
+}
+
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Guild {
     /// guild id
     pub id: Snowflake,
@@ -252,7 +258,7 @@ pub struct Guild {
     pub owner_id: Snowflake,
 
     /// total permissions for the user in the guild (excludes overwrites and implicit permissions)
-    pub permissions: Option<String>,
+    pub permissions: Option<Permission>,
 
     /// voice region id for the guild (deprecated)
     pub region: Option<String>,

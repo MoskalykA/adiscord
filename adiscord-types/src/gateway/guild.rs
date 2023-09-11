@@ -1,18 +1,21 @@
 use super::presence;
-use crate::{api::{
-    channel::Channel,
-    emoji::Emoji,
-    feature::Feature,
-    guild::{
-        self, DefaultMessageNotifications, ExplicitContentFilter, MFALevel, NSFWLevel, PremiumTier,
-        SystemChannelFlags, VerificationLevel, WelcomeScreen,
+use crate::{
+    api::{
+        channel::Channel,
+        emoji::Emoji,
+        feature::Feature,
+        guild::{
+            self, DefaultMessageNotifications, ExplicitContentFilter, MFALevel, NSFWLevel,
+            PremiumTier, SystemChannelFlags, VerificationLevel, WelcomeScreen,
+        },
+        role::Role,
+        stage::{PrivacyLevel, StageInstance},
+        sticker::Sticker,
+        user::User,
+        voice::VoiceState,
     },
-    role::Role,
-    stage::{PrivacyLevel, StageInstance},
-    sticker::Sticker,
-    user::User,
-    voice::VoiceState,
-}, Snowflake};
+    Snowflake,
+};
 use serde::Deserialize;
 use serde_repr::Deserialize_repr;
 

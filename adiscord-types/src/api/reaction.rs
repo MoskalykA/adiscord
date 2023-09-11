@@ -17,7 +17,7 @@ pub struct CountDetails {
     burst: u16,
 
     /// Count of normal reactions
-    normal: u16
+    normal: u16,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -38,5 +38,5 @@ pub struct Reaction {
     pub emoji: Emoji,
 
     /// HEX colors used for super reaction
-    pub burst_colors: Value
+    pub burst_colors: Value,
 }

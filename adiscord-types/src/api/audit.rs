@@ -1,7 +1,7 @@
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_repr::{Deserialize_repr, Serialize_repr};
-use crate::Snowflake;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Change {
@@ -185,7 +185,7 @@ pub enum Event {
     CREATOR_MONETIZATION_REQUEST_CREATED = 150,
 
     /// Creator monetization terms were accepted
-    CREATOR_MONETIZATION_TERMS_ACCEPTED
+    CREATOR_MONETIZATION_TERMS_ACCEPTED,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -224,7 +224,7 @@ pub struct EntryInfo {
     pub r#type: Option<String>,
 
     /// The type of integration which performed the action
-    pub integration_type: String
+    pub integration_type: String,
 }
 
 #[derive(Deserialize, Serialize, Debug)]

@@ -1,7 +1,7 @@
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use serde_repr::{Deserialize_repr, Serialize_repr};
-use crate::Snowflake;
 
 #[repr(u8)]
 #[allow(non_camel_case_types)]

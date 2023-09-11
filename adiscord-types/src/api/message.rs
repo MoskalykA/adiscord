@@ -4,7 +4,10 @@ use super::{
     reaction::Reaction,
     sticker::{Item, Sticker},
 };
-use crate::{api::{application::Application, role::Role, user::User}, Snowflake};
+use crate::{
+    api::{application::Application, role::Role, user::User},
+    Snowflake,
+};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 

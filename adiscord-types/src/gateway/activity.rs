@@ -1,6 +1,6 @@
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
-use crate::Snowflake;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Assets {

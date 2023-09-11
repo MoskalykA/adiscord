@@ -1,7 +1,10 @@
-use crate::{api::{
-    channel::{Channel, ChannelType},
-    thread::ThreadMember,
-}, Snowflake};
+use crate::{
+    api::{
+        channel::{Channel, ChannelType},
+        thread::ThreadMember,
+    },
+    Snowflake,
+};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]

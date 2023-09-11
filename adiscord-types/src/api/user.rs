@@ -1,6 +1,6 @@
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
-use crate::Snowflake;
 
 #[repr(u32)]
 #[allow(non_camel_case_types)]
@@ -112,5 +112,5 @@ pub struct User {
     pub public_flags: Option<Flags>,
 
     /// the user's avatar decoration hash
-    pub avatar_decoration: Option<String>
+    pub avatar_decoration: Option<String>,
 }

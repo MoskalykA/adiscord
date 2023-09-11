@@ -1,10 +1,10 @@
-use crate::Snowflake;
 use super::{
     forum,
     reaction::DefaultReaction,
     thread::{ThreadMember, ThreadMetadata},
     user::User,
 };
+use crate::Snowflake;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
@@ -13,7 +13,7 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum AttachmentFlags {
     /// this attachment has been edited using the remix feature on mobile
-    IS_REMIX = 1 << 2
+    IS_REMIX = 1 << 2,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -55,7 +55,7 @@ pub struct Attachment {
     pub waveform: Option<String>,
 
     /// attachment flags combined as a bitfield
-    pub flags: Option<AttachmentFlags>
+    pub flags: Option<AttachmentFlags>,
 }
 
 #[repr(u16)]
@@ -71,7 +71,7 @@ pub enum Flags {
     REQUIRE_TAG = 1 << 4,
 
     /// when set hides the embedded media download options. Available only for media channels
-    HIDE_MEDIA_DOWNLOAD_OPTIONS = 1 << 15
+    HIDE_MEDIA_DOWNLOAD_OPTIONS = 1 << 15,
 }
 
 #[repr(u8)]
@@ -170,7 +170,7 @@ pub enum ChannelType {
     GUILD_FORUM,
 
     /// Channel that can only contain threads, similar to GUILD_FORUM channels
-    GUILD_MEDIA
+    GUILD_MEDIA,
 }
 
 #[repr(u8)]

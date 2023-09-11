@@ -1,7 +1,10 @@
-use crate::{api::{guild::Member, user::User}, Snowflake};
+use super::presence;
+use crate::{
+    api::{guild::Member, user::User},
+    Snowflake,
+};
 use serde::Deserialize;
 use serde_json::Value;
-use super::presence;
 
 #[derive(Deserialize, Debug)]
 pub struct Add {

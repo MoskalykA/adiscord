@@ -1,5 +1,5 @@
-use crate::Snowflake;
 use super::{activity::Activity, client, user::UserPartial};
+use crate::Snowflake;
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]

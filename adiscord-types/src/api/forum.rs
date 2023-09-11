@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::Snowflake;
+use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Tags {
