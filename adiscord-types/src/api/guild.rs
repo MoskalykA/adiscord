@@ -268,7 +268,7 @@ pub struct Guild {
     pub afk_channel_id: Option<Snowflake>,
 
     /// afk timeout in seconds, can be set to: 60, 300, 900, 1800, 3600
-    pub afk_timeout: u16,
+    pub afk_timeout: Option<u16>,
 
     /// true if the server widget is enabled
     pub widget_enabled: Option<bool>,
