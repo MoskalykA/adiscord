@@ -79,8 +79,5 @@ pub enum Feature {
     VIP_REGIONS,
 
     /// guild has enabled the welcome screen
-    WELCOME_SCREEN_ENABLED,
-
-    /// unknow
-    SOUNDBOARD
+    WELCOME_SCREEN_ENABLED
 }
