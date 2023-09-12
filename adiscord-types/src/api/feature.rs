@@ -80,4 +80,7 @@ pub enum Feature {
 
     /// guild has enabled the welcome screen
     WELCOME_SCREEN_ENABLED,
+
+    /// unknow
+    SOUNDBOARD
 }
