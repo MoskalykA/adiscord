@@ -256,7 +256,7 @@ pub struct Guild {
     pub owner: Option<bool>,
 
     /// id of owner
-    pub owner_id: Snowflake,
+    pub owner_id: Option<Snowflake>,
 
     /// total permissions for the user in the guild (excludes overwrites and implicit permissions)
     pub permissions: Option<Permission>,
