@@ -79,5 +79,8 @@ pub enum Feature {
     VIP_REGIONS,
 
     /// guild has enabled the welcome screen
-    WELCOME_SCREEN_ENABLED
+    WELCOME_SCREEN_ENABLED,
+
+    #[serde(other)]
+    Unknown
 }
