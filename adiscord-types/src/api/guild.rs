@@ -277,7 +277,7 @@ pub struct Guild {
     pub widget_channel_id: Option<Snowflake>,
 
     /// verification level required for the guild
-    pub verification_level: VerificationLevel,
+    pub verification_level: Option<VerificationLevel>,
 
     /// default message notifications level
     pub default_message_notifications: DefaultMessageNotifications,
