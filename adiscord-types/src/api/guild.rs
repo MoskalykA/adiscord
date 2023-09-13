@@ -225,7 +225,7 @@ pub enum VerificationLevel {
     VERY_HIGH,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(untagged)]
 pub enum Permission {
     String(String),
@@ -256,7 +256,7 @@ pub struct Guild {
     pub owner: Option<bool>,
 
     /// id of owner
-    pub owner_id: Option<Snowflake>,
+    pub owner_id: Snowflake,
 
     /// total permissions for the user in the guild (excludes overwrites and implicit permissions)
     pub permissions: Option<Permission>,
@@ -268,7 +268,7 @@ pub struct Guild {
     pub afk_channel_id: Option<Snowflake>,
 
     /// afk timeout in seconds, can be set to: 60, 300, 900, 1800, 3600
-    pub afk_timeout: Option<u16>,
+    pub afk_timeout: u16,
 
     /// true if the server widget is enabled
     pub widget_enabled: Option<bool>,
@@ -277,7 +277,7 @@ pub struct Guild {
     pub widget_channel_id: Option<Snowflake>,
 
     /// verification level required for the guild
-    pub verification_level: Option<VerificationLevel>,
+    pub verification_level: VerificationLevel,
 
     /// default message notifications level
     pub default_message_notifications: DefaultMessageNotifications,
@@ -362,4 +362,25 @@ pub struct Guild {
 
     /// the id of the channel where admins and moderators of Community guilds receive safety alerts from Discord
     pub safety_alerts_channel_id: Option<Snowflake>,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct PartialGuild {
+    /// guild id
+    pub id: Snowflake,
+
+    /// guild name (2-100 characters, excluding trailing and leading whitespace)
+    pub name: String,
+
+    /// icon hash
+    pub icon: Option<String>,
+
+    /// true if the user is the owner of the guild
+    pub owner: bool,
+
+    /// total permissions for the user in the guild (excludes overwrites and implicit permissions)
+    pub permissions: Permission,
+
+    /// enabled guild features
+    pub features: Vec<Feature>
 }
