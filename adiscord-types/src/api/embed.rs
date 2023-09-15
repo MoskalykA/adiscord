@@ -1,4 +1,27 @@
 use serde::{Deserialize, Serialize};
+use serde_enum_str::{Deserialize_enum_str, Serialize_enum_str};
+
+#[derive(Deserialize_enum_str, Serialize_enum_str, Debug)]
+#[serde(rename_all = "snake_case")]
+pub enum Type {
+    /// generic embed rendered from embed attributes
+    Rich,
+
+    /// image embed
+    Image,
+
+    /// video embed
+    Video,
+
+    /// animated gif image embed rendered as a video embed
+    GifV,
+
+    /// article embed
+    Article,
+
+    /// link embed
+    Link,
+}
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Author {
@@ -99,7 +122,7 @@ pub struct Embed {
     pub title: Option<String>,
 
     /// type of embed (always "rich" for webhook embeds)
-    pub r#type: Option<String>,
+    pub r#type: Option<Type>,
 
     /// description of embed
     pub description: Option<String>,
