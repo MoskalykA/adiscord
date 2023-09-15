@@ -6,8 +6,6 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 #[allow(non_camel_case_types)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
-    Unknow,
-
     /// Discord Employee
     STAFF = 1 << 0,
 
@@ -52,6 +50,9 @@ pub enum Flags {
 
     /// User is an Active Developer
     ACTIVE_DEVELOPER = 1 << 22,
+
+    #[serde(other)]
+    Unknown,
 }
 
 #[repr(u8)]

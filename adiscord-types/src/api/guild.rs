@@ -7,8 +7,6 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 #[allow(non_camel_case_types)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum MemberFlags {
-    None,
-
     /// Member has left and rejoined the guild
     DID_REJOIN = 1 << 0,
 
@@ -20,6 +18,9 @@ pub enum MemberFlags {
 
     /// Member has started onboarding
     STARTED_ONBOARDING = 1 << 3,
+
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -184,8 +185,6 @@ pub struct Preview {
 #[repr(u8)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum SystemChannelFlags {
-    None,
-
     /// Suppress member join notifications
     SuppressJoinNotifications = 1 << 0,
 
@@ -203,6 +202,9 @@ pub enum SystemChannelFlags {
 
     /// Hide role subscription sticker reply buttons
     SuppressRoleSubscriptionPurchaseNotificationReplies = 1 << 5,
+
+    #[serde(other)]
+    Unknown,
 }
 
 #[repr(u8)]
@@ -382,5 +384,5 @@ pub struct PartialGuild {
     pub permissions: Permission,
 
     /// enabled guild features
-    pub features: Vec<Feature>
+    pub features: Vec<Feature>,
 }

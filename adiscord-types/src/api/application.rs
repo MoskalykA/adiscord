@@ -7,8 +7,6 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 #[allow(non_camel_case_types)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
-    None,
-
     /// Indicates if an app uses the Auto Moderation API
     APPLICATION_AUTO_MODERATION_RULE_CREATE_BADGE = 1 << 6,
 
@@ -38,6 +36,9 @@ pub enum Flags {
 
     /// Indicates if an app has registered global application commands
     APPLICATION_COMMAND_BADGE = 1 << 23,
+
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Deserialize, Serialize, Debug)]

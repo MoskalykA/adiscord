@@ -82,5 +82,5 @@ pub enum Feature {
     WELCOME_SCREEN_ENABLED,
 
     #[serde(other)]
-    Unknown
+    Unknown,
 }

@@ -91,8 +91,6 @@ pub enum Component {
 #[allow(non_camel_case_types)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
-    None,
-
     /// this message has been published to subscribed channels (via Channel Following)
     CROSSPOSTED = 1 << 0,
 
@@ -122,6 +120,12 @@ pub enum Flags {
 
     /// this message will not trigger push and desktop notifications
     SUPPRESS_NOTIFICATIONS = 1 << 12,
+
+    /// this message is a voice message
+    IS_VOICE_MESSAGE = 1 << 13,
+
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Deserialize, Serialize, Debug)]

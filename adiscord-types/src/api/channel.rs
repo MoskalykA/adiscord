@@ -62,8 +62,6 @@ pub struct Attachment {
 #[allow(non_camel_case_types)]
 #[derive(Deserialize_repr, Serialize_repr, Debug)]
 pub enum Flags {
-    None,
-
     /// this thread is pinned to the top of its parent GUILD_FORUM or GUILD_MEDIA channel
     PINNED = 1 << 1,
 
@@ -72,6 +70,9 @@ pub enum Flags {
 
     /// when set hides the embedded media download options. Available only for media channels
     HIDE_MEDIA_DOWNLOAD_OPTIONS = 1 << 15,
+
+    #[serde(other)]
+    Unknown,
 }
 
 #[repr(u8)]
