@@ -26,139 +26,139 @@ pub enum Event {
     CHANNEL_CREATE = 10,
 
     /// Channel settings were updated
-    CHANNEL_UPDATE = 11,
+    CHANNEL_UPDATE,
 
     /// Channel was deleted
-    CHANNEL_DELETE = 12,
+    CHANNEL_DELETE,
 
     /// Permission overwrite was added to a channel
-    CHANNEL_OVERWRITE_CREATE = 13,
+    CHANNEL_OVERWRITE_CREATE,
 
     /// Permission overwrite was updated for a channel
-    CHANNEL_OVERWRITE_UPDATE = 14,
+    CHANNEL_OVERWRITE_UPDATE,
 
     /// Permission overwrite was deleted from a channel
-    CHANNEL_OVERWRITE_DELETE = 15,
+    CHANNEL_OVERWRITE_DELETE,
 
     /// Member was removed from server
     MEMBER_KICK = 20,
 
     /// Members were pruned from server
-    MEMBER_PRUNE = 21,
+    MEMBER_PRUNE,
 
     /// Member was banned from server
-    MEMBER_BAN_ADD = 22,
+    MEMBER_BAN_ADD,
 
     /// Server ban was lifted for a member
-    MEMBER_BAN_REMOVE = 23,
+    MEMBER_BAN_REMOVE,
 
     /// Member was updated in server
-    MEMBER_UPDATE = 24,
+    MEMBER_UPDATE,
 
     /// Member was added or removed from a role
-    MEMBER_ROLE_UPDATE = 25,
+    MEMBER_ROLE_UPDATE,
 
     /// Member was moved to a different voice channel
-    MEMBER_MOVE = 26,
+    MEMBER_MOVE,
 
     /// Member was disconnected from a voice channel
-    MEMBER_DISCONNECT = 27,
+    MEMBER_DISCONNECT,
 
     /// Bot user was added to server
-    BOT_ADD = 28,
+    BOT_ADD,
 
     /// Role was created
     ROLE_CREATE = 30,
 
     /// Role was edited
-    ROLE_UPDATE = 31,
+    ROLE_UPDATE,
 
     /// Role was deleted
-    ROLE_DELETE = 32,
+    ROLE_DELETE,
 
     /// Server invite was created
     INVITE_CREATE = 40,
 
     /// Server invite was updated
-    INVITE_UPDATE = 41,
+    INVITE_UPDATE,
 
     /// Server invite was deleted
-    INVITE_DELETE = 42,
+    INVITE_DELETE,
 
     /// Webhook was created
     WEBHOOK_CREATE = 50,
 
     /// Webhook properties or channel were updated
-    WEBHOOK_UPDATE = 51,
+    WEBHOOK_UPDATE,
 
     /// Webhook was deleted
-    WEBHOOK_DELETE = 52,
+    WEBHOOK_DELETE,
 
     /// Emoji was created
     EMOJI_CREATE = 60,
 
     /// Emoji name was updated
-    EMOJI_UPDATE = 61,
+    EMOJI_UPDATE,
 
     /// Emoji was deleted
-    EMOJI_DELETE = 62,
+    EMOJI_DELETE,
 
     /// Single message was deleted
     MESSAGE_DELETE = 72,
 
     /// Multiple messages were deleted
-    MESSAGE_BULK_DELETE = 73,
+    MESSAGE_BULK_DELETE,
 
     /// Message was pinned to a channel
-    MESSAGE_PIN = 74,
+    MESSAGE_PIN,
 
     /// Message was unpinned from a channel
-    MESSAGE_UNPIN = 75,
+    MESSAGE_UNPIN,
 
     /// App was added to server
     INTEGRATION_CREATE = 80,
 
     /// App was updated (as an example, its scopes were updated)
-    INTEGRATION_UPDATE = 81,
+    INTEGRATION_UPDATE,
 
     /// App was removed from server
-    INTEGRATION_DELETE = 82,
+    INTEGRATION_DELETE,
 
     /// Stage instance was created (stage channel becomes live)
-    STAGE_INSTANCE_CREATE = 83,
+    STAGE_INSTANCE_CREATE,
 
     /// Stage instance details were updated
-    STAGE_INSTANCE_UPDATE = 84,
+    STAGE_INSTANCE_UPDATE,
 
     /// Stage instance was deleted (stage channel no longer live)
-    STAGE_INSTANCE_DELETE = 85,
+    STAGE_INSTANCE_DELETE,
 
     /// Sticker was created
     STICKER_CREATE = 90,
 
     /// Sticker details were updated
-    STICKER_UPDATE = 91,
+    STICKER_UPDATE,
 
     /// Sticker was deleted
-    STICKER_DELETE = 92,
+    STICKER_DELETE,
 
     /// Event was created
     GUILD_SCHEDULED_EVENT_CREATE = 100,
 
     /// Event was updated
-    GUILD_SCHEDULED_EVENT_UPDATE = 101,
+    GUILD_SCHEDULED_EVENT_UPDATE,
 
     /// Event was cancelled
-    GUILD_SCHEDULED_EVENT_DELETE = 102,
+    GUILD_SCHEDULED_EVENT_DELETE,
 
     /// Thread was created in a channel
     THREAD_CREATE = 110,
 
     /// Thread was updated
-    THREAD_UPDATE = 111,
+    THREAD_UPDATE,
 
     /// Thread was deleted
-    THREAD_DELETE = 112,
+    THREAD_DELETE,
 
     /// Permissions were updated for a command
     APPLICATION_COMMAND_PERMISSION_UPDATE = 121,
@@ -167,19 +167,19 @@ pub enum Event {
     AUTO_MODERATION_RULE_CREATE = 140,
 
     /// Auto Moderation rule was updated
-    AUTO_MODERATION_RULE_UPDATE = 141,
+    AUTO_MODERATION_RULE_UPDATE,
 
     /// Auto Moderation rule was deleted
-    AUTO_MODERATION_RULE_DELETE = 142,
+    AUTO_MODERATION_RULE_DELETE,
 
     /// Message was blocked by Auto Moderation
-    AUTO_MODERATION_BLOCK_MESSAGE = 143,
+    AUTO_MODERATION_BLOCK_MESSAGE,
 
     /// Message was flagged by Auto Moderation
-    AUTO_MODERATION_FLAG_TO_CHANNEL = 144,
+    AUTO_MODERATION_FLAG_TO_CHANNEL,
 
     /// Member was timed out by Auto Moderation
-    AUTO_MODERATION_USER_COMMUNICATION_DISABLED = 145,
+    AUTO_MODERATION_USER_COMMUNICATION_DISABLED,
 
     /// Creator monetization request was created
     CREATOR_MONETIZATION_REQUEST_CREATED = 150,
