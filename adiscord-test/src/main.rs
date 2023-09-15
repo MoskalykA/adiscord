@@ -187,12 +187,12 @@ async fn main() {
 
     // Invite
 
-    client.on_invite_update(|invite| {
-        println!("Update invite -> {:?}", invite.guild_id);
+    client.on_invite_create(|invite| {
+        println!("Create invite -> {:?}", invite.guild_id);
     });
 
     client.on_invite_delete(|invite| {
-        println!("Update invite -> {:?}", invite.guild_id);
+        println!("Delete invite -> {:?}", invite.guild_id);
     });
 
     // Message
